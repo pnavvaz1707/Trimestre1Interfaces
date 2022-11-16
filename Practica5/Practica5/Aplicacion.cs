@@ -131,7 +131,7 @@ namespace Practica5
 
                             fila = new List<string>();
 
-                            Console.WriteLine("\n");
+                            Console.WriteLine();
 
                             fila.Add("MEDIA");
                             fila.Add("");
@@ -143,7 +143,7 @@ namespace Practica5
 
                             imprimirFilaTabla(fila.ToArray());
 
-                            Console.WriteLine("\n");
+                            Console.WriteLine();
 
                             Console.WriteLine("Alumnos con 0 asignaturas suspensas: " + numSuspensos0);
                             Console.WriteLine("Alumnos con 1 asignaturas suspensa: " + numSuspensos1);
