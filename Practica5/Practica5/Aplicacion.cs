@@ -167,7 +167,7 @@ namespace Practica5
         private static int menu(Grupo g)
         {
             Console.Clear();
-            Colores.imprimirVerde("\n\t\t----- Grupo " + g.Nombre + " -----\n");
+            Auxiliar.imprimirCabecera("Grupo " + g.Nombre);
             crearMenu();
             return Auxiliar.solicitarEnteroEnUnRango(1, MENU_OPCIONES.Length, "Seleccione una opción\n");
         }

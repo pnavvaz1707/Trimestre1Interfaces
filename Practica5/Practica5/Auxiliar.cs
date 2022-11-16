@@ -127,6 +127,29 @@ namespace Practica5
             return usuarioSigue;
         }
 
+        public static void imprimirCabecera(string msg)
+        {
+            string cabecera = "";
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            for (int i = 0; i < Console.WindowWidth; i++)
+            {
+                cabecera += "─";
+            }
+
+            cabecera = "┌" + cabecera.Substring(1, cabecera.Length - 2) + "┐";
+
+            Console.WriteLine(cabecera);
+            Console.Write("│");
+            Console.SetCursorPosition(((Console.WindowWidth - 1) / 2) + ((msg.Length - 1) / 2), Console.CursorTop);
+            Console.Write(msg);
+            Console.SetCursorPosition(Console.WindowWidth - 1, Console.CursorTop);
+            Console.WriteLine("│");
+            cabecera = cabecera.Replace('┌', '└');
+            cabecera = cabecera.Replace('┐', '┘');
+            Console.WriteLine(cabecera);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
         public static void pulsarParaContinuar()
         {
             Console.WriteLine("\nPulse una tecla para continuar...");
