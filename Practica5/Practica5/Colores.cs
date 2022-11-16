@@ -4,6 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+* PRÁCTICA.............: Práctica 5
+* NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
+* CURSO y GRUPO........: 2º Desarrollo de Interfaces
+* TÍTULO de la PRÁCTICA: Uso del IDE V.Studio
+* FECHA de ENTREGA.....: 17 de Noviembre de 2022
+*/
+
+
 namespace Practica5
 {
     public class Colores
