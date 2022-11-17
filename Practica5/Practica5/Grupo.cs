@@ -4,19 +4,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+* PRÁCTICA.............: Práctica 5
+* NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
+* CURSO y GRUPO........: 2º Desarrollo de Interfaces
+* TÍTULO de la PRÁCTICA: Uso del IDE V.Studio
+* FECHA de ENTREGA.....: 17 de Noviembre de 2022
+*/
+
+
 namespace Practica5
 {
     internal class Grupo
     {
+        #region Campos
+
         private string nombre;
         private int numAsignaturas;
         private string[] codigosAsignaturas;
         private List<Alumno> alumnos;
 
+        #endregion
+
+        #region Propiedades
+
         public string Nombre { get { return nombre; } }
         public int NumAsignaturas { get { return numAsignaturas; } }
         public string[] CodigosAsignaturas { get { return codigosAsignaturas; } }
         public List<Alumno> Alumnos { get { return alumnos; } }
+
+        #endregion
 
         public Grupo(string nombre, int numAsignaturas, string[] codigosAsignaturas)
         {

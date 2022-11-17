@@ -5,18 +5,35 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+* PRÁCTICA.............: Práctica 5
+* NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
+* CURSO y GRUPO........: 2º Desarrollo de Interfaces
+* TÍTULO de la PRÁCTICA: Uso del IDE V.Studio
+* FECHA de ENTREGA.....: 17 de Noviembre de 2022
+*/
+
+
 namespace Practica5
 {
     internal class Alumno : IComparable<Alumno>
     {
+        #region Campos
+
         private int matricula;
         private string nombre;
         private float[] notas;
         private static int contador = 0;
 
+        #endregion
+
+        #region Propiedades
+
         public int Matricula { get { return matricula; } }
         public string Nombre { get { return nombre; } }
         public float[] Notas { get { return notas; } }
+
+        #endregion
 
         public Alumno(string nombre, float[] notas)
         {
@@ -36,7 +53,6 @@ namespace Practica5
         public float mediaAlumno()
         {
             float total = 0;
-            Console.WriteLine("Tamaño notas --> " + Notas.Length);
             for (int i = 0; i < Notas.Length; i++)
             {
                 total += Notas[i];

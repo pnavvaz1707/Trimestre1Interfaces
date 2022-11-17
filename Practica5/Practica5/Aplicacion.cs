@@ -18,6 +18,8 @@ namespace Practica5
 {
     internal class Aplicacion
     {
+        #region Campos
+
         private static string[] MENU_OPCIONES =
         {
             "Añadir un alumno al grupo",
@@ -26,6 +28,11 @@ namespace Practica5
             "Acta del grupo",
             "Salir"
         };
+
+        private static List<string> encabezado;
+        private static List<int> posiciones;
+
+        #endregion
 
         public static void Main(string[] args)
         {
@@ -55,94 +62,95 @@ namespace Practica5
                         break;
 
                     case 4:
-                        List<string> encabezado = new List<string>();
 
-                        encabezado.Add("MATRÍCULA");
-                        Console.Write(encabezado[0]);
-                        Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop);
+                        imprimirEncabezadoTabla(encabezado.ToArray());
 
-                        encabezado.Add("NOMBRE");
-                        Console.Write(encabezado[1]);
-                        Console.SetCursorPosition(Console.CursorLeft + 22, Console.CursorTop);
-                        for (int i = 0; i < g.CodigosAsignaturas.Length; i++)
+                        string[] subrayado = new string[encabezado.Count];
+
+                        for (int i = 0; i < encabezado.Count; i++)
                         {
-                            encabezado.Add(g.CodigosAsignaturas[i]);
-                            Console.Write(g.CodigosAsignaturas[i]);
-                            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop);
-                        }
-                        encabezado.Add("MEDIA");
-                        Console.Write(encabezado[g.CodigosAsignaturas.Length + 2]);
-                        Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop);
-                        encabezado.Add("Nº SUS");
-                        Console.WriteLine(encabezado[g.CodigosAsignaturas.Length + 3]);
-
-                        for (int i = 0; i < encabezado[0].Length; i++)
-                        {
-                            Console.Write("-");
-                        }
-                        Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop);
-
-                        for (int i = 0; i < encabezado[1].Length; i++)
-                        {
-                            Console.Write("-");
-                        }
-                        Console.SetCursorPosition(Console.CursorLeft + 22, Console.CursorTop);
-
-                        for (int i = 0; i < g.CodigosAsignaturas.Length; i++)
-                        {
-                            Console.Write("---");
-                            Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop);
+                            subrayado[i] = subrayar(encabezado[i]);
                         }
 
-                        for (int i = 0; i < encabezado[g.CodigosAsignaturas.Length + 2].Length; i++)
-                        {
-                            Console.Write("-");
-                        }
-                        Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop);
-                        for (int i = 0; i < encabezado[g.CodigosAsignaturas.Length + 3].Length; i++)
-                        {
-                            Console.Write("-");
-                        }
+                        imprimirEncabezadoTabla(subrayado);
 
                         int numSuspensos;
                         int numSuspensos0 = 0;
                         int numSuspensos1 = 0;
                         int numSuspensos2 = 0;
 
-                        g.Alumnos.Sort();
-                        for (int i = 0; i < g.Alumnos.Count; i++)
+                        if (g.Alumnos.Count == 0)
                         {
+                            Colores.imprimirRojo("No hay alumnos registrados en el grupo");
+                        }
+                        else
+                        {
+                            g.Alumnos.Sort();
 
-
-
-                            Console.WriteLine("\nNota media: " + g.Alumnos[i].mediaAlumno());
-
-                            numSuspensos = g.Alumnos[i].numSuspensosAlumno();
-                            Console.WriteLine("Número de suspensos: " + numSuspensos);
-                            switch (numSuspensos)
+                            List<string> fila;
+                            for (int i = 0; i < g.Alumnos.Count; i++)
                             {
-                                case 0:
-                                    numSuspensos0++;
-                                    break;
-                                case 1:
-                                    numSuspensos1++;
-                                    break;
-                                case 2:
-                                    numSuspensos2++;
-                                    break;
+                                fila = new List<string>();
 
+                                fila.Add(Convert.ToString(g.Alumnos[i].Matricula));
+
+                                if (g.Alumnos[i].Nombre.Length > 20)
+                                {
+                                    fila.Add(g.Alumnos[i].Nombre.Substring(0, 19) + "...");
+                                }
+                                else
+                                {
+                                    fila.Add(g.Alumnos[i].Nombre);
+                                }
+
+                                for (int j = 0; j < g.Alumnos[i].Notas.Length; j++)
+                                {
+                                    fila.Add(Convert.ToString(g.Alumnos[i].Notas[j]));
+                                }
+                                fila.Add(Convert.ToString(g.Alumnos[i].mediaAlumno()));
+
+                                numSuspensos = g.Alumnos[i].numSuspensosAlumno();
+                                fila.Add(Convert.ToString(numSuspensos));
+
+                                imprimirFilaTabla(fila.ToArray());
+
+                                switch (numSuspensos)
+                                {
+                                    case 0:
+                                        numSuspensos0++;
+                                        break;
+                                    case 1:
+                                        numSuspensos1++;
+                                        break;
+                                    case 2:
+                                        numSuspensos2++;
+                                        break;
+
+                                }
                             }
+
+                            fila = new List<string>();
+
+                            Console.WriteLine();
+
+                            fila.Add("MEDIA");
+                            fila.Add("");
+
+                            for (int i = 0; i < g.Alumnos[0].Notas.Length; i++)
+                            {
+                                fila.Add(Convert.ToString(g.mediaAsignatura(i)));
+                            }
+
+                            imprimirFilaTabla(fila.ToArray());
+
+                            Console.WriteLine();
+
+                            Console.WriteLine("Alumnos con 0 asignaturas suspensas: " + numSuspensos0);
+                            Console.WriteLine("Alumnos con 1 asignaturas suspensa: " + numSuspensos1);
+                            Console.WriteLine("Alumnos con 2 asignaturas suspensas: " + numSuspensos2);
+                            Console.WriteLine("Alumnos con 3 o más asignaturas suspensas: " + (g.Alumnos.Count - numSuspensos0 - numSuspensos1 - numSuspensos2));
                         }
-                        Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop);
-                        for (int i = 0; i < g.Alumnos[0].Notas.Length; i++)
-                        {
-                            Console.SetCursorPosition(Console.CursorLeft + 5, Console.CursorTop);
-                            Console.WriteLine("Media del grupo (asignatura " + g.CodigosAsignaturas[i] + "): " + g.mediaAsignatura(i));
-                        }
-                        Console.WriteLine("Alumnos con 0 asignaturas suspensas: " + numSuspensos0);
-                        Console.WriteLine("Alumnos con 1 asignaturas suspensa: " + numSuspensos1);
-                        Console.WriteLine("Alumnos con 2 asignaturas suspensas: " + numSuspensos2);
-                        Console.WriteLine("Alumnos con 3 o más asignaturas suspensas: " + (g.Alumnos.Count - numSuspensos0 - numSuspensos1 - numSuspensos2));
+
                         Auxiliar.pulsarParaContinuar();
                         break;
                 }
@@ -151,6 +159,10 @@ namespace Practica5
 
         private static Grupo crearGrupo()
         {
+            encabezado = new List<string>();
+            encabezado.Add("MATRÍCULA");
+            encabezado.Add("NOMBRE");
+
             string nombre = Auxiliar.leerCadena("Indica el nombre del grupo: ");
             int numAsignaturas = Auxiliar.solicitarEnteroEnUnRango(5, 9, "Indica el número de asignaturas: ");
 
@@ -159,8 +171,23 @@ namespace Practica5
             Console.WriteLine("Escriba los códigos de las asignaturas (3 caracteres)");
             for (int i = 0; i < codigosAsignaturas.Length; i++)
             {
-                codigosAsignaturas[i] = Auxiliar.leerCadena("Asignatura " + (i + 1) + ": ", 3);
+                string asignatura = null;
+                do
+                {
+                    asignatura = Auxiliar.leerCadena("Asignatura " + (i + 1) + ": ", 3);
+                    if (encabezado.Contains(asignatura))
+                    {
+                        Console.SetCursorPosition(14, Console.CursorTop - 1);
+                        Colores.imprimirRojo("--> La asignatura " + asignatura + " ya existe");
+                        asignatura = null;
+                    }
+                } while (asignatura == null);
+
+                codigosAsignaturas[i] = asignatura;
+                encabezado.Add(codigosAsignaturas[i]);
             }
+            encabezado.Add("MEDIA");
+            encabezado.Add("Nº SUS");
             return new Grupo(nombre, numAsignaturas, codigosAsignaturas);
         }
 
@@ -181,6 +208,47 @@ namespace Practica5
                 notas[i] = Auxiliar.solicitarEnteroEnUnRango(0, 10, "Nota de la asignatura " + i + ": ");
             }
             return new Alumno(nombre, notas);
+        }
+
+        private static void imprimirEncabezadoTabla(string[] fila)
+        {
+            posiciones = new List<int>();
+
+            for (int i = 0; i < fila.Length - 1; i++)
+            {
+                posiciones.Add(Console.CursorLeft);
+                Console.Write(fila[i]);
+                if (i == 1)
+                {
+                    Console.SetCursorPosition(Console.CursorLeft + 22, Console.CursorTop);
+                }
+                else
+                {
+                    Console.SetCursorPosition(Console.CursorLeft + 2, Console.CursorTop);
+                }
+            }
+            posiciones.Add(Console.CursorLeft);
+            Console.WriteLine(fila[fila.Length - 1]);
+        }
+        private static void imprimirFilaTabla(string[] fila)
+        {
+            for (int i = 0; i < fila.Length; i++)
+            {
+                Console.SetCursorPosition(posiciones[i], Console.CursorTop);
+                Console.Write(fila[i]);
+
+            }
+            Console.WriteLine();
+        }
+
+        private static string subrayar(string palabra)
+        {
+            string subrayado = "";
+            for (int i = 0; i < palabra.Length; i++)
+            {
+                subrayado += "-";
+            }
+            return subrayado;
         }
         private static void crearMenu()
         {
