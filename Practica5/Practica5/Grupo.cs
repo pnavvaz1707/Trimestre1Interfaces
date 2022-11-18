@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 * NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
 * CURSO y GRUPO........: 2º Desarrollo de Interfaces
 * TÍTULO de la PRÁCTICA: Uso del IDE V.Studio
-* FECHA de ENTREGA.....: 17 de Noviembre de 2022
+* FECHA de ENTREGA.....: 18 de Noviembre de 2022
 */
 
 
@@ -64,23 +64,33 @@ namespace Practica5
         public Alumno buscarAlumno(int matricula)
         {
             int posicion = localizarAlumno(matricula);
-            Alumno alumnoEncontrado = null;
-            if (posicion != -1)
+            if (posicion == -1)
             {
-                alumnoEncontrado = alumnos[posicion];
+                throw new ArgumentOutOfRangeException();
             }
-            return alumnoEncontrado;
+
+            return alumnos[posicion];
         }
 
-        public bool borrarAlumno(int matricula)
-        {
+        public bool borrarAlumno(int matricula) {
             int posicion = localizarAlumno(matricula);
             bool borrar = false;
-            if (posicion != -1)
+            if (posicion == -1)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            Console.WriteLine("Introduce 1 si está seguro de borrar a " + alumnos[posicion].Nombre);
+            string respuesta = Console.ReadLine();
+            if (respuesta.Equals("1"))
             {
                 alumnos.RemoveAt(posicion);
                 borrar = true;
             }
+            else
+            {
+                borrar = false;
+            }
+
             return borrar;
         }
 
