@@ -10,22 +10,25 @@ using System.Threading.Tasks;
 * NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
 * CURSO y GRUPO........: 2º Desarrollo de Interfaces
 * TÍTULO de la PRÁCTICA: Uso del IDE V.Studio
-* FECHA de ENTREGA.....: 17 de Noviembre de 2022
+* FECHA de ENTREGA.....: 18 de Noviembre de 2022
 */
 
 namespace Practica5
 {
     internal class Auxiliar
     {
-        public static string leerCadena(string mensaje)
+        public static string leerCadena(string msg)
         {
+            int y = Console.CursorTop;
+
             bool sigue = true;
             string respuesta = null;
             while (sigue)
             {
                 try
                 {
-                    Console.Write(mensaje);
+                    Console.SetCursorPosition(0, y);
+                    Console.Write(msg);
                     respuesta = Console.ReadLine();
                     if (respuesta == "")
                     {
@@ -35,21 +38,32 @@ namespace Practica5
                 }
                 catch (Exception e)
                 {
-                    Console.SetCursorPosition(mensaje.Length, Console.CursorTop - 1);
-                    Colores.imprimirRojo("--> " + e.Message);
+                    limpiarUnaLinea(msg.Length, y);
+
+                    Console.SetCursorPosition(msg.Length, y);
+                    imprimirRojo("--> " + e.Message);
+
+                    Console.Write("Pulsa una tecla para probar otra vez");
+                    Console.ReadKey();
+
+                    limpiarUnaLinea(msg.Length, y);
+                    limpiarUnaLinea(msg.Length, y + 1);
                 }
             }
             return respuesta;
         }
-        public static string leerCadena(string mensaje, int longitudMaxima)
+        public static string leerCadena(string msg, int longitudMaxima)
         {
+            int y = Console.CursorTop;
+
             bool sigue = true;
             string respuesta = null;
             while (sigue)
             {
                 try
                 {
-                    Console.Write(mensaje);
+                    Console.SetCursorPosition(0, y);
+                    Console.Write(msg);
                     respuesta = Console.ReadLine();
                     if (respuesta == "")
                     {
@@ -63,47 +77,60 @@ namespace Practica5
                 }
                 catch (Exception e)
                 {
-                    Console.SetCursorPosition(mensaje.Length, Console.CursorTop - 1);
-                    Colores.imprimirRojo("--> " + e.Message);
+                    limpiarUnaLinea(msg.Length, y);
+
+                    Console.SetCursorPosition(msg.Length, y);
+                    imprimirRojo("--> " + e.Message);
+
+                    Console.Write("Pulsa una tecla para probar otra vez");
+                    Console.ReadKey();
+
+                    limpiarUnaLinea(msg.Length, y);
+                    limpiarUnaLinea(msg.Length, y + 1);
                 }
             }
             return respuesta;
         }
 
-        public static int solicitarEnteroEnUnRango(int limiteInferior, int limiteSuperior, string msg)
+        public static int solicitarEnteroEnUnRango(int limiteInferior, int limiteSuperior, string msg, string error)
         {
+            int y = Console.CursorTop;
+
             bool sigue = true;
             int num = 0;
-
             while (sigue)
             {
                 try
                 {
+                    Console.SetCursorPosition(0, y);
                     Console.Write(msg);
                     num = Convert.ToInt32(Console.ReadLine());
                     if (num < limiteInferior || num > limiteSuperior)
                     {
-                        throw new Exception("El número debe estar comprendido en el siguiente rango [" + limiteInferior + "," + limiteSuperior + "]");
+                        throw new Exception();
                     }
                     sigue = false;
                 }
-                catch (FormatException)
+                catch (Exception)
                 {
-                    Console.SetCursorPosition(msg.Length, Console.CursorTop - 1);
-                    Colores.imprimirRojo("--> Debe introducir un número entero");
-                }
-                catch (OverflowException)
-                {
-                    Console.SetCursorPosition(msg.Length, Console.CursorTop - 1);
-                    Colores.imprimirRojo("--> El número introducido es demasiado alto");
-                }
-                catch (Exception e)
-                {
-                    Console.SetCursorPosition(msg.Length, Console.CursorTop - 1);
-                    Colores.imprimirRojo("--> " + e.Message);
+                    limpiarUnaLinea(msg.Length, y);
+
+                    Console.SetCursorPosition(msg.Length, y);
+                    imprimirRojo("--> " + error);
+
+                    Console.Write("Pulsa una tecla para probar otra vez");
+                    Console.ReadKey();
+
+                    limpiarUnaLinea(msg.Length, y);
+                    limpiarUnaLinea(msg.Length, y + 1);
                 }
             }
             return num;
+        }
+        public static void limpiarUnaLinea(int x, int y)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.Write(new string(' ', Console.WindowWidth));
         }
         public static bool seguirBucle(string msg)
         {
@@ -137,24 +164,24 @@ namespace Practica5
 
         public static void imprimirCabecera(string msg)
         {
-            string cabecera = "";
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            for (int i = 0; i < Console.WindowWidth; i++)
-            {
-                cabecera += "─";
-            }
 
+            string cabecera = new string('─', Console.WindowWidth);
             cabecera = "┌" + cabecera.Substring(1, cabecera.Length - 2) + "┐";
-
             Console.WriteLine(cabecera);
+
             Console.Write("│");
-            Console.SetCursorPosition(((Console.WindowWidth - 1) / 2) + ((msg.Length - 1) / 2), Console.CursorTop);
+            Console.SetCursorPosition(((Console.WindowWidth - 1) / 2) - ((msg.Length - 1) / 2), Console.CursorTop);
+
             Console.Write(msg);
+
             Console.SetCursorPosition(Console.WindowWidth - 1, Console.CursorTop);
             Console.WriteLine("│");
+
             cabecera = cabecera.Replace('┌', '└');
             cabecera = cabecera.Replace('┐', '┘');
             Console.WriteLine(cabecera);
+
             Console.ForegroundColor = ConsoleColor.White;
         }
 
@@ -162,6 +189,25 @@ namespace Practica5
         {
             Console.WriteLine("\nPulse una tecla para continuar...");
             Console.ReadKey();
+        }
+
+        public static void imprimirAzul(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(msg);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        public static void imprimirRojo(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(msg);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        public static void imprimirVerde(string msg)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(msg);
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
 }

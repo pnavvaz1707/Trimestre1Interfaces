@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 * NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
 * CURSO y GRUPO........: 2º Desarrollo de Interfaces
 * TÍTULO de la PRÁCTICA: Uso del IDE V.Studio
-* FECHA de ENTREGA.....: 17 de Noviembre de 2022
+* FECHA de ENTREGA.....: 18 de Noviembre de 2022
 */
 
 
@@ -37,10 +37,25 @@ namespace Practica5
 
         public Alumno(string nombre, float[] notas)
         {
+            contador++;
             this.matricula = contador;
             this.nombre = nombre;
             this.notas = notas;
-            contador++;
+
+        }
+
+        /**
+         * Constructor usado para leer por fichero
+         */
+        public Alumno(int matricula, string nombre, float[] notas)
+        {
+            this.matricula = matricula;
+            this.nombre = nombre;
+            this.notas = notas;
+            if (contador < matricula)
+            {
+                contador = matricula;
+            }
         }
 
         public void imprimeAlumno()
@@ -76,6 +91,28 @@ namespace Practica5
         public int CompareTo(Alumno? other)
         {
             return this.Nombre.CompareTo(other.Nombre);
+        }
+
+        public string obtenerNotas()
+        {
+            string notas = "";
+            for (int i = 0; i < Notas.Length; i++)
+            {
+                if (i != Notas.Length - 1)
+                {
+                    notas += Notas[i] + ",";
+                }
+                else
+                {
+                    notas += Notas[i];
+                }
+            }
+            return notas;
+        }
+
+        public override string ToString()
+        {
+            return matricula + ";" + nombre + ";" + obtenerNotas();
         }
     }
 }

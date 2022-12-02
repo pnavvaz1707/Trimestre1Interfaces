@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 /*
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 * NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
 * CURSO y GRUPO........: 2º Desarrollo de Interfaces
 * TÍTULO de la PRÁCTICA: Uso del IDE V.Studio
-* FECHA de ENTREGA.....: 17 de Noviembre de 2022
+* FECHA de ENTREGA.....: 18 de Noviembre de 2022
 */
 
 namespace Practica5
@@ -26,23 +27,35 @@ namespace Practica5
             "Borrar un alumno del grupo",
             "Consultar datos de un alumno",
             "Acta del grupo",
+            "Guardar información",
+            "Recuperar información",
             "Salir"
         };
 
-        private static List<string> encabezado;
+
+        private static List<string> encabezado; //Lista tipo String que define una serie de cadenas para imprimir luego como encabezado de la tabla
+
+        /**Lista tipo entero que guarda las posiciones donde empieza a escribir el cursor de la consola
+         * para cada posición del encabezado para así alinear en columnas los datos
+         */
         private static List<int> posiciones;
+
+        private static string rutaFichero = "C:/Users/pablo/Prueba.txt";
+
+        private static bool datosRecuperados = false;
 
         #endregion
 
         public static void Main(string[] args)
         {
+            Auxiliar.imprimirCabecera("CREACIÓN DE GRUPO");
             Grupo g = crearGrupo();
             int opcion;
             do
             {
                 opcion = menu(g);
 
-                imprimirEncabezado(opcion);
+                imprimirOpcionSel(opcion);
 
                 switch (opcion)
                 {
@@ -52,12 +65,36 @@ namespace Practica5
                         break;
 
                     case 2:
+                        int matricula = Auxiliar.solicitarEnteroEnUnRango(0, Int32.MaxValue, "Indica la matricula del alumno que desee borrar: ", "Matrícula no válida");
 
+                        try
+                        {
+                            if (g.borrarAlumno(matricula))
+                            {
+                                Auxiliar.imprimirVerde("Se ha borrado el alumno con matrícula " + matricula);
+                            }
+                            else
+                            {
+                                Auxiliar.imprimirRojo("No se ha borrado el alumno con matrícula " + matricula);
+                            }
+                        }
+                        catch (ArgumentOutOfRangeException)
+                        {
+                            Auxiliar.imprimirRojo("No existe el alumno con matrícula " + matricula);
+                        }
                         Auxiliar.pulsarParaContinuar();
                         break;
 
                     case 3:
-
+                        try
+                        {
+                            Alumno alumnoConsultado = g.buscarAlumno(Auxiliar.solicitarEnteroEnUnRango(0, Int32.MaxValue, "Indica la matricula del alumno que desee consultar: ", "Matrícula no válida"));
+                            alumnoConsultado.imprimeAlumno();
+                        }
+                        catch (ArgumentOutOfRangeException)
+                        {
+                            Auxiliar.imprimirRojo("No existe el alumno con esa matrícula");
+                        }
                         Auxiliar.pulsarParaContinuar();
                         break;
 
@@ -69,7 +106,7 @@ namespace Practica5
 
                         for (int i = 0; i < encabezado.Count; i++)
                         {
-                            subrayado[i] = subrayar(encabezado[i]);
+                            subrayado[i] = new string('-', encabezado[i].Length);
                         }
 
                         imprimirEncabezadoTabla(subrayado);
@@ -81,7 +118,7 @@ namespace Practica5
 
                         if (g.Alumnos.Count == 0)
                         {
-                            Colores.imprimirRojo("No hay alumnos registrados en el grupo");
+                            Auxiliar.imprimirRojo("No hay alumnos registrados en el grupo");
                         }
                         else
                         {
@@ -125,7 +162,6 @@ namespace Practica5
                                     case 2:
                                         numSuspensos2++;
                                         break;
-
                                 }
                             }
 
@@ -153,8 +189,79 @@ namespace Practica5
 
                         Auxiliar.pulsarParaContinuar();
                         break;
+
+                    case 5:
+                        StreamWriter ficheroEscribir = File.CreateText(rutaFichero);
+
+                        for (int i = 0; i < g.Alumnos.Count; i++)
+                        {
+                            ficheroEscribir.WriteLine(g.Alumnos[i].ToString());
+                        }
+
+                        ficheroEscribir.Close();
+                        Auxiliar.imprimirVerde("Los datos se han guardado en el fichero " + rutaFichero);
+                        Auxiliar.pulsarParaContinuar();
+                        break;
+
+                    case 6:
+
+                        if (!datosRecuperados)
+                        {
+                            {
+                                try
+                                {
+                                    StreamReader ficheroLeer = File.OpenText(rutaFichero);
+
+                                    recuperarDatos(ficheroLeer, g);
+
+                                    ficheroLeer.Close();
+                                }
+                                catch (Exception e)
+                                {
+                                    Auxiliar.imprimirRojo("El fichero no se ha encontrado (" + e.Message + ")");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Auxiliar.imprimirRojo("Ya has recuperado los datos anteriormente");
+                        }
+                        Auxiliar.pulsarParaContinuar();
+                        break;
                 }
-            } while (opcion != 5);
+            } while (opcion != 7);
+        }
+
+        private static void recuperarDatos(StreamReader ficheroLeer, Grupo g)
+        {
+            string linea;
+            int contador = 0; //Contador para saber si al menos ha leido una línea y así saber si estaba vacío o no
+
+            while ((linea = ficheroLeer.ReadLine()) != null)
+            {
+
+                string[] datos = linea.Split(';');
+
+                string[] notasPrueba = datos[2].Split(',');
+
+                float[] notasRecuperadas = new float[notasPrueba.Length];
+                for (int i = 0; i < notasPrueba.Length; i++)
+                {
+                    notasRecuperadas[i] = float.Parse(notasPrueba[i].Trim());
+                }
+
+                g.anadirAlumno(new Alumno(int.Parse(datos[0]), datos[1], notasRecuperadas));
+                contador++;
+            }
+            if (contador == 0)
+            {
+                Auxiliar.imprimirRojo("Lo datos no se han recuperado, el fichero estaba vacío");
+            }
+            else
+            {
+                Auxiliar.imprimirVerde("Se han recuperado los datos correctamente");
+                datosRecuperados = true;
+            }
         }
 
         private static Grupo crearGrupo()
@@ -164,31 +271,72 @@ namespace Practica5
             encabezado.Add("NOMBRE");
 
             string nombre = Auxiliar.leerCadena("Indica el nombre del grupo: ");
-            int numAsignaturas = Auxiliar.solicitarEnteroEnUnRango(5, 9, "Indica el número de asignaturas: ");
+            int minAsignaturas = 4;
+            int maxAsignaturas = 7;
+            int numAsignaturas = Auxiliar.solicitarEnteroEnUnRango(minAsignaturas, maxAsignaturas, "Indica el número de asignaturas [" + minAsignaturas + " - " + maxAsignaturas + "]: ", "El número de asignaturas debe estar comprendido entre " + minAsignaturas + " y " + maxAsignaturas);
 
             string[] codigosAsignaturas = new string[numAsignaturas];
 
             Console.WriteLine("Escriba los códigos de las asignaturas (3 caracteres)");
+
             for (int i = 0; i < codigosAsignaturas.Length; i++)
             {
-                string asignatura = null;
-                do
-                {
-                    asignatura = Auxiliar.leerCadena("Asignatura " + (i + 1) + ": ", 3);
-                    if (encabezado.Contains(asignatura))
-                    {
-                        Console.SetCursorPosition(14, Console.CursorTop - 1);
-                        Colores.imprimirRojo("--> La asignatura " + asignatura + " ya existe");
-                        asignatura = null;
-                    }
-                } while (asignatura == null);
+                int y = Console.CursorTop;
+                string msg = "Asignatura " + (i + 1) + ": ";
 
-                codigosAsignaturas[i] = asignatura;
+
+                codigosAsignaturas[i] = leerAsignatura(msg);
                 encabezado.Add(codigosAsignaturas[i]);
             }
+
             encabezado.Add("MEDIA");
             encabezado.Add("Nº SUS");
+
             return new Grupo(nombre, numAsignaturas, codigosAsignaturas);
+        }
+
+        private static string leerAsignatura(string msg)
+        {
+            int y = Console.CursorTop;
+            string asignatura = "";
+
+            do
+            {
+                Console.SetCursorPosition(0, y);
+                asignatura = Auxiliar.leerCadena(msg, 3).ToUpper();
+
+                Regex regex = new Regex(@"[A-Z]{3}");
+                if (!regex.IsMatch(asignatura))
+                {
+                    Console.SetCursorPosition(msg.Length, y);
+                    Auxiliar.imprimirRojo("--> La asignatura solo puede contener letras");
+
+                    Console.Write("Pulsa una tecla para probar otra vez");
+                    Console.ReadKey();
+
+                    Auxiliar.limpiarUnaLinea(msg.Length, y);
+                    Auxiliar.limpiarUnaLinea(msg.Length, y + 1);
+
+                    asignatura = null;
+                }
+                else
+                {
+                    if (encabezado.Contains(asignatura))
+                    {
+                        Console.SetCursorPosition(msg.Length, y);
+                        Auxiliar.imprimirRojo("--> La asignatura " + asignatura + " ya existe");
+
+                        Console.Write("Pulsa una tecla para probar otra vez");
+                        Console.ReadKey();
+
+                        Auxiliar.limpiarUnaLinea(msg.Length, y);
+                        Auxiliar.limpiarUnaLinea(msg.Length, y + 1);
+
+                        asignatura = null;
+                    }
+                }
+            } while (asignatura == null);
+            return asignatura;
         }
 
         private static int menu(Grupo g)
@@ -196,7 +344,7 @@ namespace Practica5
             Console.Clear();
             Auxiliar.imprimirCabecera("Grupo " + g.Nombre);
             crearMenu();
-            return Auxiliar.solicitarEnteroEnUnRango(1, MENU_OPCIONES.Length, "Seleccione una opción\n");
+            return Auxiliar.solicitarEnteroEnUnRango(1, MENU_OPCIONES.Length, "Seleccione una opción: ", "Opción incorrecta");
         }
 
         private static Alumno crearAlumno(Grupo g)
@@ -205,7 +353,7 @@ namespace Practica5
             float[] notas = new float[g.NumAsignaturas];
             for (int i = 0; i < notas.Length; i++)
             {
-                notas[i] = Auxiliar.solicitarEnteroEnUnRango(0, 10, "Nota de la asignatura " + i + ": ");
+                notas[i] = Auxiliar.solicitarEnteroEnUnRango(0, 10, "Nota de la asignatura " + g.CodigosAsignaturas[i] + ": ", "La nota debe ser un número sin decimales entre 0 y 10");
             }
             return new Alumno(nombre, notas);
         }
@@ -241,27 +389,18 @@ namespace Practica5
             Console.WriteLine();
         }
 
-        private static string subrayar(string palabra)
-        {
-            string subrayado = "";
-            for (int i = 0; i < palabra.Length; i++)
-            {
-                subrayado += "-";
-            }
-            return subrayado;
-        }
         private static void crearMenu()
         {
             for (int i = 0; i < MENU_OPCIONES.Length; i++)
             {
-                Colores.imprimirAzul((i + 1) + ". " + MENU_OPCIONES[i]);
+                Auxiliar.imprimirAzul((i + 1) + ". " + MENU_OPCIONES[i]);
             }
         }
 
-        private static void imprimirEncabezado(int respuesta)
+        private static void imprimirOpcionSel(int respuesta)
         {
             Console.Clear();
-            Colores.imprimirAzul("Has seleccionado " + MENU_OPCIONES[respuesta - 1]);
+            Auxiliar.imprimirAzul("Has seleccionado " + MENU_OPCIONES[respuesta - 1]);
         }
     }
 }
