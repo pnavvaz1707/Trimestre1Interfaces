@@ -19,9 +19,18 @@ namespace Practica6
     */
     public partial class FormMain : Form
     {
+
+        Empleado empleado;
+
         public FormMain()
         {
             InitializeComponent();
+        }
+
+        private void btnCalcular_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("NIF --> " + txtNif);
+
         }
     }
 }
