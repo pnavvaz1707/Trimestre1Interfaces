@@ -1,10 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Practica2
+/*
+* PRÁCTICA.............: Práctica 6.
+* NOMBRE Y APELLIDOS...: Pablo Navarro Vázquez
+* CURSO Y GRUPO........: 2º Desarrollo de Interfaces
+* TÍTULO DE LA PRÁCTICA: Aplicaciones de Formulario. Controles Básicos.
+* FECHA DE ENTREGA.....: 07 de diciembre de 2022
+*/
+
+namespace Practica6
 {
     internal class Nomina
     {
@@ -13,6 +17,16 @@ namespace Practica2
         private Empleado empleadoNomina;
         private DateTime fechaNomina;
         private int numHorasExtras;
+        private double salarioBase;
+        private double importeAntiguedad;
+        private double importeHorasExtras;
+        private double devengosPagaExtra;
+        private double totalDevengos;
+
+        private double cotizacionSegSoc;
+        private double cotizacionSegDes;
+        private double retencionIRPF;
+        private double totalDescuentos;
 
         #endregion
 
@@ -21,6 +35,16 @@ namespace Practica2
         public Empleado EmpleadoNomina { get { return empleadoNomina; } set { empleadoNomina = value; } }
         public DateTime FechaNomina { get { return fechaNomina; } set { fechaNomina = value; } }
         public int NumHorasExtras { get { return numHorasExtras; } set { numHorasExtras = value; } }
+
+        public double SalarioBase { get { return salarioBase; } }
+        public double ImporteAntiguedad { get { return importeAntiguedad; } }
+        public double ImporteHorasExtras { get { return importeHorasExtras; } }
+        public double DevengosPagaExtra { get { return devengosPagaExtra; } }
+        public double TotalDevengos { get { return totalDevengos; } }
+        public double CotizacionSegSoc{ get { return cotizacionSegSoc; } }
+        public double CotizacionSegDes{ get { return cotizacionSegDes; } }
+        public double RetencionIRPF{ get { return retencionIRPF; } }
+        public double TotalDescuentos{ get { return totalDescuentos; } }
 
         #endregion
 
@@ -34,62 +58,18 @@ namespace Practica2
             this.empleadoNomina = empleadoNomina;
             this.fechaNomina = fechaNomina;
             this.numHorasExtras = numHorasExtras;
+            this.salarioBase = calcularSalarioBase();
+            this.importeAntiguedad = calcularImporteAntiguedad();
+            this.importeHorasExtras = calcularImporteHorasExtras();
+            this.devengosPagaExtra = calcularDevengosPagaExtra();
+            this.totalDevengos = calcularTotalDevengado();
+
+            this.cotizacionSegSoc = calcularCotizacionSegSoc();
+            this.cotizacionSegDes = calcularCotizacionSegDes();
+            this.retencionIRPF = calcularRetencionIRPF();
+            this.totalDescuentos = calcularTotalDescuentos();
         }
-
-        public void hojaSalarial()
-        {
-            Console.Clear();
-
-            Console.WriteLine("HOJA SALARIAL");
-
-            Console.WriteLine("\nLIQUIDACIÓN DE HABERES AL " + fechaNomina);
-
-            Console.WriteLine("\nNombre........: " + empleadoNomina.Nombre);
-            Console.WriteLine("NIF...........: " + empleadoNomina.Nif);
-            Console.WriteLine("Categoría.....: " + empleadoNomina.Categoria);
-            Console.WriteLine("Nº de Trienios: " + empleadoNomina.NumTrienios);
-            Console.WriteLine("Nº de Hijos...: " + empleadoNomina.NumHijos);
-
-            Console.WriteLine("\nDEVENGOS\t\t\t\t\tDESCUENTOS");
-            Console.WriteLine("--------\t\t\t\t\t----------");
-
-            //Escribo una línea en dos instrucciones porque si no no me capta bien la instrucción de tener 2 decimales en la segunda cadena
-            Console.Write("Salario base\t\t{0:N2}", salarioBase());
-            Console.WriteLine("\t\tCotización Seg.Soc.\t{0:N2}", cotizacionSegSoc());
-
-            Console.Write("Antigüedad\t\t{0:N2}", importeAntiguedad());
-            Console.WriteLine("\t\t\tCotización Seg.Des.\t{0:N2}", cotizacionSegDes());
-
-            Console.Write("Importe Hor.Ext.\t{0:N2}", importeHorasExtras());
-            Console.WriteLine("\t\t\tRetención IRPF\t\t{0:N2}", retencionIRPF());
-
-            if (FechaNomina.Month == 6 || FechaNomina.Month == 12)
-            {
-                Console.WriteLine("Paga Extra\t\t{0:N2}", devengosPagaExtra());
-                Console.Write("\nTotal Devengos\t\t{0:N2}", (totalDevengado() + devengosPagaExtra()));
-            }
-            else
-            {
-                Console.Write("\nTotal Devengos\t\t{0:N2}", (totalDevengado()));
-            }
-
-            Console.WriteLine("\t\tTotal Descuentos\t{0:N2}", totalDescuentos());
-
-            Console.WriteLine("\n-----------------------------------------------");
-
-            if (FechaNomina.Month == 6 || FechaNomina.Month == 12)
-            {
-                Console.WriteLine("LIQUIDO A PERCIBIR \t{0:N2}", (totalDevengado() + devengosPagaExtra() - totalDescuentos()));
-            }
-            else
-            {
-                Console.WriteLine("LIQUIDO A PERCIBIR \t{0:N2}", (totalDevengado() - totalDescuentos()));
-            }
-
-            Console.WriteLine("-----------------------------------------------");
-        }
-
-        public double salarioBase()
+        public double calcularSalarioBase()
         {
             double salarioBase = 0;
             switch (empleadoNomina.Categoria)
@@ -109,30 +89,43 @@ namespace Practica2
             return salarioBase;
         }
 
-        public double cotizacionSegDes()
+        public double calcularImporteAntiguedad()
         {
-            return devengosPagaExtra() * 1.97 / 100;
-        }
-        public double cotizacionSegSoc()
-        {
-            return ((devengosPagaExtra() + devengosPagaExtra() / 6) * 4.51 / 100);
-        }
-        public double devengosPagaExtra()
-        {
-            return salarioBase() + importeAntiguedad();
+            return empleadoNomina.NumTrienios * salarioBase * 4 / 100;
         }
 
-        public double importeAntiguedad()
+        public double calcularImporteHorasExtras()
         {
-            return empleadoNomina.NumTrienios * salarioBase() * 4 / 100;
+            return NumHorasExtras * salarioBase * 1 / 100;
         }
 
-        public double importeHorasExtras()
+        public double calcularDevengosPagaExtra()
         {
-            return NumHorasExtras * salarioBase() * 1 / 100;
+            return salarioBase + importeAntiguedad;
         }
 
-        public double retencionIRPF()
+        public double calcularTotalDevengado()
+        {
+            double totalDevengado = salarioBase + importeAntiguedad + importeHorasExtras;
+            if (FechaNomina.Month == 6 || FechaNomina.Month == 12)
+            {
+                totalDevengado += devengosPagaExtra;
+            }
+
+            return totalDevengado;
+        }
+
+        public double calcularCotizacionSegSoc()
+        {
+            return (devengosPagaExtra + devengosPagaExtra / 6) * 4.51 / 100;
+        }
+
+        public double calcularCotizacionSegDes()
+        {
+            return devengosPagaExtra * 1.97 / 100;
+        }     
+
+        public double calcularRetencionIRPF()
         {
             int porcentajeIRPF = 0;
             switch (EmpleadoNomina.Categoria)
@@ -149,26 +142,23 @@ namespace Practica2
             }
             porcentajeIRPF -= EmpleadoNomina.NumHijos;
 
-            double retencionIRPF = 0;
+            double retencionIRPF;
             if (FechaNomina.Month == 6 || FechaNomina.Month == 12)
             {
-                retencionIRPF = (totalDevengado() + devengosPagaExtra()) * porcentajeIRPF / 100;
+                retencionIRPF = (totalDevengos + devengosPagaExtra) * porcentajeIRPF / 100;
             }
             else
             {
-                retencionIRPF = totalDevengado() * porcentajeIRPF / 100;
+                retencionIRPF = totalDevengos * porcentajeIRPF / 100;
             }
             return retencionIRPF;
         }
 
-        public double totalDescuentos()
+        public double calcularTotalDescuentos()
         {
-            return cotizacionSegSoc() + cotizacionSegDes() + retencionIRPF();
+            return cotizacionSegSoc + cotizacionSegDes + retencionIRPF;
         }
 
-        public double totalDevengado()
-        {
-            return salarioBase() + importeAntiguedad() + importeHorasExtras();
-        }
+
     }
 }
