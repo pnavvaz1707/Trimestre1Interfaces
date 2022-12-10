@@ -72,7 +72,8 @@ namespace Practica5
             return alumnos[posicion];
         }
 
-        public bool borrarAlumno(int matricula) {
+        public bool borrarAlumno(int matricula)
+        {
             int posicion = localizarAlumno(matricula);
             bool borrar = false;
             if (posicion == -1)
@@ -102,6 +103,32 @@ namespace Practica5
                 total += alumnos[i].Notas[posicionAsignatura];
             }
             return (total / alumnos.Count);
+        }
+
+        private string obtenerAsignaturas()
+        {
+            string asignaturas = "";
+            for (int i = 0; i < CodigosAsignaturas.Length; i++)
+            {
+                if (i == CodigosAsignaturas.Length - 1)
+                {
+                    asignaturas += CodigosAsignaturas[i];
+                }
+                else if (i == CodigosAsignaturas.Length - 2)
+                {
+                    asignaturas += CodigosAsignaturas[i] + " y ";
+                }
+                else
+                {
+                    asignaturas += CodigosAsignaturas[i] + ", ";
+                }
+            }
+            return asignaturas;
+        }
+
+        public override string ToString()
+        {
+            return Nombre + "\tAsignaturas: " + obtenerAsignaturas();
         }
     }
 }
