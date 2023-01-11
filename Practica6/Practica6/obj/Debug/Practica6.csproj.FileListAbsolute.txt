@@ -9,3 +9,14 @@ C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\obj\Debug\Practica6.csproj.CoreCompileInputs.cache
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\obj\Debug\Practica6.exe
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\obj\Debug\Practica6.pdb
+C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\obj\Debug\Practica6.csproj.AssemblyReference.cache
+C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\obj\Debug\Practica6.csproj.SuggestedBindingRedirects.cache
+C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\obj\Debug\Practica6.FormMain.resources
+C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\obj\Debug\Practica6.Properties.Resources.resources
+C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\obj\Debug\Practica6.csproj.GenerateResource.cache
+C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\obj\Debug\Practica6.csproj.CoreCompileInputs.cache
+C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\obj\Debug\Practica6.exe
+C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\obj\Debug\Practica6.pdb
+C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\bin\Debug\Practica6.exe.config
+C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\bin\Debug\Practica6.exe
+C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica6\Practica6\bin\Debug\Practica6.pdb
