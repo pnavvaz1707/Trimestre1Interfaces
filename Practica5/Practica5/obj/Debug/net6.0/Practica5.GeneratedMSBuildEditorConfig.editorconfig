@@ -7,4 +7,8 @@ build_property.InvariantGlobalization =
 build_property.PlatformNeutralAssembly = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Practica5
+<<<<<<< HEAD
 build_property.ProjectDir = C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica5\Practica5\
+=======
+build_property.ProjectDir = C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica5\Practica5\
+>>>>>>> 4c9e0449468bec12363038b6982a11fc3cd5a1a6
