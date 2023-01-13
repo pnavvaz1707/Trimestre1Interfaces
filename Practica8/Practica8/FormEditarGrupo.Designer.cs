@@ -38,6 +38,7 @@
             this.chckBoxSIGE = new System.Windows.Forms.CheckBox();
             this.chckBoxFOL = new System.Windows.Forms.CheckBox();
             this.btnCrearGrupo = new System.Windows.Forms.Button();
+            this.grpAsignaturas = new System.Windows.Forms.GroupBox();
             this.grpNuevoGrupo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +53,7 @@
             this.grpNuevoGrupo.Controls.Add(this.chckBoxSIGE);
             this.grpNuevoGrupo.Controls.Add(this.chckBoxFOL);
             this.grpNuevoGrupo.Controls.Add(this.btnCrearGrupo);
+            this.grpNuevoGrupo.Controls.Add(this.grpAsignaturas);
             this.grpNuevoGrupo.Location = new System.Drawing.Point(95, 75);
             this.grpNuevoGrupo.Name = "grpNuevoGrupo";
             this.grpNuevoGrupo.Size = new System.Drawing.Size(611, 300);
@@ -143,6 +145,15 @@
             this.btnCrearGrupo.TabIndex = 3;
             this.btnCrearGrupo.Text = "Crear";
             this.btnCrearGrupo.UseVisualStyleBackColor = true;
+            this.btnCrearGrupo.Click += new System.EventHandler(this.btnCrearGrupo_Click);
+            // 
+            // grpAsignaturas
+            // 
+            this.grpAsignaturas.Location = new System.Drawing.Point(227, 22);
+            this.grpAsignaturas.Name = "grpAsignaturas";
+            this.grpAsignaturas.Size = new System.Drawing.Size(348, 100);
+            this.grpAsignaturas.TabIndex = 12;
+            this.grpAsignaturas.TabStop = false;
             // 
             // FormEditarGrupo
             // 
@@ -170,5 +181,6 @@
         private CheckBox chckBoxSIGE;
         private CheckBox chckBoxFOL;
         private Button btnCrearGrupo;
+        private GroupBox grpAsignaturas;
     }
 }
