@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-using CheckBox = System.Windows.Forms.VisualStyles.VisualStyleElement.Button.CheckBox;
+using CheckBox = System.Windows.Forms.CheckBox;
 
 /*
 * PRÁCTICA.............: Práctica 8
@@ -20,8 +20,12 @@ using CheckBox = System.Windows.Forms.VisualStyles.VisualStyleElement.Button.Che
 
 namespace Practica8
 {
-    public partial class FormEditarGrupo : Form
+    partial class FormEditarGrupo : Form
     {
+        private DataGridView dtgvGrupos;
+
+        public DataGridView DtgvGrupos { get { return dtgvGrupos; } set { dtgvGrupos = value; } }
+
         public FormEditarGrupo()
         {
             InitializeComponent();
@@ -30,8 +34,17 @@ namespace Practica8
         private void btnCrearGrupo_Click(object sender, EventArgs e)
         {
             string nombre = txtNombreNuevoGrupo.Text;
-            bool allChecked = this.Controls.OfType<CheckBox>().All(c => c.Checked);
-
+            List<string> asignaturasSel = (from Control c in Controls where c is CheckBox && ((CheckBox)c).Checked select c.Text).ToList();
+            if (asignaturasSel.Count != 4)
+            {
+                MessageBox.Show("Debes seleccionar 4 asignaturas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            { 
+                Grupo grupo = new Grupo(nombre, asignaturasSel.ToArray());
+                dtgvGrupos.Rows.Add(grupo);
+                MessageBox.Show("Se ha creado con éxito el grupo " + grupo.Nombre, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
