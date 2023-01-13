@@ -35,10 +35,10 @@ namespace Practica8
 
         #endregion
 
-        public Grupo(string nombre, int numAsignaturas, string[] codigosAsignaturas)
+        public Grupo(string nombre, string[] codigosAsignaturas)
         {
             this.nombre = nombre;
-            this.numAsignaturas = numAsignaturas;
+            this.numAsignaturas = 4;
             this.codigosAsignaturas = codigosAsignaturas;
             this.alumnos = new List<Alumno>();
         }

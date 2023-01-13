@@ -37,28 +37,27 @@ namespace Practica8
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            dtgvGrupos = new System.Windows.Forms.DataGridView();
             this.nombreGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.asignaturasGrupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnImportar = new System.Windows.Forms.Button();
             this.btnNuevo = new System.Windows.Forms.Button();
             this.btnSeleccionar = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
-            this.grpListaGrupos = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(dtgvGrupos)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dtgvGrupos
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            dtgvGrupos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dtgvGrupos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.nombreGrupo,
             this.asignaturasGrupo});
-            this.dataGridView1.Location = new System.Drawing.Point(115, 90);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 25;
-            this.dataGridView1.Size = new System.Drawing.Size(543, 242);
-            this.dataGridView1.TabIndex = 0;
+            dtgvGrupos.Location = new System.Drawing.Point(115, 90);
+            dtgvGrupos.Name = "dtgvGrupos";
+            dtgvGrupos.RowTemplate.Height = 25;
+            dtgvGrupos.Size = new System.Drawing.Size(543, 242);
+            dtgvGrupos.TabIndex = 0;
             // 
             // nombreGrupo
             // 
@@ -89,7 +88,7 @@ namespace Practica8
             this.btnNuevo.Location = new System.Drawing.Point(553, 338);
             this.btnNuevo.Name = "btnNuevo";
             this.btnNuevo.Size = new System.Drawing.Size(105, 49);
-            this.btnNuevo.TabIndex = 2;
+            this.btnNuevo.TabIndex = 3;
             this.btnNuevo.Text = "Nuevo";
             this.btnNuevo.UseVisualStyleBackColor = true;
             this.btnNuevo.Click += new System.EventHandler(this.btnNuevo_Click);
@@ -99,7 +98,7 @@ namespace Practica8
             this.btnSeleccionar.Location = new System.Drawing.Point(442, 338);
             this.btnSeleccionar.Name = "btnSeleccionar";
             this.btnSeleccionar.Size = new System.Drawing.Size(105, 49);
-            this.btnSeleccionar.TabIndex = 3;
+            this.btnSeleccionar.TabIndex = 2;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
             this.btnSeleccionar.Click += new System.EventHandler(this.btnSeleccionar_Click);
@@ -114,14 +113,6 @@ namespace Practica8
             this.lblTitulo.TabIndex = 4;
             this.lblTitulo.Text = "Gestíon de grupos";
             // 
-            // grpListaGrupos
-            // 
-            this.grpListaGrupos.Location = new System.Drawing.Point(81, 17);
-            this.grpListaGrupos.Name = "grpListaGrupos";
-            this.grpListaGrupos.Size = new System.Drawing.Size(611, 390);
-            this.grpListaGrupos.TabIndex = 5;
-            this.grpListaGrupos.TabStop = false;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -132,12 +123,11 @@ namespace Practica8
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.btnNuevo);
             this.Controls.Add(this.btnImportar);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.grpListaGrupos);
+            this.Controls.Add(dtgvGrupos);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
             this.Text = "Gestión de grupos";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(dtgvGrupos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,13 +135,12 @@ namespace Practica8
 
         #endregion
 
-        private DataGridView dataGridView1;
+        public static DataGridView dtgvGrupos;
         private DataGridViewTextBoxColumn nombreGrupo;
         private DataGridViewTextBoxColumn asignaturasGrupo;
         private Button btnImportar;
         private Button btnNuevo;
         private Button btnSeleccionar;
         private Label lblTitulo;
-        private GroupBox grpListaGrupos;
     }
 }
