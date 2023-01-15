@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 using CheckBox = System.Windows.Forms.CheckBox;
 
@@ -20,13 +21,13 @@ using CheckBox = System.Windows.Forms.CheckBox;
 
 namespace Practica8
 {
-    partial class FormEditarGrupo : Form
+    partial class FormCrearGrupo : Form
     {
-        private DataGridView dtgvGrupos;
 
-        public DataGridView DtgvGrupos { get { return dtgvGrupos; } set { dtgvGrupos = value; } }
+        private Grupo grupo;
+        public Grupo Grupo { get { return grupo; } }
 
-        public FormEditarGrupo()
+        public FormCrearGrupo()
         {
             InitializeComponent();
         }
@@ -40,10 +41,12 @@ namespace Practica8
                 MessageBox.Show("Debes seleccionar 4 asignaturas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
-            { 
-                Grupo grupo = new Grupo(nombre, asignaturasSel.ToArray());
-                dtgvGrupos.Rows.Add(grupo);
+            {
+                grupo = new Grupo(nombre, asignaturasSel.ToArray());
+                //FormMain.Grupos.Add(grupo);
                 MessageBox.Show("Se ha creado con éxito el grupo " + grupo.Nombre, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
             }
         }
     }

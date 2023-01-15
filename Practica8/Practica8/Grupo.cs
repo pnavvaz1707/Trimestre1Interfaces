@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,21 +16,21 @@ using System.Threading.Tasks;
 
 namespace Practica8
 {
-    internal class Grupo
+    internal class Grupo : INotifyPropertyChanged
     {
         #region Campos
 
         private string nombre;
-        private int numAsignaturas;
         private string[] codigosAsignaturas;
         private List<Alumno> alumnos;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         #endregion
 
         #region Propiedades
 
         public string Nombre { get { return nombre; } }
-        public int NumAsignaturas { get { return numAsignaturas; } }
         public string[] CodigosAsignaturas { get { return codigosAsignaturas; } }
         public List<Alumno> Alumnos { get { return alumnos; } }
 
@@ -38,7 +39,6 @@ namespace Practica8
         public Grupo(string nombre, string[] codigosAsignaturas)
         {
             this.nombre = nombre;
-            this.numAsignaturas = 4;
             this.codigosAsignaturas = codigosAsignaturas;
             this.alumnos = new List<Alumno>();
         }
