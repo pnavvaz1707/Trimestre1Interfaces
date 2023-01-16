@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 * NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
 * CURSO y GRUPO........: 2º Desarrollo de Interfaces
 * TÍTULO de la PRÁCTICA: Uso del IDE V.Studio
-* FECHA de ENTREGA.....: 12 de Enero de 2023
+* FECHA de ENTREGA.....: 20 de Enero de 2023
 */
 
 
@@ -35,6 +35,8 @@ namespace Practica8
         public List<Alumno> Alumnos { get { return alumnos; } }
 
         #endregion
+
+        public Grupo() { }
 
         public Grupo(string nombre, string[] codigosAsignaturas)
         {

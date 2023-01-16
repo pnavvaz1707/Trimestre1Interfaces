@@ -15,7 +15,6 @@ C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8\obj\Debug\net6.0-windows\Practica8.genruntimeconfig.cache
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8\obj\Debug\net6.0-windows\ref\Practica8.dll
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8\obj\Debug\net6.0-windows\Practica8.FormMain.resources
-C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8\obj\Debug\net6.0-windows\Practica8.FormEditarGrupo.resources
 C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8\bin\Debug\net6.0-windows\Practica8.exe
 C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8\bin\Debug\net6.0-windows\Practica8.deps.json
 C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8\bin\Debug\net6.0-windows\Practica8.runtimeconfig.json
@@ -34,3 +33,5 @@ C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8
 C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8\obj\Debug\net6.0-windows\Practica8.pdb
 C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8\obj\Debug\net6.0-windows\Practica8.genruntimeconfig.cache
 C:\Users\quick\Source\Repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8\obj\Debug\net6.0-windows\ref\Practica8.dll
+C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8\obj\Debug\net6.0-windows\Practica8.FormCrearGrupo.resources
+C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica8\Practica8\obj\Debug\net6.0-windows\Practica8.FormCrearAlumno.resources
