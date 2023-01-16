@@ -112,7 +112,7 @@ namespace Practica8
 
         public override string ToString()
         {
-            return matricula + ";" + nombre + ";" + obtenerNotas();
+            return nombre;
         }
     }
 }
