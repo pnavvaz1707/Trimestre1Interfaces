@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-/*
+﻿/*
 * PRÁCTICA.............: Práctica 8
 * NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
 * CURSO y GRUPO........: 2º Desarrollo de Interfaces
 * TÍTULO de la PRÁCTICA: Uso del IDE V.Studio
-* FECHA de ENTREGA.....: 12 de Enero de 2023
+* FECHA de ENTREGA.....: 20 de Enero de 2023
 */
-
 
 namespace Practica8
 {
@@ -42,27 +34,6 @@ namespace Practica8
             this.nombre = nombre;
             this.notas = notas;
 
-        }
-
-        /**
-         * Constructor usado para leer por fichero
-         */
-        public Alumno(int matricula, string nombre, float[] notas)
-        {
-            this.matricula = matricula;
-            this.nombre = nombre;
-            this.notas = notas;
-            if (contador < matricula)
-            {
-                contador = matricula;
-            }
-        }
-
-        public void imprimeAlumno()
-        {
-            Console.Write("Matrícula: " + Matricula);
-            Console.SetCursorPosition(Console.CursorLeft + 7, Console.CursorTop);
-            Console.WriteLine("Nombre: " + Nombre);
         }
 
         public float mediaAlumno()
