@@ -119,13 +119,20 @@ namespace Practica8
         {
             Grupo grupoSel = new Grupo();
             PropertyInfo[] properties = grupoSel.GetType().GetProperties();
-            object objeto = Activator.CreateInstance(typeof(Grupo));
+            Type tipo = grupoSel.GetType();
 
             DataGridViewRow filaSel = dtgvGrupos.CurrentRow;
 
             for (int i = 0; i < properties.Length; i++)
             {
-                properties[i].SetValue(objeto, filaSel.Cells[i].Value);
+                string columnName = properties[i].Name;
+
+                if (filaSel.Cells[columnName].Value != null)
+                {
+                    MessageBox.Show("Celda --> " + filaSel.Cells[i].Value + " y tipo: " + filaSel.Cells[i].ValueType, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    properties[i].SetValue(grupoSel, filaSel.Cells[columnName].Value);
+                }
+                //properties[i].SetValue(filaSel.Cells[i].Value);
             }
 
             MessageBox.Show("Se ha creado con éxito el grupo " + grupoSel.Nombre, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

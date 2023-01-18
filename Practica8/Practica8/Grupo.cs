@@ -30,9 +30,9 @@ namespace Practica8
 
         #region Propiedades
 
-        public string Nombre { get { return nombre; } }
-        public string[] CodigosAsignaturas { get { return codigosAsignaturas; } }
-        public List<Alumno> Alumnos { get { return alumnos; } }
+        public string Nombre { get { return nombre; } set { nombre = value; } }
+        public string[] CodigosAsignaturas { get { return codigosAsignaturas; } set { codigosAsignaturas = value; } }
+        public List<Alumno> Alumnos { get { return alumnos; } set { alumnos = value; } }
 
         #endregion
 
