@@ -23,9 +23,13 @@ namespace Practica8
 {
     partial class FormCrearGrupo : Form
     {
-
+        #region Campos
         private Grupo grupo;
+        #endregion
+
+        #region Propiedades
         public Grupo Grupo { get { return grupo; } }
+        #endregion
 
         public FormCrearGrupo()
         {
@@ -35,16 +39,22 @@ namespace Practica8
         private void btnCrearGrupo_Click(object sender, EventArgs e)
         {
             string nombre = txtNombreNuevoGrupo.Text;
-            List<string> asignaturasSel = (from Control c in Controls where c is CheckBox && ((CheckBox)c).Checked select c.Text).ToList();
-            if (asignaturasSel.Count != 4)
+
+
+            if (lstAsignaturasCrearGrupo.CheckedItems.Count != 4)
             {
                 MessageBox.Show("Debes seleccionar 4 asignaturas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
+                string[] asignaturasSel = new string[4];
+
+                for (int i = 0; i < lstAsignaturasCrearGrupo.CheckedItems.Count; i++)
+                {
+                    asignaturasSel[i] = lstAsignaturasCrearGrupo.CheckedItems[i].ToString();
+                }
                 grupo = new Grupo(nombre, asignaturasSel.ToArray());
-                //FormMain.Grupos.Add(grupo);
-                MessageBox.Show("Se ha creado con éxito el grupo " + grupo.Nombre, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Se ha creado con éxito el grupo " + grupo.Nombre, "Grupo creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

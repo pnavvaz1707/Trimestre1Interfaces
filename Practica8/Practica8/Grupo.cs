@@ -16,15 +16,13 @@ using System.Threading.Tasks;
 
 namespace Practica8
 {
-    internal class Grupo : INotifyPropertyChanged
+    internal class Grupo
     {
         #region Campos
 
         private string nombre;
         private string[] codigosAsignaturas;
         private List<Alumno> alumnos;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         #endregion
 
@@ -35,8 +33,6 @@ namespace Practica8
         public List<Alumno> Alumnos { get { return alumnos; } set { alumnos = value; } }
 
         #endregion
-
-        public Grupo() { }
 
         public Grupo(string nombre, string[] codigosAsignaturas)
         {
@@ -130,7 +126,7 @@ namespace Practica8
 
         public override string ToString()
         {
-            return Nombre + "\tAsignaturas: " + obtenerAsignaturas();
+            return Nombre;
         }
     }
 }
