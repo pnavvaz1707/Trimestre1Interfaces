@@ -12,7 +12,7 @@ namespace Practica8
 {
     partial class FormMain : Form
     {
-        private Grupo grupoSel;
+        public static Grupo grupoSel;
         public FormMain()
         {
             InitializeComponent();
@@ -51,6 +51,7 @@ namespace Practica8
 
         public void crearColumnasAlumno()
         {
+            dtgvAlumnos.Columns.Clear();
             //Defino el objeto del que quiero crear las columnas
             Type tipo = typeof(Alumno);
             // Obtener las propiedades del tipo
@@ -130,19 +131,20 @@ namespace Practica8
 
                     row.Cells[i].Value = string.Join(",", asignaturas);
                 }
-                else if (properties[i].PropertyType.Name.Contains("List"))
-                {
-                    List<Alumno> alumnos = (List<Alumno>)properties[i].GetValue(grupo);
-
-                    alumnos.Add(new Alumno("Holaaa", new float[] { 411, 42 }));
-                    alumnos.Add(new Alumno("Adisdf", new float[] { 411, 42 }));
-
-                    row.Cells[i].Value = string.Join(",", alumnos);
-                }
-                else
+                else if (!properties[i].PropertyType.Name.Contains("List"))
                 {
                     row.Cells[i].Value = properties[i].GetValue(grupo);
+
+                    /*List<Alumno> alumnos = (List<Alumno>)properties[i].GetValue(grupo);
+
+                    alumnos.Add(new Alumno("Holaaa", new double[] { 411, 42 }));
+                    alumnos.Add(new Alumno("Adisdf", new double[] { 411, 42 }));
+
+                    row.Cells[i].Value = string.Join(",", alumnos);*/
                 }
+                /*else
+                {
+                }*/
             }
         }
 
@@ -160,23 +162,33 @@ namespace Practica8
             // Recorrer las propiedades
             for (int i = 0; i < properties.Length; i++)
             {
+
+
                 if (numCelda == 1)
                 {
                     row.Cells[numCelda].Value = alumno;
+                    numCelda++;
                 }
                 else
                 {
                     if (properties[i].PropertyType.Name.Contains("[]"))
                     {
-                        double[] notas = (double[])properties[i].GetValue(alumno);
+                        double[] notas = (double[]) properties[i].GetValue(alumno);
+                        MessageBox.Show("Se grupo " + row.Cells[numCelda].Value + "Notas --> " + string.Join(",", notas) + " Length --> " + notas.Length, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                         for (int j = 0; i < notas.Length; i++)
                         {
+                            
                             row.Cells[numCelda].Value = notas[j];
+                            MessageBox.Show("Se grupo " + row.Cells[numCelda].Value + "Notas 0 --> " + notas[0] + " Length --> " + notas.Length + " j --> " + j, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            numCelda++;
                         }
                     }
                     else
                     {
                         row.Cells[numCelda].Value = properties[i].GetValue(alumno);
+                        numCelda++;
                     }
                 }
             }
@@ -184,9 +196,14 @@ namespace Practica8
 
         private void btnAgregarAlumno_Click(object sender, EventArgs e)
         {
-
-
-            FormCrearAlumno formCrearAlumno = new FormCrearAlumno(grupoSel);
+            FormCrearAlumno formCrearAlumno = new FormCrearAlumno();
+            if (formCrearAlumno.ShowDialog() == DialogResult.OK)
+            {
+                for (int i = 0; i < grupoSel.Alumnos.Count; i++)
+                {
+                    insertarRegistro(grupoSel.Alumnos[i]);
+                }
+            }
         }
 
         private void btnBorrarAlumno_Click(object sender, EventArgs e)

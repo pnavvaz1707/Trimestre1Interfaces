@@ -14,7 +14,7 @@ namespace Practica8
 
         private int matricula;
         private string nombre;
-        private float[] notas;
+        private double[] notas;
         private static int contador = 0;
 
         #endregion
@@ -23,11 +23,11 @@ namespace Practica8
 
         public int Matricula { get { return matricula; } }
         public string Nombre { get { return nombre; } }
-        public float[] Notas { get { return notas; } }
+        public double[] Notas { get { return notas; } }
 
         #endregion
 
-        public Alumno(string nombre, float[] notas)
+        public Alumno(string nombre, double[] notas)
         {
             contador++;
             this.matricula = contador;
@@ -36,9 +36,9 @@ namespace Practica8
 
         }
 
-        public float mediaAlumno()
+        public double mediaAlumno()
         {
-            float total = 0;
+            double total = 0;
             for (int i = 0; i < Notas.Length; i++)
             {
                 total += Notas[i];
