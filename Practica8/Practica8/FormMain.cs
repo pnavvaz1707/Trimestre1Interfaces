@@ -12,48 +12,12 @@ namespace Practica8
 {
     partial class FormMain : Form
     {
-        private static List<Grupo> grupos = new List<Grupo>();
-
-        public static List<Grupo> Grupos { get { return grupos; } set { grupos = value; } }
+        private Grupo grupoSel;
         public FormMain()
         {
             InitializeComponent();
 
             crearColumnas(typeof(Grupo), dtgvGrupos);
-            crearColumnas(typeof(Alumno), dtgvAlumnos);
-        }
-
-        private void btnImportar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSeleccionar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnNuevo_Click(object sender, EventArgs e)
-        {
-            FormCrearGrupo formCrearGrupo = new FormCrearGrupo();
-
-
-
-            if (formCrearGrupo.ShowDialog() == DialogResult.OK)
-            {
-                // Añadir el objeto creado a la lista
-                Grupo grupoAgregado = formCrearGrupo.Grupo;
-                grupos.Add(grupoAgregado);
-                insertarRegistro(grupoAgregado);
-            }
-
-
-            /*
-            FormEditarGrupo form = new FormEditarGrupo();
-            form.ShowDialog();
-            dtgvGrupos.Refresh();
-            MessageBox.Show("Se ha creado con éxito el grupo " + Grupos[0].Nombre, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            */
         }
 
         public void crearColumnas(Type tipo, DataGridView dtgv)
@@ -83,6 +47,67 @@ namespace Practica8
                 // Agregar la columna al DataGridView
                 dtgv.Columns.Add(column);
             }
+        }
+
+        public void crearColumnasAlumno()
+        {
+            //Defino el objeto del que quiero crear las columnas
+            Type tipo = typeof(Alumno);
+            // Obtener las propiedades del tipo
+            PropertyInfo[] properties = tipo.GetProperties();
+
+            DataGridViewColumn column = new DataGridViewColumn();
+            column.Name = properties[0].Name;
+            column.HeaderText = properties[0].Name;
+            column.ValueType = tipo;
+            column.CellTemplate = new DataGridViewTextBoxCell();
+
+            dtgvAlumnos.Columns.Add(column);
+
+            // Recorrer las propiedades
+            for (int i = 1; i < properties.Length; i++)
+            {
+                if (properties[i].PropertyType.Name.Contains("[]"))
+                {
+
+                    for (int j = 0; j < grupoSel.CodigosAsignaturas.Length; j++)
+                    {
+                        column = new DataGridViewColumn();
+                        column.Name = grupoSel.CodigosAsignaturas[j];
+                        column.HeaderText = grupoSel.CodigosAsignaturas[j];
+                        column.ValueType = typeof(double);
+                        column.CellTemplate = new DataGridViewTextBoxCell();
+
+                        dtgvAlumnos.Columns.Add(column);
+                    }
+                }
+                else
+                {
+                    column = new DataGridViewColumn();
+                    column.Name = properties[i].Name;
+                    column.HeaderText = properties[i].Name;
+                    column.ValueType = properties[i].PropertyType;
+                    column.CellTemplate = new DataGridViewTextBoxCell();
+
+                    // Agregar la columna al DataGridView
+                    dtgvAlumnos.Columns.Add(column);
+                }
+            }
+        }
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            FormCrearGrupo formCrearGrupo = new FormCrearGrupo();
+
+            if (formCrearGrupo.ShowDialog() == DialogResult.OK)
+            {
+                Grupo grupoAgregado = formCrearGrupo.Grupo;
+                insertarRegistro(grupoAgregado);
+            }
+        }
+        private void btnImportar_Click(object sender, EventArgs e)
+        {
+
         }
 
         public void insertarRegistro(Grupo grupo)
@@ -121,11 +146,47 @@ namespace Practica8
             }
         }
 
+        public void insertarRegistro(Alumno alumno)
+        {
+            // Obtener las propiedades del objeto
+            PropertyInfo[] properties = alumno.GetType().GetProperties();
+
+            // Crear una nueva fila
+            int rowIndex = dtgvAlumnos.Rows.Add();
+            DataGridViewRow row = dtgvAlumnos.Rows[rowIndex];
+
+            int numCelda = 0;
+
+            // Recorrer las propiedades
+            for (int i = 0; i < properties.Length; i++)
+            {
+                if (numCelda == 1)
+                {
+                    row.Cells[numCelda].Value = alumno;
+                }
+                else
+                {
+                    if (properties[i].PropertyType.Name.Contains("[]"))
+                    {
+                        double[] notas = (double[])properties[i].GetValue(alumno);
+                        for (int j = 0; i < notas.Length; i++)
+                        {
+                            row.Cells[numCelda].Value = notas[j];
+                        }
+                    }
+                    else
+                    {
+                        row.Cells[numCelda].Value = properties[i].GetValue(alumno);
+                    }
+                }
+            }
+        }
+
         private void btnAgregarAlumno_Click(object sender, EventArgs e)
         {
 
 
-            //FormCrearAlumno formCrearAlumno = new FormCrearAlumno(grupoSel);
+            FormCrearAlumno formCrearAlumno = new FormCrearAlumno(grupoSel);
         }
 
         private void btnBorrarAlumno_Click(object sender, EventArgs e)
@@ -138,25 +199,12 @@ namespace Practica8
             DataGridViewRow filaSel = dtgvGrupos.Rows[e.RowIndex];
             if (filaSel != null)
             {
-                Grupo grupoSel = (Grupo)filaSel.Cells[0].Value;
+                grupoSel = (Grupo)filaSel.Cells[0].Value;
                 if (grupoSel != null)
                 {
+                    crearColumnasAlumno();
                     MessageBox.Show("Se ha creado con éxito el grupo " + filaSel.Cells[0].Value, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    List<string> asignaturas = grupoSel.CodigosAsignaturas.ToList();
-
-                    txtNombreEditarGrupo.Text = grupoSel.Nombre;
-                    for (int i = 0; i < lstAsignaturasEditarGrupo.Items.Count; i++)
-                    {
-                        if (asignaturas.Contains(lstAsignaturasEditarGrupo.Items[i].ToString()))
-                        {
-                            lstAsignaturasEditarGrupo.SetItemChecked(i, true);
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Errorel grupo " + filaSel.Cells[0].Value, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //insertarRegistro(grupoSel);
                 }
             }
         }
