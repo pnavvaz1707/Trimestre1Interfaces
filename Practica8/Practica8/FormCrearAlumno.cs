@@ -10,43 +10,80 @@ namespace Practica8
 {
     partial class FormCrearAlumno : Form
     {
+        GroupBox grpNotas;
+        TextBoxSubrayado[] txtNotas;
         public FormCrearAlumno()
         {
             InitializeComponent();
 
-            int numAsignatura = 0;
+            grpNotas = new GroupBox();
+            txtNotas = new TextBoxSubrayado[FormMain.grupoSel.CodigosAsignaturas.Length];
 
-            for (int i = 0; i < grpNotas.Controls.Count; i++)
+            int posicionX = 10;
+            int anchuraLbl = 40;
+            int anchuraTxt = 40;
+
+            for (int i = 0; i < FormMain.grupoSel.CodigosAsignaturas.Length; i++)
             {
-                if (grpNotas.Controls[i] is TextBox)
-                {
-                    TextBox notas = grpNotas.Controls[i] as TextBox;
-                    notas.Text = FormMain.grupoSel.CodigosAsignaturas[numAsignatura];
-                    numAsignatura++;
-                }
+                Label lblNota = new Label();
+
+                lblNota.Text = FormMain.grupoSel.CodigosAsignaturas[i];
+                lblNota.Location = new System.Drawing.Point(posicionX, 30);
+                lblNota.Size = new System.Drawing.Size(anchuraLbl, 15);
+
+                posicionX += anchuraLbl + 5;
+
+                grpNotas.Controls.Add(lblNota);
+
+                TextBoxSubrayado txtNota = new TextBoxSubrayado();
+                txtNota.Location = new System.Drawing.Point(posicionX, 25);
+                txtNota.Size = new System.Drawing.Size(anchuraTxt, 15);
+                txtNota.KeyPress += txtBoxSoloDoubles;
+                txtNotas[i] = txtNota;
+
+                posicionX += anchuraTxt + 20;
+
+                grpNotas.Controls.Add(txtNotas[i]);
             }
+            grpNotas.Location = new System.Drawing.Point(42, 100);
+            grpNotas.Size = new System.Drawing.Size(FormMain.grupoSel.CodigosAsignaturas.Length * anchuraTxt * 2 + 25 * FormMain.grupoSel.CodigosAsignaturas.Length, 70);
+            grpNotas.Text = "Notas";
+            this.Controls.Add(grpNotas);
         }
 
         private void btnCrearAlumno_Click(object sender, EventArgs e)
         {
-            double[] notas = new double[4];
-            int numAsignatura = 0;
-
-            for (int i = 0; i < grpNotas.Controls.Count; i++)
+            if (txtNombreAlumnoNuevo.Text != "")
             {
-                if (grpNotas.Controls[i] is TextBox)
-                {
-                    TextBox notasTxt = grpNotas.Controls[i] as TextBox;
-                    MessageBox.Show("Se va a añadir " + notasTxt.Text, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    notas[numAsignatura] = Convert.ToDouble(notasTxt.Text);
-                    MessageBox.Show("Se ha anadido " + notas[numAsignatura], "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    numAsignatura++;
-                }
-            }
-            FormMain.grupoSel.anadirAlumno(new Alumno(txtNombreAlumnoNuevo.Text,notas));
+                double[] notas = new double[FormMain.grupoSel.CodigosAsignaturas.Length];
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+                for (int i = 0; i < notas.Length; i++)
+                {
+                    notas[i] = Convert.ToDouble(txtNotas[i].Text);
+                }
+                FormMain.grupoSel.anadirAlumno(new Alumno(txtNombreAlumnoNuevo.Text, notas));
+
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("El nombre de alumno no puede estar vacío", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void txtBoxSoloDoubles(object sender, KeyPressEventArgs e)
+        {
+            TextBoxSubrayado tBox = (TextBoxSubrayado)sender;
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8 && e.KeyChar != ',')
+            {
+                e.Handled = true;
+                //tBox.BorderColor = Color.Red;
+            }
+            else
+            {
+                //tBox.BorderColor = Color.Black;
+            }
         }
     }
 }

@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-using CheckBox = System.Windows.Forms.CheckBox;
-
-/*
+﻿/*
 * PRÁCTICA.............: Práctica 8
 * NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
 * CURSO y GRUPO........: 2º Desarrollo de Interfaces
@@ -41,13 +28,13 @@ namespace Practica8
             string nombre = txtNombreNuevoGrupo.Text;
 
 
-            if (lstAsignaturasCrearGrupo.CheckedItems.Count != 4)
+            if (lstAsignaturasCrearGrupo.CheckedItems.Count < 4)
             {
-                MessageBox.Show("Debes seleccionar 4 asignaturas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debes seleccionar al menos 4 asignaturas", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                string[] asignaturasSel = new string[4];
+                string[] asignaturasSel = new string[lstAsignaturasCrearGrupo.CheckedItems.Count];
 
                 for (int i = 0; i < lstAsignaturasCrearGrupo.CheckedItems.Count; i++)
                 {

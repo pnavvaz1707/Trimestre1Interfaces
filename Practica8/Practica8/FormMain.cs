@@ -17,12 +17,13 @@ namespace Practica8
         {
             InitializeComponent();
 
-            crearColumnas(typeof(Grupo), dtgvGrupos);
+            crearColumnasGrupo();
         }
 
-        public void crearColumnas(Type tipo, DataGridView dtgv)
+        public void crearColumnasGrupo()
         {
             //Defino el objeto del que quiero crear las columnas
+            Type tipo = typeof(Grupo);
 
             // Obtener las propiedades del tipo
             PropertyInfo[] properties = tipo.GetProperties();
@@ -33,10 +34,10 @@ namespace Practica8
             column.ValueType = tipo;
             column.CellTemplate = new DataGridViewTextBoxCell();
 
-            dtgv.Columns.Add(column);
+            dtgvGrupos.Columns.Add(column);
 
             // Recorrer las propiedades
-            for (int i = 1; i < properties.Length; i++)
+            for (int i = 1; i < properties.Length - 1; i++)
             {
                 column = new DataGridViewColumn();
                 column.Name = properties[i].Name;
@@ -45,7 +46,7 @@ namespace Practica8
                 column.CellTemplate = new DataGridViewTextBoxCell();
 
                 // Agregar la columna al DataGridView
-                dtgv.Columns.Add(column);
+                dtgvGrupos.Columns.Add(column);
             }
         }
 
@@ -104,6 +105,10 @@ namespace Practica8
             {
                 Grupo grupoAgregado = formCrearGrupo.Grupo;
                 insertarRegistro(grupoAgregado);
+
+                grupoSel = grupoAgregado;
+                crearColumnasAlumno();
+                actualizarAlumnos(grupoSel.Alumnos);
             }
         }
         private void btnImportar_Click(object sender, EventArgs e)
@@ -142,9 +147,8 @@ namespace Practica8
 
                     row.Cells[i].Value = string.Join(",", alumnos);*/
                 }
-                /*else
-                {
-                }*/
+                dtgvGrupos.CurrentCell = row.Cells[0];
+                row.Selected = true;
             }
         }
 
@@ -162,8 +166,6 @@ namespace Practica8
             // Recorrer las propiedades
             for (int i = 0; i < properties.Length; i++)
             {
-
-
                 if (numCelda == 1)
                 {
                     row.Cells[numCelda].Value = alumno;
@@ -173,14 +175,11 @@ namespace Practica8
                 {
                     if (properties[i].PropertyType.Name.Contains("[]"))
                     {
-                        double[] notas = (double[]) properties[i].GetValue(alumno);
-                        MessageBox.Show("Se grupo " + row.Cells[numCelda].Value + "Notas --> " + string.Join(",", notas) + " Length --> " + notas.Length, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        double[] notas = (double[])properties[i].GetValue(alumno);
 
-                        for (int j = 0; i < notas.Length; i++)
+                        for (int j = 0; j < notas.Length; j++)
                         {
-                            
                             row.Cells[numCelda].Value = notas[j];
-                            MessageBox.Show("Se grupo " + row.Cells[numCelda].Value + "Notas 0 --> " + notas[0] + " Length --> " + notas.Length + " j --> " + j, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                             numCelda++;
                         }
@@ -192,6 +191,17 @@ namespace Practica8
                     }
                 }
             }
+            dtgvAlumnos.CurrentCell = row.Cells[0];
+            row.Selected = true;
+        }
+
+        private void actualizarAlumnos(List<Alumno> alumnos)
+        {
+            dtgvAlumnos.Rows.Clear();
+            for (int i = 0; i < alumnos.Count; i++)
+            {
+                insertarRegistro(alumnos[i]);
+            }
         }
 
         private void btnAgregarAlumno_Click(object sender, EventArgs e)
@@ -199,16 +209,25 @@ namespace Practica8
             FormCrearAlumno formCrearAlumno = new FormCrearAlumno();
             if (formCrearAlumno.ShowDialog() == DialogResult.OK)
             {
-                for (int i = 0; i < grupoSel.Alumnos.Count; i++)
-                {
-                    insertarRegistro(grupoSel.Alumnos[i]);
-                }
+                insertarRegistro(grupoSel.Alumnos[grupoSel.Alumnos.Count - 1]);
             }
         }
 
         private void btnBorrarAlumno_Click(object sender, EventArgs e)
         {
-
+            Alumno alumnoSel = (Alumno) dtgvAlumnos.SelectedRows[0].Cells[1].Value;
+            
+            if (MessageBox.Show("¿Deseas borrar al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula + "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                grupoSel.borrarAlumno(alumnoSel.Matricula);
+                MessageBox.Show("Se ha borrado correctamente al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                actualizarAlumnos(grupoSel.Alumnos);
+            }
+            else
+            {
+                MessageBox.Show("No se ha borrado al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
         }
 
         private void dtgvGrupos_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -220,10 +239,24 @@ namespace Practica8
                 if (grupoSel != null)
                 {
                     crearColumnasAlumno();
-                    MessageBox.Show("Se ha creado con éxito el grupo " + filaSel.Cells[0].Value, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //insertarRegistro(grupoSel);
+                    actualizarAlumnos(grupoSel.Alumnos);
                 }
             }
+        }
+
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dtgvAlumnos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dtgvAlumnos.Rows[e.RowIndex].Selected = true;
+        }
+
+        private void dtgvGrupos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dtgvGrupos.Rows[e.RowIndex].Selected = true;
         }
     }
 }
