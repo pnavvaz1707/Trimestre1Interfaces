@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCrearGrupo));
             this.txtNombreNuevoGrupo = new System.Windows.Forms.TextBox();
             this.lblNombreNuevoGrupo = new System.Windows.Forms.Label();
             this.btnCrearGrupo = new System.Windows.Forms.Button();
             this.lstAsignaturasCrearGrupo = new System.Windows.Forms.CheckedListBox();
+            this.errorProviderCrearGrupo = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCrearGrupo)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNombreNuevoGrupo
@@ -40,6 +44,7 @@
             this.txtNombreNuevoGrupo.Name = "txtNombreNuevoGrupo";
             this.txtNombreNuevoGrupo.Size = new System.Drawing.Size(100, 23);
             this.txtNombreNuevoGrupo.TabIndex = 12;
+            this.txtNombreNuevoGrupo.Leave += new System.EventHandler(this.txtNombreNuevoGrupo_Leave);
             // 
             // lblNombreNuevoGrupo
             // 
@@ -52,10 +57,11 @@
             // 
             // btnCrearGrupo
             // 
+            this.btnCrearGrupo.Enabled = false;
             this.btnCrearGrupo.Location = new System.Drawing.Point(81, 201);
             this.btnCrearGrupo.Name = "btnCrearGrupo";
             this.btnCrearGrupo.Size = new System.Drawing.Size(105, 49);
-            this.btnCrearGrupo.TabIndex = 19;
+            this.btnCrearGrupo.TabIndex = 14;
             this.btnCrearGrupo.Text = "Crear";
             this.btnCrearGrupo.UseVisualStyleBackColor = true;
             this.btnCrearGrupo.Click += new System.EventHandler(this.btnCrearGrupo_Click);
@@ -73,7 +79,11 @@
             this.lstAsignaturasCrearGrupo.Location = new System.Drawing.Point(81, 83);
             this.lstAsignaturasCrearGrupo.Name = "lstAsignaturasCrearGrupo";
             this.lstAsignaturasCrearGrupo.Size = new System.Drawing.Size(105, 94);
-            this.lstAsignaturasCrearGrupo.TabIndex = 20;
+            this.lstAsignaturasCrearGrupo.TabIndex = 13;
+            // 
+            // errorProviderCrearGrupo
+            // 
+            this.errorProviderCrearGrupo.ContainerControl = this;
             // 
             // FormCrearGrupo
             // 
@@ -84,9 +94,12 @@
             this.Controls.Add(this.txtNombreNuevoGrupo);
             this.Controls.Add(this.lblNombreNuevoGrupo);
             this.Controls.Add(this.btnCrearGrupo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "FormCrearGrupo";
             this.RightToLeftLayout = true;
-            this.Text = "FormCrearGrupo";
+            this.Text = "Datos del grupo";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderCrearGrupo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,5 +111,6 @@
         private Label lblNombreNuevoGrupo;
         private Button btnCrearGrupo;
         private CheckedListBox lstAsignaturasCrearGrupo;
+        private ErrorProvider errorProviderCrearGrupo;
     }
 }

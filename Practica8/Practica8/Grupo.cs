@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace Practica8
 {
+    [Serializable]
     internal class Grupo
     {
         #region Campos

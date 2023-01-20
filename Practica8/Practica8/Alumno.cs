@@ -8,6 +8,7 @@
 
 namespace Practica8
 {
+    [Serializable]
     internal class Alumno : IComparable<Alumno>
     {
         #region Campos
@@ -21,8 +22,8 @@ namespace Practica8
         #region Propiedades
 
         public int Matricula { get { return matricula; } set { matricula = value; } }
-        public string Nombre { get { return nombre; } }
-        public double[] Notas { get { return notas; } }
+        public string Nombre { get { return nombre; } set { nombre = value; } }
+        public double[] Notas { get { return notas; } set { notas = value; } }
 
         #endregion
 

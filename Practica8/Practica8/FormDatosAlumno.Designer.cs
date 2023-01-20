@@ -1,6 +1,6 @@
 ﻿namespace Practica8
 {
-    partial class FormCrearAlumno
+    partial class FormDatosAlumno
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCrearAlumno));
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDatosAlumno));
             this.txtNombreAlumnoNuevo = new System.Windows.Forms.TextBox();
             this.lblNombreAlumnoNuevo = new System.Windows.Forms.Label();
             this.btnCrearAlumno = new System.Windows.Forms.Button();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // txtNombreAlumnoNuevo
@@ -40,6 +43,7 @@
             this.txtNombreAlumnoNuevo.Name = "txtNombreAlumnoNuevo";
             this.txtNombreAlumnoNuevo.Size = new System.Drawing.Size(100, 23);
             this.txtNombreAlumnoNuevo.TabIndex = 0;
+            this.txtNombreAlumnoNuevo.TextChanged += new System.EventHandler(this.txtBoxNombreAlumnoVacio);
             // 
             // lblNombreAlumnoNuevo
             // 
@@ -52,15 +56,20 @@
             // 
             // btnCrearAlumno
             // 
-            this.btnCrearAlumno.Location = new System.Drawing.Point(654, 30);
+            this.btnCrearAlumno.Enabled = false;
+            this.btnCrearAlumno.Location = new System.Drawing.Point(251, 30);
             this.btnCrearAlumno.Name = "btnCrearAlumno";
             this.btnCrearAlumno.Size = new System.Drawing.Size(109, 46);
             this.btnCrearAlumno.TabIndex = 10;
-            this.btnCrearAlumno.Text = "Crear";
+            this.btnCrearAlumno.Text = "Guardar";
             this.btnCrearAlumno.UseVisualStyleBackColor = true;
-            this.btnCrearAlumno.Click += new System.EventHandler(this.btnCrearAlumno_Click);
+            this.btnCrearAlumno.Click += new System.EventHandler(this.btnGuardarAlumno_Click);
             // 
-            // FormCrearAlumno
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
+            // FormDatosAlumno
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -69,8 +78,10 @@
             this.Controls.Add(this.lblNombreAlumnoNuevo);
             this.Controls.Add(this.txtNombreAlumnoNuevo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FormCrearAlumno";
-            this.Text = "FormCrearAlumno";
+            this.MaximizeBox = false;
+            this.Name = "FormDatosAlumno";
+            this.Text = "Datos del alumno";
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -81,5 +92,6 @@
         private TextBox txtNombreAlumnoNuevo;
         private Label lblNombreAlumnoNuevo;
         private Button btnCrearAlumno;
+        private ErrorProvider errorProvider;
     }
 }
