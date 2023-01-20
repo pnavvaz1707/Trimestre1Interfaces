@@ -93,9 +93,9 @@ namespace Practica8
             return borrar;
         }
 
-        public float mediaAsignatura(int posicionAsignatura)
+        public double mediaAsignatura(int posicionAsignatura)
         {
-            float total = 0;
+            double total = 0;
             for (int i = 0; i < alumnos.Count; i++)
             {
                 total += alumnos[i].Notas[posicionAsignatura];
