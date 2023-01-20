@@ -6,11 +6,8 @@
 * FECHA de ENTREGA.....: 20 de Enero de 2023
 */
 
-using System;
 using System.Reflection;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Security.Cryptography;
-using System.Windows.Forms;
 
 namespace Practica8
 {

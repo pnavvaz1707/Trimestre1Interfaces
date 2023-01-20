@@ -9,7 +9,7 @@
 namespace Practica8
 {
     [Serializable]
-    internal class Alumno : IComparable<Alumno>
+    internal class Alumno
     {
         #region Campos
 
@@ -31,51 +31,6 @@ namespace Practica8
         {
             this.nombre = nombre;
             this.notas = notas;
-        }
-
-        public double mediaAlumno()
-        {
-            double total = 0;
-            for (int i = 0; i < Notas.Length; i++)
-            {
-                total += Notas[i];
-            }
-            return (total / Notas.Length);
-        }
-
-        public int numSuspensosAlumno()
-        {
-            int numSuspensos = 0;
-            for (int i = 0; i < Notas.Length; i++)
-            {
-                if (Notas[i] < 5)
-                {
-                    numSuspensos++;
-                }
-            }
-            return numSuspensos;
-        }
-
-        public int CompareTo(Alumno? other)
-        {
-            return this.Nombre.CompareTo(other.Nombre);
-        }
-
-        public string obtenerNotas()
-        {
-            string notas = "";
-            for (int i = 0; i < Notas.Length; i++)
-            {
-                if (i != Notas.Length - 1)
-                {
-                    notas += Notas[i] + ",";
-                }
-                else
-                {
-                    notas += Notas[i];
-                }
-            }
-            return notas;
         }
 
         public override string ToString()
