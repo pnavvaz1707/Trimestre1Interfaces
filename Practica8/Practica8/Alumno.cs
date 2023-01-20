@@ -15,13 +15,12 @@ namespace Practica8
         private int matricula;
         private string nombre;
         private double[] notas;
-        private static int contador = 0;
 
         #endregion
 
         #region Propiedades
 
-        public int Matricula { get { return matricula; } }
+        public int Matricula { get { return matricula; } set { matricula = value; } }
         public string Nombre { get { return nombre; } }
         public double[] Notas { get { return notas; } }
 
@@ -29,11 +28,8 @@ namespace Practica8
 
         public Alumno(string nombre, double[] notas)
         {
-            contador++;
-            this.matricula = contador;
             this.nombre = nombre;
             this.notas = notas;
-
         }
 
         public double mediaAlumno()

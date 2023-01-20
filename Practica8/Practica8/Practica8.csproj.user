@@ -10,5 +10,8 @@
     <Compile Update="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="TextBoxSubrayado.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

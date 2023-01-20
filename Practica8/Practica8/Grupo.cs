@@ -20,6 +20,7 @@ namespace Practica8
     {
         #region Campos
 
+        private int numMatricula = 1;
         private string nombre;
         private string[] codigosAsignaturas;
         private List<Alumno> alumnos;
@@ -43,7 +44,9 @@ namespace Practica8
 
         public void anadirAlumno(Alumno alumno)
         {
+            alumno.Matricula = numMatricula;
             alumnos.Add(alumno);
+            numMatricula++;
         }
 
         private int localizarAlumno(int matricula)
@@ -78,17 +81,9 @@ namespace Practica8
             {
                 throw new ArgumentOutOfRangeException();
             }
-            Console.WriteLine("Introduce 1 si está seguro de borrar a " + alumnos[posicion].Nombre);
-            string respuesta = Console.ReadLine();
-            if (respuesta.Equals("1"))
-            {
-                alumnos.RemoveAt(posicion);
-                borrar = true;
-            }
-            else
-            {
-                borrar = false;
-            }
+
+            alumnos.RemoveAt(posicion);
+            borrar = true;
 
             return borrar;
         }
