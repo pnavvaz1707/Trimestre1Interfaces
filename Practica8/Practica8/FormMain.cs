@@ -7,15 +7,23 @@
 */
 
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Practica8
 {
     partial class FormMain : Form
     {
+        public List<Grupo> grupos;
+
         public static Grupo grupoSel;
         public FormMain()
         {
             InitializeComponent();
+
+            grupos = new List<Grupo>();
+            this.FormBorderStyle = FormBorderStyle.Fixed3D;
+            this.CenterToScreen();
+
 
             crearColumnasGrupo();
         }
@@ -111,9 +119,153 @@ namespace Practica8
                 actualizarAlumnos(grupoSel.Alumnos);
             }
         }
+
+        private void btnBorrarGrupo_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("¿Deseas borrar el grupo " + grupoSel.Nombre + "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                grupos.Remove(grupoSel);
+                MessageBox.Show("Se ha borrado correctamente el grupo " + grupoSel.Nombre, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                actualizarGrupos();
+            }
+            else
+            {
+                MessageBox.Show("No se ha borrado al alumno " + grupoSel.Nombre, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         private void btnImportar_Click(object sender, EventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog();
 
+            ofd.Filter = "Archivos GRU (*.gru)|*.gru";
+            ofd.FilterIndex = 1;
+            ofd.Multiselect = false;
+            ofd.RestoreDirectory = true;
+            ofd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                FileStream ficheroLeer = new FileStream(ofd.FileName, FileMode.Open);
+
+                BinaryFormatter formatter = new BinaryFormatter();
+
+                Grupo grupoImportado = (Grupo)formatter.Deserialize(ficheroLeer);
+
+                bool repetido = false;
+
+                for (int i = 0; i < grupos.Count; i++)
+                {
+                    if (grupos[i].Nombre.Equals(grupoImportado.Nombre))
+                    {
+                        repetido = true;
+                    }
+                }
+
+                if (repetido)
+                {
+                    MessageBox.Show("El grupo a importar ya existe", "Error al importar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    insertarRegistro(grupoImportado);
+                    MessageBox.Show("Se ha importado correctamente el grupo", "Grupo creado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                ficheroLeer.Close();
+
+                
+            }
+        }
+        private void btnExportar_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Filter = "Archivos GRU (*.gru)|*.gru";
+            sfd.FilterIndex = 1;
+            sfd.RestoreDirectory = true;
+            sfd.FileName = grupoSel.Nombre;
+            sfd.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                // Serialize the object to the specified file
+                using (FileStream ficheroGuardar = new FileStream(sfd.FileName, FileMode.Create))
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    formatter.Serialize(ficheroGuardar, grupoSel);
+                }
+                MessageBox.Show("Se ha exportado correctamente el grupo " + grupoSel.Nombre, "Grupo importado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnAgregarAlumno_Click(object sender, EventArgs e)
+        {
+            FormDatosAlumno formCrearAlumno = new FormDatosAlumno();
+            if (formCrearAlumno.ShowDialog() == DialogResult.OK)
+            {
+                insertarRegistro(grupoSel.Alumnos[grupoSel.Alumnos.Count - 1]);
+            }
+        }
+
+        private void btnBorrarAlumno_Click(object sender, EventArgs e)
+        {
+            Alumno alumnoSel = (Alumno)dtgvAlumnos.SelectedRows[0].Cells[1].Value;
+
+            if (MessageBox.Show("¿Deseas borrar al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula + "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                grupoSel.borrarAlumno(alumnoSel.Matricula);
+                MessageBox.Show("Se ha borrado correctamente al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                actualizarAlumnos(grupoSel.Alumnos);
+            }
+            else
+            {
+                MessageBox.Show("No se ha borrado al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnEditarAlumno_Click(object sender, EventArgs e)
+        {
+            Alumno alumnoSel = (Alumno)dtgvAlumnos.SelectedRows[0].Cells[1].Value;
+
+            FormDatosAlumno formCrearAlumno = new FormDatosAlumno(alumnoSel);
+            formCrearAlumno.ShowDialog();
+            actualizarAlumnos(grupoSel.Alumnos);
+        }
+
+        private void btnFiltrarAlumno_Click(object sender, EventArgs e)
+        {
+            if (btnFiltrarAlumnos.Text != "Quitar filtro")
+            {
+                List<Alumno> alumnosAprobados = new List<Alumno>();
+                for (int i = 0; i < grupoSel.Alumnos.Count; i++)
+                {
+                    bool aprobado = true;
+                    for (int j = 0; j < grupoSel.Alumnos[i].Notas.Length; j++)
+                    {
+                        if (grupoSel.Alumnos[i].Notas[j] < 5)
+                        {
+                            aprobado = false;
+                        }
+                    }
+                    if (aprobado)
+                    {
+                        alumnosAprobados.Add(grupoSel.Alumnos[i]);
+                    }
+                }
+                actualizarAlumnos(alumnosAprobados);
+                btnFiltrarAlumnos.Text = "Quitar filtro";
+            }
+            else
+            {
+                actualizarAlumnos(grupoSel.Alumnos);
+                btnFiltrarAlumnos.Text = "Filtrar aprobados";
+            }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         public void insertarRegistro(Grupo grupo)
@@ -139,17 +291,15 @@ namespace Practica8
                 else if (!properties[i].PropertyType.Name.Contains("List"))
                 {
                     row.Cells[i].Value = properties[i].GetValue(grupo);
-
-                    /*List<Alumno> alumnos = (List<Alumno>)properties[i].GetValue(grupo);
-
-                    alumnos.Add(new Alumno("Holaaa", new double[] { 411, 42 }));
-                    alumnos.Add(new Alumno("Adisdf", new double[] { 411, 42 }));
-
-                    row.Cells[i].Value = string.Join(",", alumnos);*/
                 }
                 dtgvGrupos.CurrentCell = row.Cells[0];
+                btnAgregarAlumno.Enabled = true;
+                btnExportar.Enabled = true;
+                btnBorrarGrupo.Enabled = true;
                 row.Selected = true;
             }
+
+            grupos.Add(grupo);
         }
 
         public void insertarRegistro(Alumno alumno)
@@ -192,6 +342,9 @@ namespace Practica8
                 }
             }
             dtgvAlumnos.CurrentCell = row.Cells[0];
+            btnBorrarAlumno.Enabled = true;
+            btnEditarAlumno.Enabled = true;
+            btnFiltrarAlumnos.Enabled = true;
             row.Selected = true;
         }
 
@@ -203,33 +356,16 @@ namespace Practica8
                 insertarRegistro(alumnos[i]);
             }
         }
-
-        private void btnAgregarAlumno_Click(object sender, EventArgs e)
+        private void actualizarGrupos()
         {
-            FormCrearAlumno formCrearAlumno = new FormCrearAlumno();
-            if (formCrearAlumno.ShowDialog() == DialogResult.OK)
+            dtgvGrupos.Rows.Clear();
+            for (int i = 0; i < grupos.Count; i++)
             {
-                insertarRegistro(grupoSel.Alumnos[grupoSel.Alumnos.Count - 1]);
+                insertarRegistro(grupos[i]);
             }
+            dtgvAlumnos.Rows.Clear();
+            dtgvAlumnos.Columns.Clear();
         }
-
-        private void btnBorrarAlumno_Click(object sender, EventArgs e)
-        {
-            Alumno alumnoSel = (Alumno) dtgvAlumnos.SelectedRows[0].Cells[1].Value;
-            
-            if (MessageBox.Show("¿Deseas borrar al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula + "?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                grupoSel.borrarAlumno(alumnoSel.Matricula);
-                MessageBox.Show("Se ha borrado correctamente al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                actualizarAlumnos(grupoSel.Alumnos);
-            }
-            else
-            {
-                MessageBox.Show("No se ha borrado al alumno " + alumnoSel.Nombre + " con matrícula " + alumnoSel.Matricula, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            
-        }
-
         private void dtgvGrupos_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             DataGridViewRow filaSel = dtgvGrupos.Rows[e.RowIndex];
@@ -244,11 +380,6 @@ namespace Practica8
             }
         }
 
-        private void btnExportar_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void dtgvAlumnos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             dtgvAlumnos.Rows[e.RowIndex].Selected = true;
@@ -257,6 +388,12 @@ namespace Practica8
         private void dtgvGrupos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             dtgvGrupos.Rows[e.RowIndex].Selected = true;
+        }
+
+        private void acercadeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Programa hecho por Pablo Navarro Vázquez\n" +
+                "Versión 1.0.0", "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-/*
+﻿/*
 * PRÁCTICA.............: Práctica 8
 * NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
 * CURSO y GRUPO........: 2º Desarrollo de Interfaces
@@ -16,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Practica8
 {
+    [Serializable]
     internal class Grupo
     {
         #region Campos
@@ -86,37 +80,6 @@ namespace Practica8
             borrar = true;
 
             return borrar;
-        }
-
-        public double mediaAsignatura(int posicionAsignatura)
-        {
-            double total = 0;
-            for (int i = 0; i < alumnos.Count; i++)
-            {
-                total += alumnos[i].Notas[posicionAsignatura];
-            }
-            return (total / alumnos.Count);
-        }
-
-        private string obtenerAsignaturas()
-        {
-            string asignaturas = "";
-            for (int i = 0; i < CodigosAsignaturas.Length; i++)
-            {
-                if (i == CodigosAsignaturas.Length - 1)
-                {
-                    asignaturas += CodigosAsignaturas[i];
-                }
-                else if (i == CodigosAsignaturas.Length - 2)
-                {
-                    asignaturas += CodigosAsignaturas[i] + " y ";
-                }
-                else
-                {
-                    asignaturas += CodigosAsignaturas[i] + ", ";
-                }
-            }
-            return asignaturas;
         }
 
         public override string ToString()
