@@ -1,6 +1,6 @@
 ﻿namespace Practica9
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.menuPrincipal = new System.Windows.Forms.MenuStrip();
             this.menuPrincipalArchivoBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,8 +46,17 @@
             this.menuPrincipalAyudaBtn = new System.Windows.Forms.ToolStripButton();
             this.menuPrincipalOcultarBtn = new System.Windows.Forms.ToolStripButton();
             this.subMenuInicio = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.colorearTextoBtn = new System.Windows.Forms.ToolStripSplitButton();
+            this.subrayarTextoBtn = new System.Windows.Forms.ToolStripSplitButton();
             this.subMenuVer = new System.Windows.Forms.ToolStrip();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuPrincipal.SuspendLayout();
+            this.subMenuInicio.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuPrincipal
@@ -179,7 +188,7 @@
             // 
             this.menuPrincipalOcultarBtn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.menuPrincipalOcultarBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.menuPrincipalOcultarBtn.Image = ((System.Drawing.Image)(resources.GetObject("flecha_arriba")));
+            this.menuPrincipalOcultarBtn.Image = ((System.Drawing.Image)(resources.GetObject("menuPrincipalOcultarBtn.Image")));
             this.menuPrincipalOcultarBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuPrincipalOcultarBtn.Name = "menuPrincipalOcultarBtn";
             this.menuPrincipalOcultarBtn.Size = new System.Drawing.Size(23, 20);
@@ -188,12 +197,74 @@
             // 
             // subMenuInicio
             // 
+            this.subMenuInicio.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripButton2,
+            this.toolStripButton3,
+            this.toolStripSeparator3,
+            this.toolStripComboBox1,
+            this.colorearTextoBtn,
+            this.subrayarTextoBtn});
             this.subMenuInicio.Location = new System.Drawing.Point(0, 27);
             this.subMenuInicio.Name = "subMenuInicio";
             this.subMenuInicio.Size = new System.Drawing.Size(800, 25);
             this.subMenuInicio.TabIndex = 1;
-            this.subMenuInicio.Text = "toolStrip1";
-            this.subMenuInicio.Visible = false;
+            this.subMenuInicio.Text = "subMenuInicio";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "subMenuInicioPegarBtn";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Text = "subMenuInicioCortarBtn";
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "subMenuInicioCopiarBtn";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripComboBox1
+            // 
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 25);
+            // 
+            // colorearTextoBtn
+            // 
+            this.colorearTextoBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.colorearTextoBtn.Image = global::Practica9.Properties.Resources.letra_a;
+            this.colorearTextoBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.colorearTextoBtn.Name = "colorearTextoBtn";
+            this.colorearTextoBtn.Size = new System.Drawing.Size(32, 22);
+            this.colorearTextoBtn.Text = "toolStripSplitButton1";
+            // 
+            // subrayarTextoBtn
+            // 
+            this.subrayarTextoBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.subrayarTextoBtn.Image = global::Practica9.Properties.Resources.subrayador;
+            this.subrayarTextoBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.subrayarTextoBtn.Name = "subrayarTextoBtn";
+            this.subrayarTextoBtn.Size = new System.Drawing.Size(32, 22);
+            this.subrayarTextoBtn.Text = "toolStripSplitButton1";
             // 
             // subMenuVer
             // 
@@ -204,20 +275,32 @@
             this.subMenuVer.Text = "toolStrip1";
             this.subMenuVer.Visible = false;
             // 
-            // Form1
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(0, 52);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(800, 398);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.subMenuVer);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.subMenuInicio);
+            this.Controls.Add(this.subMenuVer);
             this.Controls.Add(this.menuPrincipal);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuPrincipal;
-            this.Name = "Form1";
+            this.Name = "FormMain";
             this.Text = "Editor de textos";
             this.menuPrincipal.ResumeLayout(false);
             this.menuPrincipal.PerformLayout();
+            this.subMenuInicio.ResumeLayout(false);
+            this.subMenuInicio.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,5 +326,13 @@
         private ToolStripButton menuPrincipalOcultarBtn;
         private ToolStrip subMenuInicio;
         private ToolStrip subMenuVer;
+        private ToolStripButton toolStripButton1;
+        private ToolStripButton toolStripButton2;
+        private ToolStripButton toolStripButton3;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripComboBox toolStripComboBox1;
+        private RichTextBox richTextBox1;
+        private ToolStripSplitButton colorearTextoBtn;
+        private ToolStripSplitButton subrayarTextoBtn;
     }
 }
