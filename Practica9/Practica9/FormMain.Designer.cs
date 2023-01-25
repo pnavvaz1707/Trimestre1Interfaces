@@ -1,6 +1,6 @@
 ﻿namespace Practica9
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.menuPrincipal = new System.Windows.Forms.MenuStrip();
             this.menuPrincipalArchivoBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,8 +46,24 @@
             this.menuPrincipalAyudaBtn = new System.Windows.Forms.ToolStripButton();
             this.menuPrincipalOcultarBtn = new System.Windows.Forms.ToolStripButton();
             this.subMenuInicio = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripControlHostNumFuente = new System.Windows.Forms.NumericUpDown();
+            this.colorearTextoBtn = new System.Windows.Forms.ToolStripSplitButton();
+            this.subrayarTextoBtn = new System.Windows.Forms.ToolStripSplitButton();
             this.subMenuVer = new System.Windows.Forms.ToolStrip();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.Pegar = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuPrincipal.SuspendLayout();
+            this.subMenuInicio.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.toolStripControlHostNumFuente)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuPrincipal
@@ -179,7 +195,7 @@
             // 
             this.menuPrincipalOcultarBtn.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.menuPrincipalOcultarBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.menuPrincipalOcultarBtn.Image = ((System.Drawing.Image)(resources.GetObject("flecha_arriba")));
+            this.menuPrincipalOcultarBtn.Image = ((System.Drawing.Image)(resources.GetObject("menuPrincipalOcultarBtn.Image")));
             this.menuPrincipalOcultarBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.menuPrincipalOcultarBtn.Name = "menuPrincipalOcultarBtn";
             this.menuPrincipalOcultarBtn.Size = new System.Drawing.Size(23, 20);
@@ -188,12 +204,90 @@
             // 
             // subMenuInicio
             // 
+            this.subMenuInicio.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripButton2,
+            this.toolStripButton3,
+            this.toolStripSeparator3,
+            this.toolStripComboBox1,
+            this.toolStripControlHostNumFuente,
+            this.colorearTextoBtn,
+            this.subrayarTextoBtn});
             this.subMenuInicio.Location = new System.Drawing.Point(0, 27);
             this.subMenuInicio.Name = "subMenuInicio";
-            this.subMenuInicio.Size = new System.Drawing.Size(800, 25);
+            this.subMenuInicio.Size = new System.Drawing.Size(800, 26);
             this.subMenuInicio.TabIndex = 1;
-            this.subMenuInicio.Text = "toolStrip1";
+            this.subMenuInicio.Text = "subMenuInicio";
             this.subMenuInicio.Visible = false;
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 23);
+            this.toolStripButton1.Text = "subMenuInicioPegarBtn";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 23);
+            this.toolStripButton2.Text = "subMenuInicioCortarBtn";
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 23);
+            this.toolStripButton3.Text = "subMenuInicioCopiarBtn";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 26);
+            // 
+            // toolStripComboBox1
+            // 
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 26);
+            // 
+            // toolStripControlHostNumFuente
+            // 
+            this.toolStripControlHostNumFuente.AccessibleName = "toolStripControlHostNumFuente";
+            this.toolStripControlHostNumFuente.Location = new System.Drawing.Point(207, 1);
+            this.toolStripControlHostNumFuente.Name = "toolStripControlHostNumFuente";
+            this.toolStripControlHostNumFuente.Size = new System.Drawing.Size(41, 23);
+            this.toolStripControlHostNumFuente.TabIndex = 1;
+            // 
+            // toolStripControlHostNumFuente
+            // 
+            this.toolStripControlHostNumFuente.Name = "toolStripControlHostNumFuente";
+            this.toolStripControlHostNumFuente.Size = new System.Drawing.Size(41, 23);
+            this.toolStripControlHostNumFuente.Text = "0";
+            // 
+            // colorearTextoBtn
+            // 
+            this.colorearTextoBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.colorearTextoBtn.Image = global::Practica9.Properties.Resources.letra_a;
+            this.colorearTextoBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.colorearTextoBtn.Name = "colorearTextoBtn";
+            this.colorearTextoBtn.Size = new System.Drawing.Size(32, 23);
+            this.colorearTextoBtn.Text = "toolStripSplitButton1";
+            // 
+            // subrayarTextoBtn
+            // 
+            this.subrayarTextoBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.subrayarTextoBtn.Image = global::Practica9.Properties.Resources.subrayador;
+            this.subrayarTextoBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.subrayarTextoBtn.Name = "subrayarTextoBtn";
+            this.subrayarTextoBtn.Size = new System.Drawing.Size(32, 23);
+            this.subrayarTextoBtn.Text = "toolStripSplitButton1";
             // 
             // subMenuVer
             // 
@@ -204,20 +298,79 @@
             this.subMenuVer.Text = "toolStrip1";
             this.subMenuVer.Visible = false;
             // 
-            // Form1
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 27);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 140);
+            this.tableLayoutPanel1.TabIndex = 3;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.Pegar, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.button1, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(374, 134);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // Pegar
+            // 
+            this.Pegar.AutoSize = true;
+            this.Pegar.Location = new System.Drawing.Point(3, 67);
+            this.Pegar.Name = "Pegar";
+            this.Pegar.Size = new System.Drawing.Size(37, 15);
+            this.Pegar.TabIndex = 0;
+            this.Pegar.Text = "Pegar";
+            this.Pegar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button1
+            // 
+            this.button1.Image = global::Practica9.Properties.Resources.portapapeles2;
+            this.button1.Location = new System.Drawing.Point(3, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 61);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.subMenuVer);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.subMenuInicio);
+            this.Controls.Add(this.subMenuVer);
             this.Controls.Add(this.menuPrincipal);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuPrincipal;
-            this.Name = "Form1";
+            this.Name = "FormMain";
             this.Text = "Editor de textos";
             this.menuPrincipal.ResumeLayout(false);
             this.menuPrincipal.PerformLayout();
+            this.subMenuInicio.ResumeLayout(false);
+            this.subMenuInicio.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.toolStripControlHostNumFuente)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,5 +396,17 @@
         private ToolStripButton menuPrincipalOcultarBtn;
         private ToolStrip subMenuInicio;
         private ToolStrip subMenuVer;
+        private ToolStripButton toolStripButton1;
+        private ToolStripButton toolStripButton2;
+        private ToolStripButton toolStripButton3;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripComboBox toolStripComboBox1;
+        private ToolStripSplitButton colorearTextoBtn;
+        private ToolStripSplitButton subrayarTextoBtn;
+        private ToolStripControlHost toolStripControlHostNumFuente;
+        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Label Pegar;
+        private Button button1;
     }
 }
