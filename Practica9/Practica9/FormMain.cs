@@ -1,15 +1,16 @@
 using Practica9.Properties;
+using System.Windows.Forms;
 
 namespace Practica9
 {
     public partial class FormMain : Form
     {
-        ToolStrip subMenuActivo;
+        TableLayoutPanel subMenuActivo;
         public FormMain()
         {
             InitializeComponent();
 
-            
+
 
             /*ToolStripItemCollection prueba = subMenuInicio.Items;
             subMenuInicio.Items.Clear();
@@ -24,24 +25,31 @@ namespace Practica9
                     subMenuInicio.Items.Add(toolStripControlHostNumFuente);
                 }
             }*/
-            subMenuInicio.ResumeLayout();
+
             subMenuActivo = subMenuInicio;
-            subMenuActivo.Visible= true;
-            
+            subMenuInicio.Visible = true;
+
+            foreach (FontFamily font in System.Drawing.FontFamily.Families)
+            {
+                fuentesComboBox.Items.Add(font.Name);
+            }
+
+            fuentesComboBox.Text = this.richTextBox1.Font.Name.ToString();
+
         }
 
         private void menuPrincipalInicioBtn_Click(object sender, EventArgs e)
         {
             subMenuActivo.Visible = false;
             subMenuActivo = subMenuInicio;
-            subMenuActivo.Visible = true;
+            subMenuInicio.Visible = true;
         }
         
         private void menuPrincipalVerBtn_Click(object sender, EventArgs e)
         {
             subMenuActivo.Visible = false;
-            subMenuActivo = subMenuVer;
-            subMenuVer.Visible = true;
+            subMenuActivo = subMenuInicio;
+            subMenuInicio.Visible = true;
         }
 
         private void menuPrincipalOcultarBtn_Click(object sender, EventArgs e)
@@ -51,15 +59,49 @@ namespace Practica9
             {
                 subMenuActivo.Visible = false;
                 menuPrincipalOcultarBtn.Text = "Mostrar";
-                this.menuPrincipalOcultarBtn.Image = (Image)(resources.GetObject("flecha_abajo"));
+                this.menuPrincipalOcultarBtn.Image = Resources.flecha_abajo;
             }
             else
             {
                 subMenuActivo.Visible = true;
                 menuPrincipalOcultarBtn.Text = "Ocultar";
-                this.menuPrincipalOcultarBtn.Image = (Image)(resources.GetObject("flecha_arriba"));
+                this.menuPrincipalOcultarBtn.Image = Resources.flecha_arriba;
             }
         }
 
+        private void tamanoFuenteComboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show(tamanoFuenteComboBox.Text);
+            richTextBox1.SelectionFont = new Font(richTextBox1.SelectionFont.FontFamily, Convert.ToInt16(tamanoFuenteComboBox.Text));
+        }
+
+        private void fuentesComboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionFont = new Font(fuentesComboBox.Text, richTextBox1.Font.Size);
+
+        }
+
+        private void btnNegrita_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Bold);
+        }
+
+        private void btnItalica_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Italic);
+
+        }
+
+        private void btnSubrayar_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Underline);
+
+        }
+
+        private void btnTachar_Click(object sender, EventArgs e)
+        {
+            richTextBox1.SelectionFont = new Font(richTextBox1.Font, FontStyle.Strikeout);
+
+        }
     }
 }

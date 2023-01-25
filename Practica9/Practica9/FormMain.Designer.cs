@@ -45,25 +45,24 @@
             this.menuPrincipalVerBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPrincipalAyudaBtn = new System.Windows.Forms.ToolStripButton();
             this.menuPrincipalOcultarBtn = new System.Windows.Forms.ToolStripButton();
-            this.subMenuInicio = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripControlHostNumFuente = new System.Windows.Forms.NumericUpDown();
-            this.colorearTextoBtn = new System.Windows.Forms.ToolStripSplitButton();
-            this.subrayarTextoBtn = new System.Windows.Forms.ToolStripSplitButton();
-            this.subMenuVer = new System.Windows.Forms.ToolStrip();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.subMenuInicio = new System.Windows.Forms.TableLayoutPanel();
+            this.subMenuInicioPortapapeles = new System.Windows.Forms.TableLayoutPanel();
             this.Pegar = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPegar = new System.Windows.Forms.Button();
+            this.btnCopiar = new System.Windows.Forms.Button();
+            this.btnCortar = new System.Windows.Forms.Button();
+            this.fuentesComboBox = new System.Windows.Forms.ComboBox();
+            this.tamanoFuenteComboBox = new System.Windows.Forms.ComboBox();
+            this.btnNegrita = new System.Windows.Forms.Button();
+            this.btnItalica = new System.Windows.Forms.Button();
+            this.btnSubrayar = new System.Windows.Forms.Button();
+            this.btnTachar = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.menuPrincipal.SuspendLayout();
-            this.subMenuInicio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolStripControlHostNumFuente)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.subMenuInicio.SuspendLayout();
+            this.subMenuInicioPortapapeles.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuPrincipal
@@ -202,61 +201,6 @@
             this.menuPrincipalOcultarBtn.Text = "Ocultar";
             this.menuPrincipalOcultarBtn.Click += new System.EventHandler(this.menuPrincipalOcultarBtn_Click);
             // 
-            // subMenuInicio
-            // 
-            this.subMenuInicio.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripButton3,
-            this.toolStripSeparator3,
-            this.toolStripComboBox1,
-            this.toolStripControlHostNumFuente,
-            this.colorearTextoBtn,
-            this.subrayarTextoBtn});
-            this.subMenuInicio.Location = new System.Drawing.Point(0, 27);
-            this.subMenuInicio.Name = "subMenuInicio";
-            this.subMenuInicio.Size = new System.Drawing.Size(800, 26);
-            this.subMenuInicio.TabIndex = 1;
-            this.subMenuInicio.Text = "subMenuInicio";
-            this.subMenuInicio.Visible = false;
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 23);
-            this.toolStripButton1.Text = "subMenuInicioPegarBtn";
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 23);
-            this.toolStripButton2.Text = "subMenuInicioCortarBtn";
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 23);
-            this.toolStripButton3.Text = "subMenuInicioCopiarBtn";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 26);
-            // 
-            // toolStripComboBox1
-            // 
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 26);
-            // 
             // toolStripControlHostNumFuente
             // 
             this.toolStripControlHostNumFuente.AccessibleName = "toolStripControlHostNumFuente";
@@ -265,99 +209,189 @@
             this.toolStripControlHostNumFuente.Size = new System.Drawing.Size(41, 23);
             this.toolStripControlHostNumFuente.TabIndex = 1;
             // 
-            // toolStripControlHostNumFuente
+            // subMenuInicio
             // 
-            this.toolStripControlHostNumFuente.Name = "toolStripControlHostNumFuente";
-            this.toolStripControlHostNumFuente.Size = new System.Drawing.Size(41, 23);
-            this.toolStripControlHostNumFuente.Text = "0";
+            this.subMenuInicio.ColumnCount = 7;
+            this.subMenuInicio.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.68511F));
+            this.subMenuInicio.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.subMenuInicio.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.subMenuInicio.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.subMenuInicio.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.subMenuInicio.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.subMenuInicio.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 518F));
+            this.subMenuInicio.Controls.Add(this.subMenuInicioPortapapeles, 0, 0);
+            this.subMenuInicio.Controls.Add(this.fuentesComboBox, 1, 0);
+            this.subMenuInicio.Controls.Add(this.tamanoFuenteComboBox, 6, 0);
+            this.subMenuInicio.Controls.Add(this.btnNegrita, 2, 1);
+            this.subMenuInicio.Controls.Add(this.btnItalica, 3, 1);
+            this.subMenuInicio.Controls.Add(this.btnSubrayar, 4, 1);
+            this.subMenuInicio.Controls.Add(this.btnTachar, 5, 1);
+            this.subMenuInicio.Dock = System.Windows.Forms.DockStyle.Top;
+            this.subMenuInicio.Location = new System.Drawing.Point(0, 27);
+            this.subMenuInicio.Name = "subMenuInicio";
+            this.subMenuInicio.RowCount = 3;
+            this.subMenuInicio.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.subMenuInicio.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.subMenuInicio.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.subMenuInicio.Size = new System.Drawing.Size(800, 90);
+            this.subMenuInicio.TabIndex = 3;
+            this.subMenuInicio.Visible = false;
             // 
-            // colorearTextoBtn
+            // subMenuInicioPortapapeles
             // 
-            this.colorearTextoBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.colorearTextoBtn.Image = global::Practica9.Properties.Resources.letra_a;
-            this.colorearTextoBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.colorearTextoBtn.Name = "colorearTextoBtn";
-            this.colorearTextoBtn.Size = new System.Drawing.Size(32, 23);
-            this.colorearTextoBtn.Text = "toolStripSplitButton1";
-            // 
-            // subrayarTextoBtn
-            // 
-            this.subrayarTextoBtn.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.subrayarTextoBtn.Image = global::Practica9.Properties.Resources.subrayador;
-            this.subrayarTextoBtn.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.subrayarTextoBtn.Name = "subrayarTextoBtn";
-            this.subrayarTextoBtn.Size = new System.Drawing.Size(32, 23);
-            this.subrayarTextoBtn.Text = "toolStripSplitButton1";
-            // 
-            // subMenuVer
-            // 
-            this.subMenuVer.Location = new System.Drawing.Point(0, 27);
-            this.subMenuVer.Name = "subMenuVer";
-            this.subMenuVer.Size = new System.Drawing.Size(800, 25);
-            this.subMenuVer.TabIndex = 2;
-            this.subMenuVer.Text = "toolStrip1";
-            this.subMenuVer.Visible = false;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 27);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 140);
-            this.tableLayoutPanel1.TabIndex = 3;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.Pegar, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.button1, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(374, 134);
-            this.tableLayoutPanel2.TabIndex = 0;
+            this.subMenuInicioPortapapeles.ColumnCount = 2;
+            this.subMenuInicioPortapapeles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.subMenuInicioPortapapeles.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.subMenuInicioPortapapeles.Controls.Add(this.Pegar, 0, 2);
+            this.subMenuInicioPortapapeles.Controls.Add(this.btnPegar, 0, 0);
+            this.subMenuInicioPortapapeles.Controls.Add(this.btnCopiar, 1, 1);
+            this.subMenuInicioPortapapeles.Controls.Add(this.btnCortar, 1, 0);
+            this.subMenuInicioPortapapeles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.subMenuInicioPortapapeles.Location = new System.Drawing.Point(3, 3);
+            this.subMenuInicioPortapapeles.Name = "subMenuInicioPortapapeles";
+            this.subMenuInicioPortapapeles.RowCount = 3;
+            this.subMenuInicio.SetRowSpan(this.subMenuInicioPortapapeles, 3);
+            this.subMenuInicioPortapapeles.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.subMenuInicioPortapapeles.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.subMenuInicioPortapapeles.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.subMenuInicioPortapapeles.Size = new System.Drawing.Size(148, 84);
+            this.subMenuInicioPortapapeles.TabIndex = 0;
             // 
             // Pegar
             // 
             this.Pegar.AutoSize = true;
+            this.Pegar.Dock = System.Windows.Forms.DockStyle.Top;
             this.Pegar.Location = new System.Drawing.Point(3, 67);
             this.Pegar.Name = "Pegar";
-            this.Pegar.Size = new System.Drawing.Size(37, 15);
+            this.Pegar.Size = new System.Drawing.Size(53, 15);
             this.Pegar.TabIndex = 0;
             this.Pegar.Text = "Pegar";
             this.Pegar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button1
+            // btnPegar
             // 
-            this.button1.Image = global::Practica9.Properties.Resources.portapapeles2;
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 61);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnPegar.Image = global::Practica9.Properties.Resources.portapapeles;
+            this.btnPegar.Location = new System.Drawing.Point(3, 3);
+            this.btnPegar.Name = "btnPegar";
+            this.subMenuInicioPortapapeles.SetRowSpan(this.btnPegar, 2);
+            this.btnPegar.Size = new System.Drawing.Size(53, 61);
+            this.btnPegar.TabIndex = 1;
+            this.btnPegar.UseVisualStyleBackColor = true;
+            // 
+            // btnCopiar
+            // 
+            this.btnCopiar.Image = global::Practica9.Properties.Resources.copiar;
+            this.btnCopiar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCopiar.Location = new System.Drawing.Point(62, 32);
+            this.btnCopiar.Name = "btnCopiar";
+            this.btnCopiar.Size = new System.Drawing.Size(83, 23);
+            this.btnCopiar.TabIndex = 3;
+            this.btnCopiar.Text = "Copiar";
+            this.btnCopiar.UseVisualStyleBackColor = true;
+            // 
+            // btnCortar
+            // 
+            this.btnCortar.Image = global::Practica9.Properties.Resources.tijeras;
+            this.btnCortar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCortar.Location = new System.Drawing.Point(62, 3);
+            this.btnCortar.Name = "btnCortar";
+            this.btnCortar.Size = new System.Drawing.Size(83, 23);
+            this.btnCortar.TabIndex = 2;
+            this.btnCortar.Text = "Cortar";
+            this.btnCortar.UseVisualStyleBackColor = true;
+            // 
+            // fuentesComboBox
+            // 
+            this.subMenuInicio.SetColumnSpan(this.fuentesComboBox, 5);
+            this.fuentesComboBox.FormattingEnabled = true;
+            this.fuentesComboBox.Location = new System.Drawing.Point(157, 3);
+            this.fuentesComboBox.Name = "fuentesComboBox";
+            this.fuentesComboBox.Size = new System.Drawing.Size(121, 23);
+            this.fuentesComboBox.TabIndex = 1;
+            this.fuentesComboBox.SelectedValueChanged += new System.EventHandler(this.fuentesComboBox_SelectedValueChanged);
+            // 
+            // tamanoFuenteComboBox
+            // 
+            this.tamanoFuenteComboBox.FormattingEnabled = true;
+            this.tamanoFuenteComboBox.Items.AddRange(new object[] {
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "14",
+            "16",
+            "18",
+            "20",
+            "22",
+            "24",
+            "26",
+            "28",
+            "36",
+            "48",
+            "72"});
+            this.tamanoFuenteComboBox.Location = new System.Drawing.Point(285, 3);
+            this.tamanoFuenteComboBox.Name = "tamanoFuenteComboBox";
+            this.tamanoFuenteComboBox.Size = new System.Drawing.Size(56, 23);
+            this.tamanoFuenteComboBox.TabIndex = 2;
+            this.tamanoFuenteComboBox.SelectedValueChanged += new System.EventHandler(this.tamanoFuenteComboBox_SelectedValueChanged);
+            // 
+            // btnNegrita
+            // 
+            this.btnNegrita.Image = ((System.Drawing.Image)(resources.GetObject("btnNegrita.Image")));
+            this.btnNegrita.Location = new System.Drawing.Point(157, 35);
+            this.btnNegrita.Name = "btnNegrita";
+            this.btnNegrita.Size = new System.Drawing.Size(26, 23);
+            this.btnNegrita.TabIndex = 3;
+            this.btnNegrita.UseVisualStyleBackColor = true;
+            this.btnNegrita.Click += new System.EventHandler(this.btnNegrita_Click);
+            // 
+            // btnItalica
+            // 
+            this.btnItalica.Image = ((System.Drawing.Image)(resources.GetObject("btnItalica.Image")));
+            this.btnItalica.Location = new System.Drawing.Point(189, 35);
+            this.btnItalica.Name = "btnItalica";
+            this.btnItalica.Size = new System.Drawing.Size(26, 23);
+            this.btnItalica.TabIndex = 4;
+            this.btnItalica.UseVisualStyleBackColor = true;
+            this.btnItalica.Click += new System.EventHandler(this.btnItalica_Click);
+            // 
+            // btnSubrayar
+            // 
+            this.btnSubrayar.Image = ((System.Drawing.Image)(resources.GetObject("btnSubrayar.Image")));
+            this.btnSubrayar.Location = new System.Drawing.Point(221, 35);
+            this.btnSubrayar.Name = "btnSubrayar";
+            this.btnSubrayar.Size = new System.Drawing.Size(26, 23);
+            this.btnSubrayar.TabIndex = 5;
+            this.btnSubrayar.UseVisualStyleBackColor = true;
+            this.btnSubrayar.Click += new System.EventHandler(this.btnSubrayar_Click);
+            // 
+            // btnTachar
+            // 
+            this.btnTachar.Image = ((System.Drawing.Image)(resources.GetObject("btnTachar.Image")));
+            this.btnTachar.Location = new System.Drawing.Point(253, 35);
+            this.btnTachar.Name = "btnTachar";
+            this.btnTachar.Size = new System.Drawing.Size(26, 23);
+            this.btnTachar.TabIndex = 6;
+            this.btnTachar.UseVisualStyleBackColor = true;
+            this.btnTachar.Click += new System.EventHandler(this.btnTachar_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox1.Location = new System.Drawing.Point(0, 117);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(800, 333);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.subMenuInicio);
-            this.Controls.Add(this.subMenuVer);
             this.Controls.Add(this.menuPrincipal);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuPrincipal;
@@ -365,12 +399,10 @@
             this.Text = "Editor de textos";
             this.menuPrincipal.ResumeLayout(false);
             this.menuPrincipal.PerformLayout();
-            this.subMenuInicio.ResumeLayout(false);
-            this.subMenuInicio.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.toolStripControlHostNumFuente)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
+            this.subMenuInicio.ResumeLayout(false);
+            this.subMenuInicioPortapapeles.ResumeLayout(false);
+            this.subMenuInicioPortapapeles.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -394,19 +426,19 @@
         private ToolStripMenuItem menuPrincipalVerBtn;
         private ToolStripButton menuPrincipalAyudaBtn;
         private ToolStripButton menuPrincipalOcultarBtn;
-        private ToolStrip subMenuInicio;
-        private ToolStrip subMenuVer;
-        private ToolStripButton toolStripButton1;
-        private ToolStripButton toolStripButton2;
-        private ToolStripButton toolStripButton3;
-        private ToolStripSeparator toolStripSeparator3;
-        private ToolStripComboBox toolStripComboBox1;
-        private ToolStripSplitButton colorearTextoBtn;
-        private ToolStripSplitButton subrayarTextoBtn;
-        private ToolStripControlHost toolStripControlHostNumFuente;
-        private TableLayoutPanel tableLayoutPanel1;
-        private TableLayoutPanel tableLayoutPanel2;
+        private TableLayoutPanel subMenuInicio;
+        private TableLayoutPanel subMenuInicioPortapapeles;
         private Label Pegar;
-        private Button button1;
+        private Button btnPegar;
+        private Button btnCopiar;
+        private Button btnCortar;
+        private NumericUpDown toolStripControlHostNumFuente;
+        private RichTextBox richTextBox1;
+        private ComboBox tamanoFuenteComboBox;
+        private ComboBox fuentesComboBox;
+        private Button btnNegrita;
+        private Button btnItalica;
+        private Button btnSubrayar;
+        private Button btnTachar;
     }
 }

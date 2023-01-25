@@ -63,6 +63,36 @@ namespace Practica9.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap copiar {
+            get {
+                object obj = ResourceManager.GetObject("copiar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap flecha_abajo {
+            get {
+                object obj = ResourceManager.GetObject("flecha_abajo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap flecha_arriba {
+            get {
+                object obj = ResourceManager.GetObject("flecha_arriba", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap letra_a {
             get {
                 object obj = ResourceManager.GetObject("letra_a", resourceCulture);
@@ -83,36 +113,6 @@ namespace Practica9.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap portapapeles1 {
-            get {
-                object obj = ResourceManager.GetObject("portapapeles1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap portapapeles2 {
-            get {
-                object obj = ResourceManager.GetObject("portapapeles2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap portapapeles3 {
-            get {
-                object obj = ResourceManager.GetObject("portapapeles3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap subrayador {
             get {
                 object obj = ResourceManager.GetObject("subrayador", resourceCulture);
@@ -123,9 +123,9 @@ namespace Practica9.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap subrayador1 {
+        internal static System.Drawing.Bitmap tijeras {
             get {
-                object obj = ResourceManager.GetObject("subrayador1", resourceCulture);
+                object obj = ResourceManager.GetObject("tijeras", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
