@@ -12,7 +12,7 @@ namespace Practica9
             NumericUpDown numFuenteControl = new NumericUpDown();
             ToolStripControlHost toolStripControlHostNumFuente = new ToolStripControlHost(numFuenteControl);
             numFuenteControl.Width= 70;
-           
+
             ToolStripItemCollection prueba = subMenuInicio.Items;
             subMenuInicio.Items.Clear();
             int contador = 0;
