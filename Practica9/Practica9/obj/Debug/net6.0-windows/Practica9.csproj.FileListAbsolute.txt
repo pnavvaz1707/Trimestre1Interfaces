@@ -34,3 +34,4 @@ C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica9\Practica9
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica9\Practica9\obj\Debug\net6.0-windows\Practica9.genruntimeconfig.cache
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica9\Practica9\obj\Debug\net6.0-windows\ref\Practica9.dll
 C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica9\Practica9\obj\Debug\net6.0-windows\Practica9.FormMain.resources
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica9\Practica9\obj\Debug\net6.0-windows\Practica9.FormBuscarYReemplazar.resources
