@@ -1,14 +1,24 @@
 using Practica9.Properties;
-
+/*
+* PRÁCTICA.............: Práctica 9
+* NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
+* CURSO y GRUPO........: 2º Desarrollo de Interfaces
+* TÍTULO de la PRÁCTICA: Uso del IDE V.Studio
+* FECHA de ENTREGA.....: 31 de Enero de 2023
+*/
 namespace Practica9
 {
     public partial class FormMain : Form
     {
+        bool guardado = true;
         TableLayoutPanel subMenuActivo;
         string nombreArchivo;
+
+        public static RichTextBox EditorTextBox { get { return editorTextBox; } }
         public FormMain()
         {
             InitializeComponent();
+            CenterToParent();
 
             subMenuActivo = subMenuInicio;
             subMenuInicio.Visible = true;
@@ -31,9 +41,9 @@ namespace Practica9
 
         private void menuPrincipalVerBtn_Click(object sender, EventArgs e)
         {
-            subMenuActivo.Visible = false;
-            subMenuActivo = subMenuInicio;
-            subMenuInicio.Visible = true;
+            subMenuInicio.Visible = false;
+            subMenuActivo = subMenuVer;
+            subMenuVer.Visible = true;
         }
 
         private void menuPrincipalOcultarBtn_Click(object sender, EventArgs e)
@@ -229,24 +239,64 @@ namespace Practica9
 
         private void btnArchivoNuevo_Click(object sender, EventArgs e)
         {
-            editorTextBox.Clear();
-            nombreArchivo = null;
+            if (!guardado)
+            {
+                DialogResult opcionSel = MessageBox.Show("No ha guardado el archivo, ¿desea guardarlo?", "Guardar archivo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (opcionSel == DialogResult.Yes)
+                {
+                    btnGuardarArchivo_Click(sender, e);
+                }
+                else if (opcionSel == DialogResult.No)
+                {
+                    editorTextBox.Clear();
+                    nombreArchivo = null;
+                    guardado = true;
+                }
+            }
+            else
+            {
+                editorTextBox.Clear();
+                nombreArchivo = null;
+                guardado = true;
+            }
         }
 
         private void btnArchivoAbrir_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Formato de texto enriquecido (RTF)|*.rtf";
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (!guardado)
             {
-                nombreArchivo = openFileDialog.FileName;
-                editorTextBox.LoadFile(nombreArchivo);
+                DialogResult opcionSel = MessageBox.Show("No ha guardado el archivo, ¿desea guardarlo?", "Guardar archivo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (opcionSel == DialogResult.Yes)
+                {
+                    btnGuardarArchivo_Click(sender, e);
+                }
+                else if (opcionSel == DialogResult.No)
+                {
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.Filter = "Formato de texto enriquecido (RTF)|*.rtf";
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        nombreArchivo = openFileDialog.FileName;
+                        editorTextBox.LoadFile(nombreArchivo);
+                        guardado = true;
+                    }
+                }
+            }
+            else
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Formato de texto enriquecido (RTF)|*.rtf";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    nombreArchivo = openFileDialog.FileName;
+                    editorTextBox.LoadFile(nombreArchivo);
+                    guardado = true;
+                }
             }
         }
 
         private void btnGuardarArchivo_Click(object sender, EventArgs e)
         {
-
             if (nombreArchivo != null)
             {
                 editorTextBox.SaveFile(nombreArchivo);
@@ -255,16 +305,19 @@ namespace Practica9
             {
                 guardarComo();
             }
+            guardado = true;
         }
 
         private void btnGuardarComoArchivo_Click(object sender, EventArgs e)
         {
             guardarComo();
+            guardado = true;
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-
+            this.Close();
+            Application.Exit();
         }
 
         private void guardarComo()
@@ -287,24 +340,72 @@ namespace Practica9
         private void btnBuscar_Click(object sender, EventArgs e)
         {
             FormBuscarYReemplazar formBuscar = new FormBuscarYReemplazar();
-            if (formBuscar.ShowDialog() == DialogResult.OK)
-            {
-
-            }
+            formBuscar.ShowDialog();
         }
 
         private void btnReemplazar_Click(object sender, EventArgs e)
         {
             FormBuscarYReemplazar formBuscarYReemplazar = new FormBuscarYReemplazar("e");
-            if (formBuscarYReemplazar.ShowDialog() == DialogResult.OK)
-            {
-
-            }
+            formBuscarYReemplazar.ShowDialog();
         }
 
         private void btnSeleccionarTodo_Click(object sender, EventArgs e)
         {
             editorTextBox.SelectAll();
+        }
+
+        private void menuPrincipalAyudaBtn_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Programa hecho por Pablo Navarro Vázquez\n" +
+                "Versión 1.0.0", "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnZoom100_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(editorTextBox.ZoomFactor.ToString());
+            editorTextBox.ZoomFactor = 1;
+        }
+
+        private void btnAcercar_Click(object sender, EventArgs e)
+        {
+            if (editorTextBox.ZoomFactor < 63)
+            {
+                editorTextBox.ZoomFactor = editorTextBox.ZoomFactor + 1;
+            }
+        }
+
+        private void btnAlejar_Click(object sender, EventArgs e)
+        {
+            if (editorTextBox.ZoomFactor > 1.515625)
+            {
+                editorTextBox.ZoomFactor = editorTextBox.ZoomFactor + -1;
+            }
+        }
+
+        private void editorTextBox_TextChanged(object sender, EventArgs e)
+        {
+            guardado = false;
+        }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!guardado)
+            {
+                DialogResult opcionSel = MessageBox.Show("No ha guardado el archivo, ¿desea guardarlo?", "Guardar archivo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (opcionSel == DialogResult.Yes)
+                {
+                    btnGuardarArchivo_Click(sender, e);
+                }
+                else if (opcionSel == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
         }
     }
 }

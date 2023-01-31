@@ -66,8 +66,16 @@
             this.btnAlinearJustificado = new System.Windows.Forms.Button();
             this.btnAlinearDerecha = new System.Windows.Forms.Button();
             editorTextBox = new System.Windows.Forms.RichTextBox();
+            this.subMenuVer = new System.Windows.Forms.TableLayoutPanel();
+            this.btnAlejar = new System.Windows.Forms.Button();
+            this.btnAcercar = new System.Windows.Forms.Button();
+            this.btnZoom100 = new System.Windows.Forms.Button();
+            this.lblReiniciarZoom = new System.Windows.Forms.Label();
+            this.lblAlejar = new System.Windows.Forms.Label();
+            this.lblAcercar = new System.Windows.Forms.Label();
             this.menuPrincipal.SuspendLayout();
             this.subMenuInicio.SuspendLayout();
+            this.subMenuVer.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuPrincipal
@@ -174,6 +182,7 @@
             this.menuPrincipalAyudaBtn.Name = "menuPrincipalAyudaBtn";
             this.menuPrincipalAyudaBtn.Size = new System.Drawing.Size(23, 20);
             this.menuPrincipalAyudaBtn.Text = "A&yuda";
+            this.menuPrincipalAyudaBtn.Click += new System.EventHandler(this.menuPrincipalAyudaBtn_Click);
             // 
             // menuPrincipalOcultarBtn
             // 
@@ -499,11 +508,93 @@
             // editorTextBox
             // 
             editorTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            editorTextBox.Location = new System.Drawing.Point(0, 117);
+            editorTextBox.Location = new System.Drawing.Point(0, 207);
             editorTextBox.Name = "editorTextBox";
-            editorTextBox.Size = new System.Drawing.Size(800, 333);
+            editorTextBox.Size = new System.Drawing.Size(800, 243);
             editorTextBox.TabIndex = 4;
             editorTextBox.Text = "";
+            editorTextBox.TextChanged += new System.EventHandler(this.editorTextBox_TextChanged);
+            // 
+            // subMenuVer
+            // 
+            this.subMenuVer.ColumnCount = 4;
+            this.subMenuVer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 54F));
+            this.subMenuVer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.subMenuVer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            this.subMenuVer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 434F));
+            this.subMenuVer.Controls.Add(this.btnAlejar, 1, 0);
+            this.subMenuVer.Controls.Add(this.btnAcercar, 0, 0);
+            this.subMenuVer.Controls.Add(this.btnZoom100, 2, 0);
+            this.subMenuVer.Controls.Add(this.lblReiniciarZoom, 2, 1);
+            this.subMenuVer.Controls.Add(this.lblAlejar, 1, 1);
+            this.subMenuVer.Controls.Add(this.lblAcercar, 0, 1);
+            this.subMenuVer.Dock = System.Windows.Forms.DockStyle.Top;
+            this.subMenuVer.Location = new System.Drawing.Point(0, 117);
+            this.subMenuVer.Name = "subMenuVer";
+            this.subMenuVer.RowCount = 2;
+            this.subMenuVer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.subMenuVer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
+            this.subMenuVer.Size = new System.Drawing.Size(800, 90);
+            this.subMenuVer.TabIndex = 5;
+            this.subMenuVer.Visible = false;
+            // 
+            // btnAlejar
+            // 
+            this.btnAlejar.Image = global::Practica9.Properties.Resources.zoom_out;
+            this.btnAlejar.Location = new System.Drawing.Point(57, 3);
+            this.btnAlejar.Name = "btnAlejar";
+            this.btnAlejar.Size = new System.Drawing.Size(49, 55);
+            this.btnAlejar.TabIndex = 0;
+            this.btnAlejar.UseVisualStyleBackColor = true;
+            this.btnAlejar.Click += new System.EventHandler(this.btnAlejar_Click);
+            // 
+            // btnAcercar
+            // 
+            this.btnAcercar.Image = global::Practica9.Properties.Resources.zoom_in;
+            this.btnAcercar.Location = new System.Drawing.Point(3, 3);
+            this.btnAcercar.Name = "btnAcercar";
+            this.btnAcercar.Size = new System.Drawing.Size(48, 55);
+            this.btnAcercar.TabIndex = 1;
+            this.btnAcercar.UseVisualStyleBackColor = true;
+            this.btnAcercar.Click += new System.EventHandler(this.btnAcercar_Click);
+            // 
+            // btnZoom100
+            // 
+            this.btnZoom100.Image = global::Practica9.Properties.Resources.zoom_reiniciar;
+            this.btnZoom100.Location = new System.Drawing.Point(112, 3);
+            this.btnZoom100.Name = "btnZoom100";
+            this.btnZoom100.Size = new System.Drawing.Size(49, 55);
+            this.btnZoom100.TabIndex = 2;
+            this.btnZoom100.UseVisualStyleBackColor = true;
+            this.btnZoom100.Click += new System.EventHandler(this.btnZoom100_Click);
+            // 
+            // lblReiniciarZoom
+            // 
+            this.lblReiniciarZoom.AutoSize = true;
+            this.lblReiniciarZoom.Location = new System.Drawing.Point(112, 61);
+            this.lblReiniciarZoom.Name = "lblReiniciarZoom";
+            this.lblReiniciarZoom.Size = new System.Drawing.Size(52, 29);
+            this.lblReiniciarZoom.TabIndex = 3;
+            this.lblReiniciarZoom.Text = "Reiniciar zoom";
+            // 
+            // lblAlejar
+            // 
+            this.lblAlejar.AutoSize = true;
+            this.lblAlejar.Location = new System.Drawing.Point(57, 61);
+            this.lblAlejar.Name = "lblAlejar";
+            this.lblAlejar.Size = new System.Drawing.Size(37, 15);
+            this.lblAlejar.TabIndex = 4;
+            this.lblAlejar.Text = "Alejar";
+            // 
+            // lblAcercar
+            // 
+            this.lblAcercar.AutoSize = true;
+            this.lblAcercar.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblAcercar.Location = new System.Drawing.Point(3, 61);
+            this.lblAcercar.Name = "lblAcercar";
+            this.lblAcercar.Size = new System.Drawing.Size(48, 15);
+            this.lblAcercar.TabIndex = 5;
+            this.lblAcercar.Text = "Acercar";
             // 
             // FormMain
             // 
@@ -511,16 +602,21 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(editorTextBox);
+            this.Controls.Add(this.subMenuVer);
             this.Controls.Add(this.subMenuInicio);
             this.Controls.Add(this.menuPrincipal);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuPrincipal;
             this.Name = "FormMain";
             this.Text = "Editor de textos";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.menuPrincipal.ResumeLayout(false);
             this.menuPrincipal.PerformLayout();
             this.subMenuInicio.ResumeLayout(false);
             this.subMenuInicio.PerformLayout();
+            this.subMenuVer.ResumeLayout(false);
+            this.subMenuVer.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -545,7 +641,6 @@
         private Button btnPegar;
         private Button btnCopiar;
         private Button btnCortar;
-        public static RichTextBox editorTextBox;
         private ComboBox tamanoFuenteComboBox;
         private ComboBox fuentesComboBox;
         private Button btnColorearTexto;
@@ -565,5 +660,13 @@
         private Button btnAlinearIzquierda;
         private Button btnAlinearJustificado;
         private Button btnAlinearDerecha;
+        private TableLayoutPanel subMenuVer;
+        private Button btnAlejar;
+        private Button btnAcercar;
+        private Button btnZoom100;
+        private Label lblReiniciarZoom;
+        private Label lblAlejar;
+        private Label lblAcercar;
+        public static RichTextBox editorTextBox;
     }
 }

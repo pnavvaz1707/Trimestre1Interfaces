@@ -49,25 +49,25 @@
             // 
             // txtBoxBuscar
             // 
-            this.txtBoxBuscar.Location = new System.Drawing.Point(86, 23);
-            this.txtBoxBuscar.Multiline = true;
+            this.txtBoxBuscar.Location = new System.Drawing.Point(86, 20);
             this.txtBoxBuscar.Name = "txtBoxBuscar";
-            this.txtBoxBuscar.Size = new System.Drawing.Size(100, 15);
+            this.txtBoxBuscar.Size = new System.Drawing.Size(100, 23);
             this.txtBoxBuscar.TabIndex = 1;
+            this.txtBoxBuscar.TextChanged += new System.EventHandler(this.txtBoxBuscar_TextChanged);
             // 
             // txtBoxReemplazar
             // 
             this.txtBoxReemplazar.Enabled = false;
-            this.txtBoxReemplazar.Location = new System.Drawing.Point(86, 50);
-            this.txtBoxReemplazar.Multiline = true;
+            this.txtBoxReemplazar.Location = new System.Drawing.Point(86, 55);
             this.txtBoxReemplazar.Name = "txtBoxReemplazar";
-            this.txtBoxReemplazar.Size = new System.Drawing.Size(100, 15);
+            this.txtBoxReemplazar.Size = new System.Drawing.Size(100, 23);
             this.txtBoxReemplazar.TabIndex = 3;
+            this.txtBoxReemplazar.TextChanged += new System.EventHandler(this.txtBoxReemplazar_TextChanged);
             // 
             // lblReemplazar
             // 
             this.lblReemplazar.AutoSize = true;
-            this.lblReemplazar.Location = new System.Drawing.Point(12, 50);
+            this.lblReemplazar.Location = new System.Drawing.Point(12, 58);
             this.lblReemplazar.Name = "lblReemplazar";
             this.lblReemplazar.Size = new System.Drawing.Size(68, 15);
             this.lblReemplazar.TabIndex = 2;
@@ -75,6 +75,7 @@
             // 
             // btnBuscarSiguiente
             // 
+            this.btnBuscarSiguiente.Enabled = false;
             this.btnBuscarSiguiente.Location = new System.Drawing.Point(204, 15);
             this.btnBuscarSiguiente.Name = "btnBuscarSiguiente";
             this.btnBuscarSiguiente.Size = new System.Drawing.Size(118, 23);
