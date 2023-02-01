@@ -1,3 +1,10 @@
+/*
+* PRÁCTICA.............: Práctica 9
+* NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
+* CURSO y GRUPO........: 2º Desarrollo de Interfaces
+* TÍTULO de la PRÁCTICA: Uso del IDE V.Studio
+* FECHA de ENTREGA.....: 31 de Enero de 2023
+*/
 namespace Practica9
 {
     internal static class Program
@@ -11,7 +18,7 @@ namespace Practica9
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new FormMain());
+            Application.Run(new Splash());
         }
     }
 }
