@@ -36,3 +36,5 @@ C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica9\Practica9
 C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica9\Practica9\obj\Debug\net6.0-windows\Practica9.FormMain.resources
 C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica9\Practica9\obj\Debug\net6.0-windows\Practica9.FormBuscarYReemplazar.resources
 C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica9\Practica9\obj\Debug\net6.0-windows\Practica9.Splash.resources
+C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica9\Practica9\obj\Debug\net6.0-windows\Practica9.FormBuscarYReemplazar.resources
+C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica9\Practica9\obj\Debug\net6.0-windows\Practica9.Splash.resources
