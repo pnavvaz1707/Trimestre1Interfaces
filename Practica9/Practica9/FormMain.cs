@@ -65,12 +65,26 @@ namespace Practica9
 
         private void tamanoFuenteComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, Convert.ToInt16(tamanoFuenteComboBox.Text));
+            if (editorTextBox.SelectionFont != null)
+            {
+                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, Convert.ToInt16(tamanoFuenteComboBox.Text));
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado","Error al cambiar fuente",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
 
         private void fuentesComboBox_SelectedValueChanged(object sender, EventArgs e)
         {
-            editorTextBox.SelectionFont = new Font(fuentesComboBox.Text, editorTextBox.SelectionFont.Size);
+            if (editorTextBox.SelectionFont != null)
+            {
+                editorTextBox.SelectionFont = new Font(fuentesComboBox.Text, editorTextBox.SelectionFont.Size);
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
 
