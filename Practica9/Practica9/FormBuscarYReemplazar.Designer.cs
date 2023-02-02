@@ -34,7 +34,6 @@
             this.txtBoxReemplazar = new System.Windows.Forms.TextBox();
             this.lblReemplazar = new System.Windows.Forms.Label();
             this.btnBuscarSiguiente = new System.Windows.Forms.Button();
-            this.btnReemplazar = new System.Windows.Forms.Button();
             this.btnReemplazarTodo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -76,7 +75,7 @@
             // btnBuscarSiguiente
             // 
             this.btnBuscarSiguiente.Enabled = false;
-            this.btnBuscarSiguiente.Location = new System.Drawing.Point(204, 15);
+            this.btnBuscarSiguiente.Location = new System.Drawing.Point(204, 20);
             this.btnBuscarSiguiente.Name = "btnBuscarSiguiente";
             this.btnBuscarSiguiente.Size = new System.Drawing.Size(118, 23);
             this.btnBuscarSiguiente.TabIndex = 4;
@@ -84,21 +83,10 @@
             this.btnBuscarSiguiente.UseVisualStyleBackColor = true;
             this.btnBuscarSiguiente.Click += new System.EventHandler(this.btnBuscarSiguiente_Click);
             // 
-            // btnReemplazar
-            // 
-            this.btnReemplazar.Enabled = false;
-            this.btnReemplazar.Location = new System.Drawing.Point(204, 46);
-            this.btnReemplazar.Name = "btnReemplazar";
-            this.btnReemplazar.Size = new System.Drawing.Size(118, 23);
-            this.btnReemplazar.TabIndex = 5;
-            this.btnReemplazar.Text = "Reemplazar";
-            this.btnReemplazar.UseVisualStyleBackColor = true;
-            this.btnReemplazar.Click += new System.EventHandler(this.btnReemplazar_Click);
-            // 
             // btnReemplazarTodo
             // 
             this.btnReemplazarTodo.Enabled = false;
-            this.btnReemplazarTodo.Location = new System.Drawing.Point(204, 75);
+            this.btnReemplazarTodo.Location = new System.Drawing.Point(204, 55);
             this.btnReemplazarTodo.Name = "btnReemplazarTodo";
             this.btnReemplazarTodo.Size = new System.Drawing.Size(118, 23);
             this.btnReemplazarTodo.TabIndex = 6;
@@ -110,9 +98,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(341, 123);
+            this.ClientSize = new System.Drawing.Size(341, 101);
             this.Controls.Add(this.btnReemplazarTodo);
-            this.Controls.Add(this.btnReemplazar);
             this.Controls.Add(this.btnBuscarSiguiente);
             this.Controls.Add(this.txtBoxReemplazar);
             this.Controls.Add(this.lblReemplazar);

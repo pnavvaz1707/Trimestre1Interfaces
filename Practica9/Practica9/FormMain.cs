@@ -71,7 +71,7 @@ namespace Practica9
             }
             else
             {
-                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado","Error al cambiar fuente",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -80,55 +80,6 @@ namespace Practica9
             if (editorTextBox.SelectionFont != null)
             {
                 editorTextBox.SelectionFont = new Font(fuentesComboBox.Text, editorTextBox.SelectionFont.Size);
-            }
-            else
-            {
-                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-
-        private void btnNegrita_Click(object sender, EventArgs e)
-        {
-            if (editorTextBox.SelectionFont != null)
-            {
-                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont, FontStyle.Bold);
-            }
-            else
-            {
-                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnItalica_Click(object sender, EventArgs e)
-        {
-            if (editorTextBox.SelectionFont != null)
-            {
-                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont, FontStyle.Italic);
-            }
-            else
-            {
-                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnSubrayar_Click(object sender, EventArgs e)
-        {
-            if (editorTextBox.SelectionFont != null)
-            {
-                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont, FontStyle.Underline);
-            }
-            else
-            {
-                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnTachar_Click(object sender, EventArgs e)
-        {
-            if (editorTextBox.SelectionFont != null)
-            {
-                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont, FontStyle.Strikeout);
             }
             else
             {
@@ -251,28 +202,14 @@ namespace Practica9
 
         private void btnSumarTamanoFuente_Click(object sender, EventArgs e)
         {
-            if (editorTextBox.SelectionFont != null)
-            {
-                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, editorTextBox.SelectionFont.Size + 1);
-                tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
-            }
-            else
-            {
-                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, editorTextBox.SelectionFont.Size + 1);
+            tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
         }
 
         private void btnRestarTamanoFuente_Click(object sender, EventArgs e)
         {
-            if (editorTextBox.SelectionFont != null)
-            {
-                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, editorTextBox.SelectionFont.Size - 1);
-                tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
-            }
-            else
-            {
-                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, editorTextBox.SelectionFont.Size - 1);
+            tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
         }
 
         private void btnPegar_Click(object sender, EventArgs e)
@@ -316,14 +253,28 @@ namespace Practica9
 
         private void btnArchivoAbrir_Click(object sender, EventArgs e)
         {
-            if (!guardado)
+            try
             {
-                DialogResult opcionSel = MessageBox.Show("No ha guardado el archivo, ¿desea guardarlo?", "Guardar archivo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                if (opcionSel == DialogResult.Yes)
+                if (!guardado)
                 {
-                    btnGuardarArchivo_Click(sender, e);
+                    DialogResult opcionSel = MessageBox.Show("No ha guardado el archivo, ¿desea guardarlo?", "Guardar archivo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (opcionSel == DialogResult.Yes)
+                    {
+                        btnGuardarArchivo_Click(sender, e);
+                    }
+                    else if (opcionSel == DialogResult.No)
+                    {
+                        OpenFileDialog openFileDialog = new OpenFileDialog();
+                        openFileDialog.Filter = "Formato de texto enriquecido (RTF)|*.rtf";
+                        if (openFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            nombreArchivo = openFileDialog.FileName;
+                            editorTextBox.LoadFile(nombreArchivo);
+                            guardado = true;
+                        }
+                    }
                 }
-                else if (opcionSel == DialogResult.No)
+                else
                 {
                     OpenFileDialog openFileDialog = new OpenFileDialog();
                     openFileDialog.Filter = "Formato de texto enriquecido (RTF)|*.rtf";
@@ -335,16 +286,9 @@ namespace Practica9
                     }
                 }
             }
-            else
+            catch (Exception)
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.Filter = "Formato de texto enriquecido (RTF)|*.rtf";
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    nombreArchivo = openFileDialog.FileName;
-                    editorTextBox.LoadFile(nombreArchivo);
-                    guardado = true;
-                }
+                MessageBox.Show("Ha habido un error al abrir el fichero", "Error al importar", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -405,6 +349,8 @@ namespace Practica9
         private void btnSeleccionarTodo_Click(object sender, EventArgs e)
         {
             editorTextBox.SelectAll();
+            editorTextBox.SelectionBackColor = Color.Blue;
+            editorTextBox.SelectionColor = Color.White;
         }
 
         private void menuPrincipalAyudaBtn_Click(object sender, EventArgs e)
@@ -459,6 +405,27 @@ namespace Practica9
                     e.Cancel = true;
                 }
             }
+        }
+
+        private void editorTextBox_SelectionChanged(object sender, EventArgs e)
+        {
+            if (editorTextBox.SelectionFont != null)
+            {
+                tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
+                fuentesComboBox.Text = editorTextBox.SelectionFont.FontFamily.Name;
+                chckBoxNegrita.Checked = editorTextBox.SelectionFont.Bold;
+                chckBoxSubrayado.Checked = editorTextBox.SelectionFont.Underline;
+                chckBoxItalica.Checked = editorTextBox.SelectionFont.Italic;
+                chckBoxStrikeout.Checked = editorTextBox.SelectionFont.Strikeout;
+                chckBoxSuperIndice.Checked = (editorTextBox.SelectionCharOffset == 10);
+                chckBoxSubIndice.Checked = (editorTextBox.SelectionCharOffset == -10);
+            }
+        }
+
+        private void btnSeleccionarTodo_Leave(object sender, EventArgs e)
+        {
+            editorTextBox.Undo();
+            editorTextBox.Undo();
         }
     }
 }

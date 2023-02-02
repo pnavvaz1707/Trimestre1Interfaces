@@ -464,6 +464,7 @@
             this.btnSeleccionarTodo.Text = "Seleccionar todo";
             this.btnSeleccionarTodo.UseVisualStyleBackColor = true;
             this.btnSeleccionarTodo.Click += new System.EventHandler(this.btnSeleccionarTodo_Click);
+            this.btnSeleccionarTodo.Leave += new System.EventHandler(this.btnSeleccionarTodo_Leave);
             // 
             // btnAlinearCentro
             // 
@@ -513,6 +514,7 @@
             editorTextBox.Size = new System.Drawing.Size(800, 243);
             editorTextBox.TabIndex = 4;
             editorTextBox.Text = "";
+            editorTextBox.SelectionChanged += new System.EventHandler(this.editorTextBox_SelectionChanged);
             editorTextBox.TextChanged += new System.EventHandler(this.editorTextBox_TextChanged);
             // 
             // subMenuVer
