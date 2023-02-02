@@ -37,7 +37,8 @@ namespace Practica9
             // Si la encontramos continuamos la resaltamos con fondo azul y seguimos buscando
             if (posicionTextoEntrada >= 0)
             {
-                FormMain.EditorTextBox.SelectionBackColor = Color.DeepSkyBlue;
+                FormMain.EditorTextBox.SelectionBackColor = Color.Blue;
+                FormMain.EditorTextBox.SelectionColor = Color.White;
 
                 int longitudTextoABuscar = txtBoxBuscar.Text.Length;
                 FormMain.EditorTextBox.Select(posicionTextoEntrada, longitudTextoABuscar);
@@ -55,6 +56,7 @@ namespace Practica9
         {
             if (posicionInicio > 0 && posicionFinal > 0 && indiceTextoEncontrado >= 0)
             {
+                FormMain.EditorTextBox.Undo();
                 FormMain.EditorTextBox.Undo();
             }
 
@@ -88,18 +90,9 @@ namespace Practica9
                 btnBuscarSiguiente.Enabled = false;
             }
         }
-
-        private void btnReemplazar_Click(object sender, EventArgs e)
-        {
-            FormMain.EditorTextBox.SelectionBackColor = Color.Red;
-
-            int longitudTextoABuscar = txtBoxBuscar.Text.Length;
-            FormMain.EditorTextBox.Select(posicionInicioGlobal - longitudTextoABuscar, longitudTextoABuscar);
-            FormMain.EditorTextBox.SelectedText = FormMain.EditorTextBox.SelectedText.Replace(txtBoxBuscar.Text, txtBoxReemplazar.Text);
-        }
-
         private void btnReemplazarTodo_Click(object sender, EventArgs e)
         {
+
             FormMain.EditorTextBox.Text = FormMain.EditorTextBox.Text.Replace(txtBoxBuscar.Text, txtBoxReemplazar.Text);
         }
 
