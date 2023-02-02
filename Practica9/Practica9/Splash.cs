@@ -17,7 +17,7 @@ namespace Practica9
 
         private void contadorSplash_Tick(object sender, EventArgs e)
         {
-            barraProgresoSplash.Increment(1);
+            barraProgresoSplash.Increment(10);
             if (barraProgresoSplash.Value == barraProgresoSplash.Maximum)
             {
                 contadorSplash.Stop();

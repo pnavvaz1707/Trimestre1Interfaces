@@ -90,25 +90,50 @@ namespace Practica9
 
         private void btnNegrita_Click(object sender, EventArgs e)
         {
-            editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont, FontStyle.Bold);
+            if (editorTextBox.SelectionFont != null)
+            {
+                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont, FontStyle.Bold);
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnItalica_Click(object sender, EventArgs e)
         {
-            editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont, FontStyle.Italic);
-
+            if (editorTextBox.SelectionFont != null)
+            {
+                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont, FontStyle.Italic);
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnSubrayar_Click(object sender, EventArgs e)
         {
-            editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont, FontStyle.Underline);
-
+            if (editorTextBox.SelectionFont != null)
+            {
+                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont, FontStyle.Underline);
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnTachar_Click(object sender, EventArgs e)
         {
-            editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont, FontStyle.Strikeout);
-
+            if (editorTextBox.SelectionFont != null)
+            {
+                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont, FontStyle.Strikeout);
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void chckBoxNegrita_CheckedChanged(object sender, EventArgs e)
@@ -226,14 +251,28 @@ namespace Practica9
 
         private void btnSumarTamanoFuente_Click(object sender, EventArgs e)
         {
-            editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, editorTextBox.SelectionFont.Size + 1);
-            tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
+            if (editorTextBox.SelectionFont != null)
+            {
+                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, editorTextBox.SelectionFont.Size + 1);
+                tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnRestarTamanoFuente_Click(object sender, EventArgs e)
         {
-            editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, editorTextBox.SelectionFont.Size - 1);
-            tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
+            if (editorTextBox.SelectionFont != null)
+            {
+                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, editorTextBox.SelectionFont.Size - 1);
+                tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido cambiar la fuente del texto seleccionado", "Error al cambiar fuente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnPegar_Click(object sender, EventArgs e)

@@ -91,11 +91,18 @@ namespace Practica9
 
         private void btnReemplazar_Click(object sender, EventArgs e)
         {
-            FormMain.EditorTextBox.SelectionBackColor = Color.Red;
-
             int longitudTextoABuscar = txtBoxBuscar.Text.Length;
-            FormMain.EditorTextBox.Select(posicionInicioGlobal - longitudTextoABuscar, longitudTextoABuscar);
-            FormMain.EditorTextBox.SelectedText = FormMain.EditorTextBox.SelectedText.Replace(txtBoxBuscar.Text, txtBoxReemplazar.Text);
+            if (posicionInicioGlobal == 0)
+            {
+                btnBuscarSiguiente_Click(sender, e);
+                FormMain.EditorTextBox.Select(posicionInicioGlobal - longitudTextoABuscar, longitudTextoABuscar);
+                FormMain.EditorTextBox.SelectedText = FormMain.EditorTextBox.SelectedText.Replace(txtBoxBuscar.Text, txtBoxReemplazar.Text);
+            }
+            else
+            {
+                FormMain.EditorTextBox.Select(posicionInicioGlobal - longitudTextoABuscar, longitudTextoABuscar);
+                FormMain.EditorTextBox.SelectedText = FormMain.EditorTextBox.SelectedText.Replace(txtBoxBuscar.Text, txtBoxReemplazar.Text);
+            }
         }
 
         private void btnReemplazarTodo_Click(object sender, EventArgs e)
