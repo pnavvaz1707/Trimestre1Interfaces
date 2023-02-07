@@ -202,14 +202,28 @@ namespace Practica9
 
         private void btnSumarTamanoFuente_Click(object sender, EventArgs e)
         {
-            editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, editorTextBox.SelectionFont.Size + 1);
-            tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
+            if (editorTextBox.SelectionFont != null)
+            {
+                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, editorTextBox.SelectionFont.Size + 1);
+                tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido cambiar el tamaño del texto seleccionado", "Error al cambiar el tamaño", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnRestarTamanoFuente_Click(object sender, EventArgs e)
         {
-            editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, editorTextBox.SelectionFont.Size - 1);
-            tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
+            if (editorTextBox.SelectionFont != null)
+            {
+                editorTextBox.SelectionFont = new Font(editorTextBox.SelectionFont.FontFamily, editorTextBox.SelectionFont.Size - 1);
+                tamanoFuenteComboBox.Text = editorTextBox.SelectionFont.Size.ToString();
+            }
+            else
+            {
+                MessageBox.Show("No se ha podido cambiar el tamaño del texto seleccionado", "Error al cambiar el tamaño", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnPegar_Click(object sender, EventArgs e)
@@ -294,15 +308,21 @@ namespace Practica9
 
         private void btnGuardarArchivo_Click(object sender, EventArgs e)
         {
-            if (nombreArchivo != null)
+            try
             {
-                editorTextBox.SaveFile(nombreArchivo);
-            }
-            else
+                if (nombreArchivo != null)
+                {
+                    editorTextBox.SaveFile(nombreArchivo);
+                }
+                else
+                {
+                    guardarComo();
+                }
+                guardado = true;
+            }catch (Exception)
             {
-                guardarComo();
+                MessageBox.Show("Ha habido un error al guardar el fichero", "Error al guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            guardado = true;
         }
 
         private void btnGuardarComoArchivo_Click(object sender, EventArgs e)
