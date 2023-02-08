@@ -15,6 +15,8 @@ namespace Practica10
         public FormConfg()
         {
             InitializeComponent();
+            CenterToScreen();
+
             string[] nombresPuerto = SerialPort.GetPortNames();
             for (int i = 0; i < nombresPuerto.Length; i++)
             {

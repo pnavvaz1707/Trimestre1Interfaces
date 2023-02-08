@@ -15,11 +15,12 @@ namespace Practica10
         public FormCarga()
         {
             InitializeComponent();
+            CenterToScreen();
         }
 
         private void contadorCarga_Tick(object sender, EventArgs e)
         {
-            barraDeCarga.Increment(1);
+            barraDeCarga.Increment(2);
             if (barraDeCarga.Maximum == barraDeCarga.Value)
             {
                 contadorCarga.Stop();
