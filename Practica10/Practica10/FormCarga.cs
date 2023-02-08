@@ -20,7 +20,7 @@ namespace Practica10
 
         private void contadorCarga_Tick(object sender, EventArgs e)
         {
-            barraDeCarga.Increment(2);
+            barraDeCarga.Increment(10);
             if (barraDeCarga.Maximum == barraDeCarga.Value)
             {
                 contadorCarga.Stop();

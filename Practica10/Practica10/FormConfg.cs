@@ -1,4 +1,6 @@
-﻿using System.IO.Ports;
+﻿using System;
+using System.Collections.Generic;
+using System.IO.Ports;
 using System.Windows.Forms;
 
 namespace Practica10
@@ -22,11 +24,63 @@ namespace Practica10
             {
                 cbPuerto.Items.Add(nombresPuerto[i]);
             }
+            cbPuerto.SelectedIndex = 0;
+
+            cbNumBits.Items.Add(5);
+            cbNumBits.Items.Add(6);
+            cbNumBits.Items.Add(7);
+            cbNumBits.Items.Add(8);
+            cbNumBits.SelectedIndex = 0;
+
+            cbVelocidad.Items.Add(110);
+            cbVelocidad.Items.Add(300);
+            cbVelocidad.Items.Add(1200);
+            cbVelocidad.Items.Add(2400);
+            cbVelocidad.Items.Add(4800);
+            cbVelocidad.Items.Add(9600);
+            cbVelocidad.Items.Add(19200);
+            cbVelocidad.Items.Add(38400);
+            cbVelocidad.Items.Add(57600);
+            cbVelocidad.Items.Add(115200);
+            cbVelocidad.Items.Add(230400);
+            cbVelocidad.Items.Add(460800);
+            cbVelocidad.Items.Add(921600);
+            cbVelocidad.SelectedIndex = 0;
+
+            Dictionary<Parity, string> dicParity = new Dictionary<Parity, string>();
+
+            dicParity.Add(Parity.Even, "Par");
+            dicParity.Add(Parity.Odd, "Impar");
+            dicParity.Add(Parity.None, "Ninguno");
+            dicParity.Add(Parity.Mark, "Marca");
+            dicParity.Add(Parity.Space, "Espacio");
+
+            cbParidad.DataSource = new BindingSource(dicParity, null);
+            cbParidad.DisplayMember = "Value";
+            cbParidad.ValueMember = "Key";
+            cbParidad.SelectedIndex = 0;
+
+            Dictionary<StopBits, string> dicStopBits = new Dictionary<StopBits, string>();
+
+            dicStopBits.Add(StopBits.One, "1");
+            dicStopBits.Add(StopBits.OnePointFive, "1.5");
+            dicStopBits.Add(StopBits.Two, "2");
+
+            cbBitStop.DataSource = new BindingSource(dicStopBits, null);
+            cbBitStop.DisplayMember = "Value";
+            cbBitStop.ValueMember = "Key";
+            cbBitStop.SelectedIndex = 0;
         }
 
-        private void FormConfg_FormClosed(object sender, FormClosedEventArgs e)
+        private void btnConfgPuerto_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            puertoSerie.PortName = cbPuerto.Text;
+            puertoSerie.DataBits = Convert.ToInt16(cbNumBits.Text);
+            puertoSerie.StopBits = ((KeyValuePair<StopBits, string>)cbBitStop.SelectedItem).Key;
+            puertoSerie.BaudRate = Convert.ToInt32(cbVelocidad.Text);
+            puertoSerie.Parity = ((KeyValuePair<Parity, string>)cbParidad.SelectedItem).Key;
+            //puertoSerie.Open();
+            this.Close();
         }
     }
 }
