@@ -10,3 +10,15 @@ C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.csproj.CoreCompileInputs.cache
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.exe
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.pdb
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.csproj.AssemblyReference.cache
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.csproj.SuggestedBindingRedirects.cache
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.FormCarga.resources
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.FormConfg.resources
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.Properties.Resources.resources
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.csproj.GenerateResource.cache
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.csproj.CoreCompileInputs.cache
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.exe
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.pdb
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\bin\Debug\Practica10.exe.config
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\bin\Debug\Practica10.exe
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\bin\Debug\Practica10.pdb
