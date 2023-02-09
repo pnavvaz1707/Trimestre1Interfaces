@@ -58,11 +58,11 @@
     <Compile Include="FormConfg.Designer.cs">
       <DependentUpon>FormConfg.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.cs">
+    <Compile Include="FormChat.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMain.Designer.cs">
-      <DependentUpon>FormMain.cs</DependentUpon>
+    <Compile Include="FormChat.Designer.cs">
+      <DependentUpon>FormChat.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -72,8 +72,8 @@
     <EmbeddedResource Include="FormConfg.resx">
       <DependentUpon>FormConfg.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMain.resx">
-      <DependentUpon>FormMain.cs</DependentUpon>
+    <EmbeddedResource Include="FormChat.resx">
+      <DependentUpon>FormChat.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -22,3 +22,4 @@ C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica
 C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\bin\Debug\Practica10.exe.config
 C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\bin\Debug\Practica10.exe
 C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\bin\Debug\Practica10.pdb
+C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.FormChat.resources
