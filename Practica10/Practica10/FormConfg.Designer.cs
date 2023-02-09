@@ -158,6 +158,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormConfg";
             this.Text = "Configuración del puerto";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormConfg_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

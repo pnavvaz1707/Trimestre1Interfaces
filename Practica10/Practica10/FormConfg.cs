@@ -30,7 +30,8 @@ namespace Practica10
             cbNumBits.Items.Add(6);
             cbNumBits.Items.Add(7);
             cbNumBits.Items.Add(8);
-            cbNumBits.SelectedIndex = 0;
+            cbNumBits.SelectedIndex = 3;
+            //8
 
             cbVelocidad.Items.Add(110);
             cbVelocidad.Items.Add(300);
@@ -45,32 +46,39 @@ namespace Practica10
             cbVelocidad.Items.Add(230400);
             cbVelocidad.Items.Add(460800);
             cbVelocidad.Items.Add(921600);
-            cbVelocidad.SelectedIndex = 0;
+            cbVelocidad.SelectedIndex = 3;
+            //2400
 
-            Dictionary<Parity, string> dicParity = new Dictionary<Parity, string>();
-
-            dicParity.Add(Parity.Even, "Par");
-            dicParity.Add(Parity.Odd, "Impar");
-            dicParity.Add(Parity.None, "Ninguno");
-            dicParity.Add(Parity.Mark, "Marca");
-            dicParity.Add(Parity.Space, "Espacio");
+            Dictionary<Parity, string> dicParity = new Dictionary<Parity, string>
+            {
+                { Parity.Even, "Par" },
+                { Parity.Odd, "Impar" },
+                { Parity.None, "Ninguno" },
+                { Parity.Mark, "Marca" },
+                { Parity.Space, "Espacio" }
+            };
 
             cbParidad.DataSource = new BindingSource(dicParity, null);
             cbParidad.DisplayMember = "Value";
             cbParidad.ValueMember = "Key";
-            cbParidad.SelectedIndex = 0;
+            cbParidad.SelectedIndex = 2;
+            //Ninguno
 
-            Dictionary<StopBits, string> dicStopBits = new Dictionary<StopBits, string>();
-
-            dicStopBits.Add(StopBits.One, "1");
-            dicStopBits.Add(StopBits.OnePointFive, "1.5");
-            dicStopBits.Add(StopBits.Two, "2");
+            Dictionary<StopBits, string> dicStopBits = new Dictionary<StopBits, string>
+            {
+                { StopBits.One, "1" },
+                { StopBits.OnePointFive, "1.5" },
+                { StopBits.Two, "2" }
+            };
 
             cbBitStop.DataSource = new BindingSource(dicStopBits, null);
             cbBitStop.DisplayMember = "Value";
             cbBitStop.ValueMember = "Key";
             cbBitStop.SelectedIndex = 0;
+
         }
+
+
 
         private void btnConfgPuerto_Click(object sender, EventArgs e)
         {
@@ -79,8 +87,15 @@ namespace Practica10
             puertoSerie.StopBits = ((KeyValuePair<StopBits, string>)cbBitStop.SelectedItem).Key;
             puertoSerie.BaudRate = Convert.ToInt32(cbVelocidad.Text);
             puertoSerie.Parity = ((KeyValuePair<Parity, string>)cbParidad.SelectedItem).Key;
-            //puertoSerie.Open();
-            this.Close();
+            puertoSerie.Open();
+            this.Hide();
+            FormChat formChat = new FormChat(puertoSerie);
+            formChat.ShowDialog();
+        }
+
+        private void FormConfg_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
