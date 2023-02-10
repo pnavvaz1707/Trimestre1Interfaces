@@ -40,7 +40,7 @@ namespace Practica10
 
         private void btnEnviarFichero_Click(object sender, EventArgs e)
         {
-            
+            puertoSerie.Write
         }
 
         private void btnEnviarMensaje_Click(object sender, EventArgs e)
