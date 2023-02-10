@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -30,17 +31,25 @@ namespace Practica10
 
         private void acercadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Programa realizado por Pablo Navarro Vázquez" + "\nVersión: 1.0.0","Acerca de",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            MessageBox.Show("Programa realizado por Pablo Navarro Vázquez" + "\nVersión: 1.0.0", "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void recibirMensajes(object sender,EventArgs e)
+        private void recibirMensajes(object sender, EventArgs e)
         {
             rtboxMensajesRecibidos.Text += puertoSerie.ReadLine();
         }
 
         private void btnEnviarFichero_Click(object sender, EventArgs e)
         {
-            puertoSerie.Write
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream fs = File.OpenRead(openFileDialog.FileName))
+                {
+                    puertoSerie.Write((new BinaryReader(fs)).ReadBytes((int)fs.Length), 0, (int)fs.Length);
+                }
+                //port.Write(File.OpenText(openFileDialog.FileName).ReadToEnd());
+            }
         }
 
         private void btnEnviarMensaje_Click(object sender, EventArgs e)
