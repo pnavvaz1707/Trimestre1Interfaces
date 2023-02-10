@@ -36,7 +36,17 @@ namespace Practica10
 
         private void recibirMensajes(object sender, EventArgs e)
         {
-            rtboxMensajesRecibidos.Text += puertoSerie.ReadLine();
+            string mensajeLeido = puertoSerie.ReadLine();
+            string archivo = puertoSerie.ReadLine();
+            if (mensajeLeido == "A$rc$i$vo" && archivo != null)
+            {
+                MessageBox.Show("¿Desea guardar el archivo o visualizarlo?","Archivo recibido",MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                rtboxMensajesRecibidos.Text += archivo;
+            }
+            else
+            {
+                rtboxMensajesRecibidos.Text += mensajeLeido;
+            }
         }
 
         private void btnEnviarFichero_Click(object sender, EventArgs e)
@@ -46,6 +56,7 @@ namespace Practica10
             {
                 using (FileStream fs = File.OpenRead(openFileDialog.FileName))
                 {
+                    puertoSerie.WriteLine("A$rc$i$vo");
                     puertoSerie.Write((new BinaryReader(fs)).ReadBytes((int)fs.Length), 0, (int)fs.Length);
                 }
                 //port.Write(File.OpenText(openFileDialog.FileName).ReadToEnd());
