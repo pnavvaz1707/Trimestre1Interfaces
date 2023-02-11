@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System.Net.Configuration;
 using System.Windows.Forms;
 
 namespace Practica10
 {
     public partial class FormConfg : Form
     {
-        /*
-         * Puerto : Portnames
-         * Bits por segundo: 110, 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200, 230400, 460800, 921600
-         * Bits de datos: 5, 6, 7, 8
-         * Paridad: Par, Impar, Ninguno, Marca, Espacio
-         * Bits de parada: 1, 1.5, 2
-         */
-        public FormConfg()
+        public static SerialPort puertoSerieAux;
+        private string msg;
+        public FormConfg(string msg)
         {
             InitializeComponent();
             CenterToScreen();
+
+            this.msg = msg;
 
             string[] nombresPuerto = SerialPort.GetPortNames();
             for (int i = 0; i < nombresPuerto.Length; i++)
@@ -78,19 +76,31 @@ namespace Practica10
 
         }
 
-
-
         private void btnConfgPuerto_Click(object sender, EventArgs e)
         {
-            puertoSerie.PortName = cbPuerto.Text;
-            puertoSerie.DataBits = Convert.ToInt16(cbNumBits.Text);
-            puertoSerie.StopBits = ((KeyValuePair<StopBits, string>)cbBitStop.SelectedItem).Key;
-            puertoSerie.BaudRate = Convert.ToInt32(cbVelocidad.Text);
-            puertoSerie.Parity = ((KeyValuePair<Parity, string>)cbParidad.SelectedItem).Key;
-            puertoSerie.Open();
-            this.Hide();
-            FormChat formChat = new FormChat(puertoSerie);
-            formChat.ShowDialog();
+            try
+            {
+                puertoSerie.PortName = cbPuerto.Text;
+                puertoSerie.DataBits = Convert.ToInt16(cbNumBits.Text);
+                puertoSerie.StopBits = ((KeyValuePair<StopBits, string>)cbBitStop.SelectedItem).Key;
+                puertoSerie.BaudRate = Convert.ToInt32(cbVelocidad.Text);
+                puertoSerie.Parity = ((KeyValuePair<Parity, string>)cbParidad.SelectedItem).Key;
+                puertoSerie.Open();
+                this.Hide();
+                if (msg == "Configurar")
+                {
+                    this.DialogResult = DialogResult.OK;
+                    puertoSerieAux = puertoSerie;
+                }
+                else
+                {
+                    FormChat formChat = new FormChat(puertoSerie);
+                    formChat.ShowDialog();
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Ha habido un error al conectar el puerto","Error en el puerto",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
 
         private void FormConfg_FormClosed(object sender, FormClosedEventArgs e)

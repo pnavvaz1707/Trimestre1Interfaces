@@ -36,28 +36,40 @@ namespace Practica10
 
         private void recibirMensajes(object sender, EventArgs e)
         {
-            string mensajeLeido = puertoSerie.ReadLine();
-            string archivo = puertoSerie.ReadLine();
-            if (mensajeLeido == "A$rc$i$vo" && archivo != null)
+            string cabecera = puertoSerie.ReadLine();
+            MessageBox.Show("C --> " + cabecera);
+            string mensaje = puertoSerie.ReadExisting();
+            MessageBox.Show("M --> " + mensaje);
+            if (cabecera == "--- Archivo ---" && mensaje != null)
             {
-                DialogResult dialogResult = MessageBox.Show("¿Desea guardar el archivo o visualizarlo?","Archivo recibido",MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (dialogResult == DialogResult.OK)
+                FormRecibeArchivo formRecibeArchivo = new FormRecibeArchivo();
+                DialogResult dialogResult = formRecibeArchivo.ShowDialog();
+                MessageBox.Show(dialogResult.ToString());
+                if (dialogResult == DialogResult.Yes)
                 {
-                    rtboxMensajesRecibidos.Text += archivo;
-                }
-                else
-                {
+                    MessageBox.Show("Va a guardar");
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "Todos los archivos (*.*)|*.*";
                     saveFileDialog.FileName = "Sin título";
                     saveFileDialog.CreatePrompt = true;
                     saveFileDialog.OverwritePrompt = true;
                     saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    MessageBox.Show("Va a guardar11");
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        MessageBox.Show("Se ha guardado correctamente el archivo", "Archivo guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    MessageBox.Show("Va a guardar222");
                 }
-                
+                else
+                {
+                    rtboxMensajesRecibidos.Text += mensaje;
+                }
+
             }
-            else
+            else if (cabecera == "--- Texto ---")
             {
-                rtboxMensajesRecibidos.Text += mensajeLeido;
+                rtboxMensajesRecibidos.Text += mensaje;
             }
         }
 
@@ -68,7 +80,7 @@ namespace Practica10
             {
                 using (FileStream fs = File.OpenRead(openFileDialog.FileName))
                 {
-                    puertoSerie.WriteLine("A$rc$i$vo");
+                    puertoSerie.WriteLine("--- Archivo ---");
                     puertoSerie.Write((new BinaryReader(fs)).ReadBytes((int)fs.Length), 0, (int)fs.Length);
                 }
                 //port.Write(File.OpenText(openFileDialog.FileName).ReadToEnd());
@@ -77,7 +89,18 @@ namespace Practica10
 
         private void btnEnviarMensaje_Click(object sender, EventArgs e)
         {
+            puertoSerie.WriteLine("--- Texto ---");
             puertoSerie.WriteLine(tboxMensajeAEnviar.Text);
+        }
+
+        private void configurarPuertoMenuItem_Click(object sender, EventArgs e)
+        {
+            FormConfg formConfg = new FormConfg("Configurar");
+            if (formConfg.ShowDialog() == DialogResult.OK)
+            {
+                puertoSerie = FormConfg.puertoSerieAux;
+                MessageBox.Show("Se ha modificado correctamente el puerto", "Puerto modificado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

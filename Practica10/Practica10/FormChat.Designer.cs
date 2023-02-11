@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormChat));
             this.menuPrincipal = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configurarPuertoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,31 +56,31 @@
             // archivoToolStripMenuItem
             // 
             this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.nuevoToolStripMenuItem,
+            this.configurarPuertoMenuItem,
             this.toolStripSeparator2,
             this.salirToolStripMenuItem});
             this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
             this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.archivoToolStripMenuItem.Text = "&Archivo";
             // 
-            // nuevoToolStripMenuItem
+            // configurarPuertoMenuItem
             // 
-            this.nuevoToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("nuevoToolStripMenuItem.Image")));
-            this.nuevoToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.nuevoToolStripMenuItem.Text = "&Nuevo";
+            this.configurarPuertoMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("configurarPuertoMenuItem.Image")));
+            this.configurarPuertoMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.configurarPuertoMenuItem.Name = "configurarPuertoMenuItem";
+            this.configurarPuertoMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.configurarPuertoMenuItem.Text = "Configurar nuevo puerto";
+            this.configurarPuertoMenuItem.Click += new System.EventHandler(this.configurarPuertoMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(202, 6);
             // 
             // salirToolStripMenuItem
             // 
             this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
-            this.salirToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.salirToolStripMenuItem.Text = "&Salir";
             // 
             // acercadeToolStripMenuItem
@@ -162,7 +162,7 @@
 
         private System.Windows.Forms.MenuStrip menuPrincipal;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configurarPuertoMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercadeToolStripMenuItem;

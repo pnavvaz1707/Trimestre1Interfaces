@@ -25,7 +25,7 @@ namespace Practica10
             {
                 contadorCarga.Stop();
                 this.Hide();
-                FormConfg formConfg = new FormConfg();
+                FormConfg formConfg = new FormConfg("");
                 formConfg.Show();
             }
         }
