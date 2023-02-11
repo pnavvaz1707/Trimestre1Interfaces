@@ -40,8 +40,20 @@ namespace Practica10
             string archivo = puertoSerie.ReadLine();
             if (mensajeLeido == "A$rc$i$vo" && archivo != null)
             {
-                MessageBox.Show("¿Desea guardar el archivo o visualizarlo?","Archivo recibido",MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                rtboxMensajesRecibidos.Text += archivo;
+                DialogResult dialogResult = MessageBox.Show("¿Desea guardar el archivo o visualizarlo?","Archivo recibido",MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (dialogResult == DialogResult.OK)
+                {
+                    rtboxMensajesRecibidos.Text += archivo;
+                }
+                else
+                {
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.FileName = "Sin título";
+                    saveFileDialog.CreatePrompt = true;
+                    saveFileDialog.OverwritePrompt = true;
+                    saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                }
+                
             }
             else
             {
