@@ -101,6 +101,9 @@ namespace Practica11
                 puntajeTitulo.Width = 100;
                 puntajeTitulo.Location = new Point(200, 40);
 
+                this.Controls.Add(usuarioTitulo);
+                this.Controls.Add(puntajeTitulo);
+
                 for (int i = 0; i < usuarios.Count && i < 5; i++)
                 {
                     MessageBox.Show(i.ToString());
