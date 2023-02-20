@@ -14,7 +14,7 @@ namespace Practica11
     /// </summary>
     public class frmGUI : Form
     {
-        public PictureBox pbPantallaJuego;
+        public static PictureBox pbPantallaJuego;
         private System.Windows.Forms.Timer timer1;
         private IContainer components;
         public static Tetris t;
@@ -78,7 +78,7 @@ namespace Practica11
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGUI));
-            this.pbPantallaJuego = new System.Windows.Forms.PictureBox();
+            pbPantallaJuego = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.lblNumLineas = new System.Windows.Forms.Label();
@@ -96,19 +96,19 @@ namespace Practica11
             this.btnNúmeroDeFilasMenuItemConfiguracion = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAñadirPiezasMenuItemConfiguracion = new System.Windows.Forms.ToolStripMenuItem();
             this.btnAcercaDeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.pbPantallaJuego)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(pbPantallaJuego)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPiezaSiguiente)).BeginInit();
             this.menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // pbPantallaJuego
             // 
-            this.pbPantallaJuego.BackColor = System.Drawing.Color.Black;
-            this.pbPantallaJuego.Location = new System.Drawing.Point(163, 30);
-            this.pbPantallaJuego.Name = "pbPantallaJuego";
-            this.pbPantallaJuego.Size = new System.Drawing.Size(312, 516);
-            this.pbPantallaJuego.TabIndex = 0;
-            this.pbPantallaJuego.TabStop = false;
+            pbPantallaJuego.BackColor = System.Drawing.Color.Black;
+            pbPantallaJuego.Location = new System.Drawing.Point(163, 30);
+            pbPantallaJuego.Name = "pbPantallaJuego";
+            pbPantallaJuego.Size = new System.Drawing.Size(312, 516);
+            pbPantallaJuego.TabIndex = 0;
+            pbPantallaJuego.TabStop = false;
             // 
             // timer1
             // 
@@ -260,7 +260,7 @@ namespace Practica11
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblNivel);
             this.Controls.Add(this.lblNumLineas);
-            this.Controls.Add(this.pbPantallaJuego);
+            this.Controls.Add(pbPantallaJuego);
             this.Controls.Add(this.menu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menu;
@@ -270,7 +270,7 @@ namespace Practica11
             this.Load += new System.EventHandler(this.frmGUI_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmGUI_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.frmGUI_KeyUp);
-            ((System.ComponentModel.ISupportInitialize)(this.pbPantallaJuego)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(pbPantallaJuego)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPiezaSiguiente)).EndInit();
             this.menu.ResumeLayout(false);
             this.menu.PerformLayout();
@@ -459,7 +459,7 @@ namespace Practica11
                 {
                     timer1.Stop();
                     MessageBox.Show("Se terminó el juego");
-                    FormPuntaje formPuntaje = new FormPuntaje();
+                    FormPuntaje formPuntaje = new FormPuntaje(lblNivel.Text + " (" + Constantes.COLUMNAS_PANTALLA + " x " + Constantes.FILAS_PANTALLA + ")");
                     formPuntaje.ShowDialog();
                 }
             }
@@ -578,14 +578,26 @@ namespace Practica11
 
         private void btnNúmeroDeFilasMenuItemConfiguracion_Click(object sender, EventArgs e)
         {
+            enPausa = false;
+            pausaJuego();
+
             FormConfgDimensiones formConfgDimensiones = new FormConfgDimensiones();
             formConfgDimensiones.ShowDialog();
+
+            enPausa = true;
+            pausaJuego();
         }
 
         private void btnAñadirPiezasMenuItemConfiguracion_Click(object sender, EventArgs e)
         {
+            enPausa = false;
+            pausaJuego();
+
             FormNuevaPieza formNuevaPieza = new FormNuevaPieza();
             formNuevaPieza.ShowDialog();
+
+            enPausa = true;
+            pausaJuego();
         }
 
         private void frmGUI_FormClosing(object sender, FormClosingEventArgs e)

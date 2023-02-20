@@ -36,12 +36,12 @@ namespace Practica11.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection Puntaje {
+        public global::System.Collections.Specialized.StringCollection Puntajes {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["Puntaje"]));
+                return ((global::System.Collections.Specialized.StringCollection)(this["Puntajes"]));
             }
             set {
-                this["Puntaje"] = value;
+                this["Puntajes"] = value;
             }
         }
     }

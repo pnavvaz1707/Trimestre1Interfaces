@@ -5,7 +5,7 @@
     <Setting Name="Usuarios" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Puntaje" Type="System.Collections.Specialized.StringCollection" Scope="User">
+    <Setting Name="Puntajes" Type="System.Collections.Specialized.StringCollection" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

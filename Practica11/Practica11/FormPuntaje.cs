@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -13,37 +14,11 @@ namespace Practica11
 {
     public partial class FormPuntaje : Form
     {
-        public FormPuntaje()
+        string nivel;
+        public FormPuntaje(string nivel)
         {
             InitializeComponent();
-            try
-            {
-                ArrayList usuarios = new ArrayList(Properties.Settings.Default.Usuarios.Cast<object>().ToArray());
-                ArrayList puntajes = new ArrayList(Properties.Settings.Default.Puntaje.Cast<object>().ToArray());
-                for (int i = 0; i < usuarios.Count; i++)
-                {
-                    Label usuario = new Label();
-                    usuario.Text = usuarios[i].ToString();
-                    usuario.Width = 150;
-                    usuario.Location = new Point(40, 60 + (i * 40));
-
-                    Label puntaje = new Label();
-                    puntaje.Text = puntajes[i].ToString();
-                    puntaje.Width = 20;
-                    puntaje.Location = new Point(215, 60 + (i * 40));
-
-                    this.Controls.Add(usuario);
-                }
-            }
-            catch (Exception)
-            {
-                Label usuariop = new Label();
-                usuariop.Text = "No se han encontrado usuarios";
-                usuariop.Width = usuariop.Text.Length;
-                usuariop.Location = new Point(50, 50 + 40);
-                this.Controls.Add(usuariop);
-            }
-
+            this.nivel = nivel;
         }
 
         private void txtRegistrar_TextChanged(object sender, EventArgs e)
@@ -68,6 +43,85 @@ namespace Practica11
             {
                 btnRegistrar.Enabled = true;
             }
+        }
+
+        private void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            StringCollection usuarios = Properties.Settings.Default.Usuarios;
+            StringCollection puntajes = Properties.Settings.Default.Puntajes;
+
+            if (usuarios == null)
+            {
+                usuarios = new StringCollection();
+            }
+
+            if (puntajes == null)
+            {
+                puntajes = new StringCollection();
+            }
+
+            usuarios.Add(txtRegistrar.Text);
+            puntajes.Add(nivel);
+
+            Properties.Settings.Default.Usuarios = usuarios;
+            Properties.Settings.Default.Puntajes = puntajes;
+
+            Properties.Settings.Default.Save();
+
+            mostrarUsuarios();
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+
+            mostrarUsuarios();
+        }
+
+        private void mostrarUsuarios()
+        {
+            StringCollection usuarios = Properties.Settings.Default.Usuarios;
+            StringCollection puntajes = Properties.Settings.Default.Puntajes;
+            if (usuarios == null || puntajes == null)
+            {
+                Label noUsuarios = new Label();
+                noUsuarios.Text = "No se han encontrado usuarios";
+                noUsuarios.Width = 180;
+                noUsuarios.Location = new Point(50, 50 + 40);
+                this.Controls.Add(noUsuarios);
+            }
+            else
+            {
+                Label usuarioTitulo = new Label();
+                usuarioTitulo.Text = "Usuarios";
+                usuarioTitulo.Width = 100;
+                usuarioTitulo.Location = new Point(40, 40);
+
+                Label puntajeTitulo = new Label();
+                puntajeTitulo.Text = "Puntajes";
+                puntajeTitulo.Width = 100;
+                puntajeTitulo.Location = new Point(200, 40);
+
+                for (int i = 0; i < usuarios.Count && i < 5; i++)
+                {
+                    MessageBox.Show(i.ToString());
+                    Label usuario = new Label();
+
+                    usuario.Text = usuarios[i].ToString();
+                    usuario.Width = 150;
+                    usuario.Location = new Point(40, 60 + (i * 40));
+
+                    Label puntaje = new Label();
+                    puntaje.Text = puntajes[i].ToString();
+                    puntaje.Width = 70;
+                    puntaje.Location = new Point(200, 60 + (i * 40));
+
+                    this.Controls.Add(usuario);
+                    this.Controls.Add(puntaje);
+                }
+            }
+            txtRegistrar.Visible = false;
+            btnCancelar.Visible = false;
+            btnRegistrar.Visible = false;
         }
     }
 }
