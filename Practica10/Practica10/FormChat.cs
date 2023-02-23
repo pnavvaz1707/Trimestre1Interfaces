@@ -2,6 +2,7 @@
 using System.IO;
 using System.IO.Ports;
 using System.Windows.Forms;
+using DLLPractica10;
 
 /*
 * PRÁCTICA.............: Práctica 10
@@ -79,7 +80,8 @@ namespace Practica10
             {
                 using (FileStream fs = File.OpenRead(openFileDialog.FileName))
                 {
-                    puertoSerie.WriteLine("--- Archivo ---");
+                    PruebaDLL pruebaDLL = new PruebaDLL();
+                    pruebaDLL.escribirCabecera(puertoSerie,"--- Archivo ---");
                     puertoSerie.Write((new BinaryReader(fs)).ReadBytes((int)fs.Length), 0, (int)fs.Length);
                 }
                 //port.Write(File.OpenText(openFileDialog.FileName).ReadToEnd());
@@ -88,7 +90,8 @@ namespace Practica10
 
         private void btnEnviarMensaje_Click(object sender, EventArgs e)
         {
-            puertoSerie.WriteLine("--- Texto ---");
+            PruebaDLL pruebaDLL = new PruebaDLL();
+            pruebaDLL.escribirCabecera(puertoSerie, "--- Texto ---");
             puertoSerie.WriteLine(tboxMensajeAEnviar.Text);
         }
 
