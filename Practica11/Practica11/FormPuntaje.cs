@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Collections.Specialized;
 /*
 * PRÁCTICA.............: Práctica 11 Resumen. Clases, Objetos y dll’s
 * NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
