@@ -1,5 +1,11 @@
 using System;
-
+/*
+* PRÁCTICA.............: Práctica 11 Resumen. Clases, Objetos y dll’s
+* NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
+* CURSO y GRUPO........: 2º Desarrollo de Interfaces
+* TÍTULO de la PRÁCTICA: Práctica 11. Matenimiento. Resumen (Recopilación).
+* FECHA de ENTREGA.....: 21 de febrero de 2023
+*/
 namespace Practica11
 {
 	/// <summary>
@@ -16,13 +22,6 @@ namespace Practica11
         public Pieza()
         {
 
-        }
-        public Pieza(int color)
-		{
-            m_color = color;
-            m_rotacion = 0;
-            m_posX = 6;
-            m_posY = 0 - alto + 1;
         }
 		
 		public Pieza(string formaPiezaRotacion1, string formaPiezaRotacion2, string formaPiezaRotacion3, string formaPiezaRotacion4, int color)

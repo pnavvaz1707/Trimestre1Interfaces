@@ -48,6 +48,8 @@
             this.lblTituloNuevaPieza = new System.Windows.Forms.Label();
             this.btnContinuarNuevaPieza = new System.Windows.Forms.Button();
             this.btnTerminar = new System.Windows.Forms.Button();
+            this.cbColores = new System.Windows.Forms.ComboBox();
+            this.lblColor = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // chckNuevaPieza1
@@ -252,7 +254,7 @@
             // 
             // btnContinuarNuevaPieza
             // 
-            this.btnContinuarNuevaPieza.Location = new System.Drawing.Point(12, 215);
+            this.btnContinuarNuevaPieza.Location = new System.Drawing.Point(12, 264);
             this.btnContinuarNuevaPieza.Name = "btnContinuarNuevaPieza";
             this.btnContinuarNuevaPieza.Size = new System.Drawing.Size(75, 23);
             this.btnContinuarNuevaPieza.TabIndex = 27;
@@ -262,7 +264,7 @@
             // 
             // btnTerminar
             // 
-            this.btnTerminar.Location = new System.Drawing.Point(108, 215);
+            this.btnTerminar.Location = new System.Drawing.Point(117, 264);
             this.btnTerminar.Name = "btnTerminar";
             this.btnTerminar.Size = new System.Drawing.Size(75, 23);
             this.btnTerminar.TabIndex = 28;
@@ -270,11 +272,38 @@
             this.btnTerminar.UseVisualStyleBackColor = true;
             this.btnTerminar.Click += new System.EventHandler(this.btnTerminar_Click);
             // 
+            // cbColores
+            // 
+            this.cbColores.FormattingEnabled = true;
+            this.cbColores.Items.AddRange(new object[] {
+            "Red",
+            "Blue",
+            "Dark orange",
+            "Deep pink",
+            "Violet",
+            "Beige",
+            "Dark magenta"});
+            this.cbColores.Location = new System.Drawing.Point(71, 217);
+            this.cbColores.Name = "cbColores";
+            this.cbColores.Size = new System.Drawing.Size(80, 23);
+            this.cbColores.TabIndex = 29;
+            // 
+            // lblColor
+            // 
+            this.lblColor.AutoSize = true;
+            this.lblColor.Location = new System.Drawing.Point(28, 220);
+            this.lblColor.Name = "lblColor";
+            this.lblColor.Size = new System.Drawing.Size(36, 15);
+            this.lblColor.TabIndex = 30;
+            this.lblColor.Text = "Color";
+            // 
             // FormNuevaPieza
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(204, 263);
+            this.ClientSize = new System.Drawing.Size(204, 325);
+            this.Controls.Add(this.lblColor);
+            this.Controls.Add(this.cbColores);
             this.Controls.Add(this.btnTerminar);
             this.Controls.Add(this.btnContinuarNuevaPieza);
             this.Controls.Add(this.lblTituloNuevaPieza);
@@ -323,5 +352,7 @@
         private Label lblTituloNuevaPieza;
         private Button btnContinuarNuevaPieza;
         private Button btnTerminar;
+        private ComboBox cbColores;
+        private Label lblColor;
     }
 }

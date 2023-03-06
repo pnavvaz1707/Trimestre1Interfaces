@@ -6,7 +6,13 @@ using System.Windows.Forms;
 using System.Data;
 using Practica11;
 using Microsoft.Win32;
-
+/*
+* PRÁCTICA.............: Práctica 11 Resumen. Clases, Objetos y dll’s
+* NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
+* CURSO y GRUPO........: 2º Desarrollo de Interfaces
+* TÍTULO de la PRÁCTICA: Práctica 11. Matenimiento. Resumen (Recopilación).
+* FECHA de ENTREGA.....: 21 de febrero de 2023
+*/
 namespace Practica11
 {
     /// <summary>
@@ -286,20 +292,11 @@ namespace Practica11
         [STAThread]
         static void Main()
         {
-            if (!Utiles.ResolucionCorrecta(800, 600))
-            {
-                MessageBox.Show("Para ejecutar el juego, debe tener como mínimo una resolución de 800 x 600");
-            }
-            else
-            {
-                Application.Run(new frmGUI());
-            }
+            Application.Run(new frmGUI());
         }
 
         private void frmGUI_Load(object sender, System.EventArgs e)
         {
-            pbPantallaJuego.Width = Convert.ToInt32(Constantes.COLUMNAS_PANTALLA) * 21 - Convert.ToInt32(Constantes.COLUMNAS_PANTALLA);
-            pbPantallaJuego.Height = Convert.ToInt32(Constantes.FILAS_PANTALLA) * 21 - Convert.ToInt32(Constantes.FILAS_PANTALLA);
             RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Practica11");
             if (key != null)
             {
@@ -310,6 +307,8 @@ namespace Practica11
                 this.Location = new Point(x, y);
                 this.Size = new Size(ancho, altura);
             }
+            pbPantallaJuego.Width = Convert.ToInt32(Constantes.COLUMNAS_PANTALLA) * 21 - Convert.ToInt32(Constantes.COLUMNAS_PANTALLA);
+            pbPantallaJuego.Height = Convert.ToInt32(Constantes.FILAS_PANTALLA) * 21 - Convert.ToInt32(Constantes.FILAS_PANTALLA);
             t = new Tetris();
         }
 
@@ -461,7 +460,6 @@ namespace Practica11
                 {
                     timer1.Stop();
                     MessageBox.Show("Se terminó el juego");
-                    configuraciónToolStripMenuItem.Enabled = true;
                     FormPuntaje formPuntaje = new FormPuntaje(lblNivel.Text + " (" + Constantes.COLUMNAS_PANTALLA + " x " + Constantes.FILAS_PANTALLA + ")");
                     formPuntaje.ShowDialog();
                 }
@@ -538,20 +536,17 @@ namespace Practica11
             pintaPantalla(t.matrizPantalla);
             timer1.Start();
             timer2.Start();
-            configuraciónToolStripMenuItem.Enabled = false;
         }
 
         private void pausaJuego()
         {
             if (!enPausa)
             {
-                configuraciónToolStripMenuItem.Enabled = true;
                 timer1.Stop();
                 timer2.Stop();
             }
             else
             {
-                configuraciónToolStripMenuItem.Enabled = false;
                 timer1.Start();
                 timer2.Start();
             }
@@ -589,6 +584,9 @@ namespace Practica11
 
             FormConfgDimensiones formConfgDimensiones = new FormConfgDimensiones();
             formConfgDimensiones.ShowDialog();
+
+            enPausa = true;
+            pausaJuego();
         }
 
         private void btnAñadirPiezasMenuItemConfiguracion_Click(object sender, EventArgs e)
@@ -599,8 +597,8 @@ namespace Practica11
             FormNuevaPieza formNuevaPieza = new FormNuevaPieza();
             formNuevaPieza.ShowDialog();
 
-            //enPausa = true;
-            //pausaJuego();
+            enPausa = true;
+            pausaJuego();
         }
 
         private void frmGUI_FormClosing(object sender, FormClosingEventArgs e)
