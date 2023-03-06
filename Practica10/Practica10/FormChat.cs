@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Windows.Forms;
 using DLLPractica10;
 
@@ -24,6 +25,7 @@ namespace Practica10
             this.puertoSerie = puertoSerie;
             this.puertoSerie.DataReceived += new SerialDataReceivedEventHandler(this.recibirMensajes);
             CheckForIllegalCrossThreadCalls = false;
+            this.Text += " (" + puertoSerie.PortName + ")";
         }
 
         private void FormChat_FormClosed(object sender, FormClosedEventArgs e)
@@ -33,42 +35,58 @@ namespace Practica10
 
         private void acercadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Programa realizado por Pablo Navarro Vázquez" + "\nVersión: 1.0.0", "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Programa realizado por Pablo Navarro Vázquez" + "\nVersión: 2.0.0", "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void recibirMensajes(object sender, EventArgs e)
         {
             string cabecera = puertoSerie.ReadLine();
-            string mensaje = puertoSerie.ReadExisting();
-            if (cabecera == "--- Archivo ---" && mensaje != null)
+
+            if (cabecera.Contains("--- Archivo ---"))
             {
-                FormRecibeArchivo formRecibeArchivo = new FormRecibeArchivo();
-                DialogResult dialogResult = formRecibeArchivo.ShowDialog();
-                MessageBox.Show(dialogResult.ToString());
-                if (dialogResult == DialogResult.Yes)
+                byte[] archivoRecibido = new byte[puertoSerie.BytesToRead];
+                while (puertoSerie.BytesToRead > 0)
                 {
-                    MessageBox.Show("Va a guardar");
-                    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                    saveFileDialog.Filter = "Todos los archivos (*.*)|*.*";
-                    saveFileDialog.FileName = "Sin título";
-                    saveFileDialog.CreatePrompt = true;
-                    saveFileDialog.OverwritePrompt = true;
-                    saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    MessageBox.Show("Va a guardar11");
-                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    puertoSerie.Read(archivoRecibido, 0, puertoSerie.BytesToRead);
+                }
+                DialogResult opcionSel = MessageBox.Show("Ha recibido un archivo, pulse sí si desea guardarlo, no si desea visualizarlo solo", "Archivo recibido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (opcionSel == DialogResult.Yes)
+                {
+                    try
                     {
-                        MessageBox.Show("Se ha guardado correctamente el archivo", "Archivo guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        SaveFileDialog saveFileDialog = new SaveFileDialog();
+                        saveFileDialog.Filter = "Todos los archivos (*.*)|*.*";
+                        saveFileDialog.FileName = "Sin título" + cabecera.Substring(cabecera.IndexOf('.'));
+                        saveFileDialog.CreatePrompt = true;
+                        saveFileDialog.OverwritePrompt = true;
+                        saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                        DialogResult result = DialogResult.None;
+                        if (InvokeRequired)
+                        {
+                            Invoke(new Action(() => result = saveFileDialog.ShowDialog()));
+                        }
+
+                        if (result == DialogResult.OK)
+                        {
+                            BinaryWriter binaryWriter = new BinaryWriter(saveFileDialog.OpenFile());
+                            binaryWriter.Write(archivoRecibido);
+                            binaryWriter.Close();
+                            MessageBox.Show("Se ha guardado correctamente el archivo", "Archivo guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
-                    MessageBox.Show("Va a guardar222");
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
                 else
                 {
-                    rtboxMensajesRecibidos.Text += mensaje;
+                    rtboxMensajesRecibidos.Text += archivoRecibido;
                 }
-
             }
             else if (cabecera == "--- Texto ---")
             {
+                string mensaje = puertoSerie.ReadExisting();
                 rtboxMensajesRecibidos.Text += mensaje;
             }
         }
@@ -81,10 +99,9 @@ namespace Practica10
                 using (FileStream fs = File.OpenRead(openFileDialog.FileName))
                 {
                     PruebaDLL pruebaDLL = new PruebaDLL();
-                    pruebaDLL.escribirCabecera(puertoSerie,"--- Archivo ---");
+                    pruebaDLL.escribirCabecera(puertoSerie, "--- Archivo --- " + openFileDialog.FileName.Substring(openFileDialog.FileName.IndexOf(".")));
                     puertoSerie.Write((new BinaryReader(fs)).ReadBytes((int)fs.Length), 0, (int)fs.Length);
                 }
-                //port.Write(File.OpenText(openFileDialog.FileName).ReadToEnd());
             }
         }
 

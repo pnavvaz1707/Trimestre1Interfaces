@@ -73,7 +73,6 @@ namespace Practica11
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-
             mostrarUsuarios();
         }
 
@@ -106,7 +105,6 @@ namespace Practica11
 
                 for (int i = 0; i < usuarios.Count && i < 5; i++)
                 {
-                    MessageBox.Show(i.ToString());
                     Label usuario = new Label();
 
                     usuario.Text = usuarios[i].ToString();

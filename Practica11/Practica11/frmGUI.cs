@@ -298,6 +298,8 @@ namespace Practica11
 
         private void frmGUI_Load(object sender, System.EventArgs e)
         {
+            pbPantallaJuego.Width = Convert.ToInt32(Constantes.COLUMNAS_PANTALLA) * 21 - Convert.ToInt32(Constantes.COLUMNAS_PANTALLA);
+            pbPantallaJuego.Height = Convert.ToInt32(Constantes.FILAS_PANTALLA) * 21 - Convert.ToInt32(Constantes.FILAS_PANTALLA);
             RegistryKey key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Practica11");
             if (key != null)
             {
@@ -459,6 +461,7 @@ namespace Practica11
                 {
                     timer1.Stop();
                     MessageBox.Show("Se terminó el juego");
+                    configuraciónToolStripMenuItem.Enabled = true;
                     FormPuntaje formPuntaje = new FormPuntaje(lblNivel.Text + " (" + Constantes.COLUMNAS_PANTALLA + " x " + Constantes.FILAS_PANTALLA + ")");
                     formPuntaje.ShowDialog();
                 }
@@ -535,17 +538,20 @@ namespace Practica11
             pintaPantalla(t.matrizPantalla);
             timer1.Start();
             timer2.Start();
+            configuraciónToolStripMenuItem.Enabled = false;
         }
 
         private void pausaJuego()
         {
             if (!enPausa)
             {
+                configuraciónToolStripMenuItem.Enabled = true;
                 timer1.Stop();
                 timer2.Stop();
             }
             else
             {
+                configuraciónToolStripMenuItem.Enabled = false;
                 timer1.Start();
                 timer2.Start();
             }
@@ -583,9 +589,6 @@ namespace Practica11
 
             FormConfgDimensiones formConfgDimensiones = new FormConfgDimensiones();
             formConfgDimensiones.ShowDialog();
-
-            enPausa = true;
-            pausaJuego();
         }
 
         private void btnAñadirPiezasMenuItemConfiguracion_Click(object sender, EventArgs e)
@@ -596,8 +599,8 @@ namespace Practica11
             FormNuevaPieza formNuevaPieza = new FormNuevaPieza();
             formNuevaPieza.ShowDialog();
 
-            enPausa = true;
-            pausaJuego();
+            //enPausa = true;
+            //pausaJuego();
         }
 
         private void frmGUI_FormClosing(object sender, FormClosingEventArgs e)
