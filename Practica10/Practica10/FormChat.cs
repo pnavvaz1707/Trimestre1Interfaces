@@ -35,7 +35,7 @@ namespace Practica10
 
         private void acercadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Programa realizado por Pablo Navarro Vázquez" + "\nVersión: 2.0.0", "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Programa realizado por Pablo Navarro Vázquez" + "\nVersión: 3.0.0", "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void recibirMensajes(object sender, EventArgs e)
@@ -44,11 +44,16 @@ namespace Practica10
 
             if (cabecera.Contains("--- Archivo ---"))
             {
+                int indexInicio = cabecera.IndexOf('*');
+                int indexFinal = cabecera.IndexOf(' ', indexInicio);
+                int longitud = indexFinal - indexInicio - 1;
+                int tamanoArchivo = Convert.ToInt32(cabecera.Substring(indexInicio + 1,longitud));
+
+                MessageBox.Show("Tamaño --> " + tamanoArchivo);
+
                 byte[] archivoRecibido = new byte[puertoSerie.BytesToRead];
-                while (puertoSerie.BytesToRead > 0)
-                {
-                    puertoSerie.Read(archivoRecibido, 0, puertoSerie.BytesToRead);
-                }
+                puertoSerie.Read(archivoRecibido, 0, puertoSerie.BytesToRead);
+
                 DialogResult opcionSel = MessageBox.Show("Ha recibido un archivo, pulse sí si desea guardarlo, no si desea visualizarlo solo", "Archivo recibido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (opcionSel == DialogResult.Yes)
                 {
@@ -68,9 +73,8 @@ namespace Practica10
 
                         if (result == DialogResult.OK)
                         {
-                            BinaryWriter binaryWriter = new BinaryWriter(saveFileDialog.OpenFile());
-                            binaryWriter.Write(archivoRecibido);
-                            binaryWriter.Close();
+                            MessageBox.Show("Nombre: " + saveFileDialog.FileName);
+                            File.WriteAllBytes(saveFileDialog.FileName, archivoRecibido);
                             MessageBox.Show("Se ha guardado correctamente el archivo", "Archivo guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
@@ -99,8 +103,9 @@ namespace Practica10
                 using (FileStream fs = File.OpenRead(openFileDialog.FileName))
                 {
                     PruebaDLL pruebaDLL = new PruebaDLL();
-                    pruebaDLL.escribirCabecera(puertoSerie, "--- Archivo --- " + openFileDialog.FileName.Substring(openFileDialog.FileName.IndexOf(".")));
-                    puertoSerie.Write((new BinaryReader(fs)).ReadBytes((int)fs.Length), 0, (int)fs.Length);
+                    pruebaDLL.escribirCabecera(puertoSerie, "--- Archivo --- " + "*" + fs.Length + " " + openFileDialog.FileName.Substring(openFileDialog.FileName.IndexOf(".")));
+                    byte[] bytesArchivoEnviar = File.ReadAllBytes(openFileDialog.FileName);
+                    puertoSerie.Write(bytesArchivoEnviar,0,bytesArchivoEnviar.Length);
                 }
             }
         }

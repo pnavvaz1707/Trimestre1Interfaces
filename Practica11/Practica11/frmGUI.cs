@@ -462,6 +462,7 @@ namespace Practica11
                     MessageBox.Show("Se terminó el juego");
                     FormPuntaje formPuntaje = new FormPuntaje(lblNivel.Text + " (" + Constantes.COLUMNAS_PANTALLA + " x " + Constantes.FILAS_PANTALLA + ")");
                     formPuntaje.ShowDialog();
+                    configuraciónToolStripMenuItem.Enabled = true;
                 }
             }
         }
@@ -536,17 +537,20 @@ namespace Practica11
             pintaPantalla(t.matrizPantalla);
             timer1.Start();
             timer2.Start();
+            configuraciónToolStripMenuItem.Enabled = false;
         }
 
         private void pausaJuego()
         {
             if (!enPausa)
             {
+                configuraciónToolStripMenuItem.Enabled = true;
                 timer1.Stop();
                 timer2.Stop();
             }
             else
             {
+                configuraciónToolStripMenuItem.Enabled = false;
                 timer1.Start();
                 timer2.Start();
             }
@@ -584,9 +588,6 @@ namespace Practica11
 
             FormConfgDimensiones formConfgDimensiones = new FormConfgDimensiones();
             formConfgDimensiones.ShowDialog();
-
-            enPausa = true;
-            pausaJuego();
         }
 
         private void btnAñadirPiezasMenuItemConfiguracion_Click(object sender, EventArgs e)
@@ -596,9 +597,6 @@ namespace Practica11
 
             FormNuevaPieza formNuevaPieza = new FormNuevaPieza();
             formNuevaPieza.ShowDialog();
-
-            enPausa = true;
-            pausaJuego();
         }
 
         private void frmGUI_FormClosing(object sender, FormClosingEventArgs e)

@@ -1,15 +1,4 @@
 ﻿using Practica11.Properties;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Practica11;
 /*
 * PRÁCTICA.............: Práctica 11 Resumen. Clases, Objetos y dll’s
 * NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
@@ -84,6 +73,7 @@ namespace Practica11
                     ((Button)sender).Enabled = false;
                 }
             }
+            btnTerminar.Enabled = true;
 
         }
 

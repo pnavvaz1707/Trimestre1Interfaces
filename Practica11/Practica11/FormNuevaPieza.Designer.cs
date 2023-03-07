@@ -264,6 +264,7 @@
             // 
             // btnTerminar
             // 
+            this.btnTerminar.Enabled = false;
             this.btnTerminar.Location = new System.Drawing.Point(117, 264);
             this.btnTerminar.Name = "btnTerminar";
             this.btnTerminar.Size = new System.Drawing.Size(75, 23);

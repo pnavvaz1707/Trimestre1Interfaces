@@ -112,7 +112,6 @@ namespace Practica11
 
                 for (int i = 0; i < jugadores.Count && i < 5; i++)
                 {
-                    MessageBox.Show(i.ToString());
                     Label usuario = new Label();
 
                     usuario.Text = jugadores[i].Nombre;
