@@ -44,48 +44,30 @@ namespace Practica10
 
             if (cabecera.Contains("--- Archivo ---"))
             {
-                int indexInicio = cabecera.IndexOf('*');
-                int indexFinal = cabecera.IndexOf(' ', indexInicio);
-                int longitud = indexFinal - indexInicio - 1;
-                int tamanoArchivo = Convert.ToInt32(cabecera.Substring(indexInicio + 1,longitud));
+                int tamanoArchivo = Convert.ToInt32(cabecera.LastIndexOf(' '));
 
-                MessageBox.Show("Tamaño --> " + tamanoArchivo);
+                byte[] archivoRecibido = new byte[tamanoArchivo];
+                puertoSerie.Read(archivoRecibido, 0, tamanoArchivo);
 
-                byte[] archivoRecibido = new byte[puertoSerie.BytesToRead];
-                puertoSerie.Read(archivoRecibido, 0, puertoSerie.BytesToRead);
-
-                DialogResult opcionSel = MessageBox.Show("Ha recibido un archivo, pulse sí si desea guardarlo, no si desea visualizarlo solo", "Archivo recibido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (opcionSel == DialogResult.Yes)
+                if (cabecera.Substring(cabecera.IndexOf('.')) == "txt")
                 {
-                    try
+                    DialogResult opcionSel = MessageBox.Show("Ha recibido un archivo de texto, pulse sí si desea guardarlo, no si desea visualizarlo solo", "Archivo recibido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (opcionSel == DialogResult.Yes)
                     {
-                        SaveFileDialog saveFileDialog = new SaveFileDialog();
-                        saveFileDialog.Filter = "Todos los archivos (*.*)|*.*";
-                        saveFileDialog.FileName = "Sin título" + cabecera.Substring(cabecera.IndexOf('.'));
-                        saveFileDialog.CreatePrompt = true;
-                        saveFileDialog.OverwritePrompt = true;
-                        saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                        DialogResult result = DialogResult.None;
-                        if (InvokeRequired)
-                        {
-                            Invoke(new Action(() => result = saveFileDialog.ShowDialog()));
-                        }
-
-                        if (result == DialogResult.OK)
-                        {
-                            MessageBox.Show("Nombre: " + saveFileDialog.FileName);
-                            File.WriteAllBytes(saveFileDialog.FileName, archivoRecibido);
-                            MessageBox.Show("Se ha guardado correctamente el archivo", "Archivo guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
+                        guardarArchivoRecibido(cabecera, archivoRecibido);
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        MessageBox.Show(ex.Message);
+                        rtboxMensajesRecibidos.Text += archivoRecibido;
                     }
                 }
                 else
                 {
-                    rtboxMensajesRecibidos.Text += archivoRecibido;
+                    DialogResult opcionSel = MessageBox.Show("Ha recibido un archivo, ¿desea guardarlo?", "Archivo recibido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (opcionSel == DialogResult.Yes)
+                    {
+                        guardarArchivoRecibido(cabecera, archivoRecibido);
+                    }
                 }
             }
             else if (cabecera == "--- Texto ---")
@@ -95,18 +77,53 @@ namespace Practica10
             }
         }
 
+        private void guardarArchivoRecibido(string cabecera, byte[] archivoRecibido)
+        {
+            int indiceInicio = cabecera.IndexOf('*');
+            int indiceFinal = cabecera.IndexOf(' ', indiceInicio);
+
+            int longitud = indiceFinal - indiceInicio - 1;
+
+            string nombreArchivo = cabecera.Substring(indiceInicio + 1, longitud);
+
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Todos los archivos (*.*)|*.*";
+                saveFileDialog.FileName = nombreArchivo;
+                saveFileDialog.CreatePrompt = true;
+                saveFileDialog.OverwritePrompt = true;
+                saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                DialogResult result = DialogResult.None;
+                if (InvokeRequired)
+                {
+                    Invoke(new Action(() => result = saveFileDialog.ShowDialog()));
+                }
+
+                if (result == DialogResult.OK)
+                {
+                    File.WriteAllBytes(saveFileDialog.FileName, archivoRecibido);
+                    MessageBox.Show("Se ha guardado correctamente el archivo", "Archivo guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         private void btnEnviarFichero_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Multiselect = false;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                using (FileStream fs = File.OpenRead(openFileDialog.FileName))
-                {
-                    PruebaDLL pruebaDLL = new PruebaDLL();
-                    pruebaDLL.escribirCabecera(puertoSerie, "--- Archivo --- " + "*" + fs.Length + " " + openFileDialog.FileName.Substring(openFileDialog.FileName.IndexOf(".")));
-                    byte[] bytesArchivoEnviar = File.ReadAllBytes(openFileDialog.FileName);
-                    puertoSerie.Write(bytesArchivoEnviar,0,bytesArchivoEnviar.Length);
-                }
+                PruebaDLL pruebaDLL = new PruebaDLL();
+
+                byte[] bytesArchivoEnviar = File.ReadAllBytes(openFileDialog.FileName);
+
+                pruebaDLL.escribirCabecera(puertoSerie, "--- Archivo --- *" + openFileDialog.SafeFileName + " " + bytesArchivoEnviar.Length);
+                puertoSerie.Write(bytesArchivoEnviar, 0, bytesArchivoEnviar.Length);
             }
         }
 
