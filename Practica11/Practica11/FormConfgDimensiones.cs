@@ -9,7 +9,13 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Practica11;
-
+/*
+* PRÁCTICA.............: Práctica 11 Resumen. Clases, Objetos y dll’s
+* NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
+* CURSO y GRUPO........: 2º Desarrollo de Interfaces
+* TÍTULO de la PRÁCTICA: Práctica 11. Matenimiento. Resumen (Recopilación).
+* FECHA de ENTREGA.....: 21 de febrero de 2023
+*/
 namespace Practica11
 {
     public partial class FormConfgDimensiones : Form
@@ -17,6 +23,7 @@ namespace Practica11
         public FormConfgDimensiones()
         {
             InitializeComponent();
+            CenterToParent();
         }
 
         private void btnOk_Click(object sender, EventArgs e)

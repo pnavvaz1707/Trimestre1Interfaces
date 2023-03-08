@@ -1,6 +1,12 @@
 using System;
 using System.Collections;
-
+/*
+* PRÁCTICA.............: Práctica 11 Resumen. Clases, Objetos y dll’s
+* NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
+* CURSO y GRUPO........: 2º Desarrollo de Interfaces
+* TÍTULO de la PRÁCTICA: Práctica 11. Matenimiento. Resumen (Recopilación).
+* FECHA de ENTREGA.....: 21 de febrero de 2023
+*/
 namespace Practica11
 {
     /// <summary>
@@ -46,12 +52,12 @@ namespace Practica11
             formaPieza1 = "";
             formaPieza1 += "1000";
             formaPieza1 += "1000";
-            formaPieza1 += "0000";
-            formaPieza1 += "0000";
+            formaPieza1 += "1000";
+            formaPieza1 += "1000";
 
             formaPieza2 = "";
             formaPieza2 += "0000";
-            formaPieza2 += "1100";
+            formaPieza2 += "1111";
             formaPieza2 += "0000";
             formaPieza2 += "0000";
 

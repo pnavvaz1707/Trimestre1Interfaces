@@ -9,7 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+/*
+* PRÁCTICA.............: Práctica 11 Resumen. Clases, Objetos y dll’s
+* NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
+* CURSO y GRUPO........: 2º Desarrollo de Interfaces
+* TÍTULO de la PRÁCTICA: Práctica 11. Matenimiento. Resumen (Recopilación).
+* FECHA de ENTREGA.....: 21 de febrero de 2023
+*/
 namespace Practica11
 {
     public partial class FormPuntaje : Form
@@ -19,6 +25,7 @@ namespace Practica11
         {
             InitializeComponent();
             this.nivel = nivel;
+            CenterToParent();
         }
 
         private void txtRegistrar_TextChanged(object sender, EventArgs e)
@@ -81,6 +88,15 @@ namespace Practica11
         {
             StringCollection usuarios = Properties.Settings.Default.Usuarios;
             StringCollection puntajes = Properties.Settings.Default.Puntajes;
+            List<Jugador> jugadores = new List<Jugador>();
+
+            for (int i = 0; i < puntajes.Count; i++)
+            {
+                jugadores.Add(new Jugador(usuarios[i], puntajes[i]));
+            }
+            jugadores.Sort();
+            jugadores.Reverse();
+
             if (usuarios == null || puntajes == null)
             {
                 Label noUsuarios = new Label();
@@ -104,17 +120,17 @@ namespace Practica11
                 this.Controls.Add(usuarioTitulo);
                 this.Controls.Add(puntajeTitulo);
 
-                for (int i = 0; i < usuarios.Count && i < 5; i++)
+                for (int i = 0; i < jugadores.Count && i < 5; i++)
                 {
                     MessageBox.Show(i.ToString());
                     Label usuario = new Label();
 
-                    usuario.Text = usuarios[i].ToString();
+                    usuario.Text = jugadores[i].Nombre;
                     usuario.Width = 150;
                     usuario.Location = new Point(40, 60 + (i * 40));
 
                     Label puntaje = new Label();
-                    puntaje.Text = puntajes[i].ToString();
+                    puntaje.Text = jugadores[i].Puntaje;
                     puntaje.Width = 70;
                     puntaje.Location = new Point(200, 60 + (i * 40));
 

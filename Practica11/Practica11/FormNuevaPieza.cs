@@ -10,7 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Practica11;
-
+/*
+* PRÁCTICA.............: Práctica 11 Resumen. Clases, Objetos y dll’s
+* NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
+* CURSO y GRUPO........: 2º Desarrollo de Interfaces
+* TÍTULO de la PRÁCTICA: Práctica 11. Matenimiento. Resumen (Recopilación).
+* FECHA de ENTREGA.....: 21 de febrero de 2023
+*/
 namespace Practica11
 {
     public partial class FormNuevaPieza : Form
@@ -20,6 +26,8 @@ namespace Practica11
         {
             InitializeComponent();
             formasPiezas = new List<string>();
+            cbColores.SelectedItem = cbColores.Items[0];
+            CenterToParent();
         }
 
         private void chckBoxPieza_Changed(object sender, EventArgs e)
@@ -57,25 +65,54 @@ namespace Practica11
                         if (formasPiezas.Count == 3)
                         {
                             ((CheckBox)Controls[i - j]).Enabled = false;
+
                         }
                     }
                 }
             }
-            formasPiezas.Add(formaPieza);
-            MessageBox.Show("Forma registrada");
-            if (formasPiezas.Count == 4)
+            if (formaPieza.IndexOf('1') == -1)
             {
-                ((Button)sender).Enabled = false;
+                MessageBox.Show("Debes rellenar al menos un bloque");
+            }
+            else
+            {
+
+                formasPiezas.Add(formaPieza);
+                MessageBox.Show("Forma registrada");
+                if (formasPiezas.Count == 4)
+                {
+                    ((Button)sender).Enabled = false;
+                }
             }
 
         }
 
         private void btnTerminar_Click(object sender, EventArgs e)
         {
-            Pieza piezaNueva = new Pieza(formasPiezas[0], formasPiezas[1], formasPiezas[2], formasPiezas[3], 2);
-            Constantes.NUM_PIEZAS += 1;
-            frmGUI.t.M_matrizPiezas.Add(piezaNueva);
-            this.Close();
+
+            if (formasPiezas.Count == 3)
+            {
+                MessageBox.Show("Si ya has registrado 3 formas debes registrar una cuarta obligatoriamente");
+            }
+            else
+            {
+                Pieza piezaNueva = new Pieza();
+                if (formasPiezas.Count == 4)
+                {
+                    piezaNueva = new Pieza(formasPiezas[0], formasPiezas[1], formasPiezas[2], formasPiezas[3], cbColores.SelectedIndex + 1);
+                }
+                else if (formasPiezas.Count == 2)
+                {
+                    piezaNueva = new Pieza(formasPiezas[0], formasPiezas[1], formasPiezas[0], formasPiezas[1], cbColores.SelectedIndex + 1);
+                }
+                else if (formasPiezas.Count == 1)
+                {
+                    piezaNueva = new Pieza(formasPiezas[0], formasPiezas[0], formasPiezas[0], formasPiezas[0], cbColores.SelectedIndex + 1);
+                }
+                Constantes.NUM_PIEZAS += 1;
+                frmGUI.t.M_matrizPiezas.Add(piezaNueva);
+                this.Close();
+            }
         }
     }
 }
