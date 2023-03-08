@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+=======
+﻿using System.Collections.Specialized;
+>>>>>>> 034621aa292a5c2ad5545150926a9f74a0302c0d
 /*
 * PRÁCTICA.............: Práctica 11 Resumen. Clases, Objetos y dll’s
 * NOMBRE y APELLIDOS...: Pablo Navarro Vázquez
@@ -122,7 +126,6 @@ namespace Practica11
 
                 for (int i = 0; i < jugadores.Count && i < 5; i++)
                 {
-                    MessageBox.Show(i.ToString());
                     Label usuario = new Label();
 
                     usuario.Text = jugadores[i].Nombre;

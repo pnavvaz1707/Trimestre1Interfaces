@@ -1,0 +1,6 @@
+C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\DLLPractica10\DLLPractica10\bin\Debug\DLLPractica10.dll
+C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\DLLPractica10\DLLPractica10\bin\Debug\DLLPractica10.pdb
+C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\DLLPractica10\DLLPractica10\obj\Debug\DLLPractica10.csproj.AssemblyReference.cache
+C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\DLLPractica10\DLLPractica10\obj\Debug\DLLPractica10.csproj.CoreCompileInputs.cache
+C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\DLLPractica10\DLLPractica10\obj\Debug\DLLPractica10.dll
+C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\DLLPractica10\DLLPractica10\obj\Debug\DLLPractica10.pdb

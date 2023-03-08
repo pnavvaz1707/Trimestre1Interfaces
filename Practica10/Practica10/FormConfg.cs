@@ -36,7 +36,6 @@ namespace Practica10
             cbNumBits.Items.Add(7);
             cbNumBits.Items.Add(8);
             cbNumBits.SelectedIndex = 3;
-            //8
 
             cbVelocidad.Items.Add(110);
             cbVelocidad.Items.Add(300);
@@ -52,7 +51,6 @@ namespace Practica10
             cbVelocidad.Items.Add(460800);
             cbVelocidad.Items.Add(921600);
             cbVelocidad.SelectedIndex = 3;
-            //2400
 
             Dictionary<Parity, string> dicParity = new Dictionary<Parity, string>
             {

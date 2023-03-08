@@ -8,23 +8,23 @@
     "net6.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\quick\\.nuget\\packages\\": {},
+    "C:\\Users\\pablo\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\quick\\source\\repos\\pnavvaz1707\\Trimestre1Interfaces\\Practica11\\Practica11\\Practica11.csproj",
+      "projectUniqueName": "C:\\Users\\pablo\\source\\repos\\pnavvaz1707\\Trimestre1Interfaces\\Practica11\\Practica11\\Practica11.csproj",
       "projectName": "Practica11",
-      "projectPath": "C:\\Users\\quick\\source\\repos\\pnavvaz1707\\Trimestre1Interfaces\\Practica11\\Practica11\\Practica11.csproj",
-      "packagesPath": "C:\\Users\\quick\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\quick\\source\\repos\\pnavvaz1707\\Trimestre1Interfaces\\Practica11\\Practica11\\obj\\",
+      "projectPath": "C:\\Users\\pablo\\source\\repos\\pnavvaz1707\\Trimestre1Interfaces\\Practica11\\Practica11\\Practica11.csproj",
+      "packagesPath": "C:\\Users\\pablo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pablo\\source\\repos\\pnavvaz1707\\Trimestre1Interfaces\\Practica11\\Practica11\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\quick\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pablo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -69,7 +69,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   }
