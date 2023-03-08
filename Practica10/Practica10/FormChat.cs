@@ -102,7 +102,14 @@ namespace Practica10
 
                 if (result == DialogResult.OK)
                 {
-                    File.WriteAllBytes(saveFileDialog.FileName, archivoRecibido);
+                    FileStream stream = new FileStream(saveFileDialog.FileName, FileMode.Open, FileAccess.Write);
+                    BinaryWriter writer = new BinaryWriter(stream);
+
+                    writer.Write(archivoRecibido);
+                    writer.Flush();
+                    writer.Close();
+
+                    //File.WriteAllBytes(saveFileDialog.FileName, archivoRecibido);
                     MessageBox.Show("Se ha guardado correctamente el archivo", "Archivo guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -120,10 +127,14 @@ namespace Practica10
             {
                 PruebaDLL pruebaDLL = new PruebaDLL();
 
-                byte[] bytesArchivoEnviar = File.ReadAllBytes(openFileDialog.FileName);
+                FileStream fichero = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
+
+                byte[] bytesArchivoEnviar = new byte[fichero.Length];
 
                 pruebaDLL.escribirCabecera(puertoSerie, "--- Archivo --- *" + openFileDialog.SafeFileName + " " + bytesArchivoEnviar.Length);
                 puertoSerie.Write(bytesArchivoEnviar, 0, bytesArchivoEnviar.Length);
+
+                fichero.Close();
             }
         }
 

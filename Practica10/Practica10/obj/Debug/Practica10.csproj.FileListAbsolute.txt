@@ -26,3 +26,7 @@ C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\bin\Debug\DLLPractica10.dll
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\bin\Debug\DLLPractica10.pdb
 C:\Users\pablo\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.csproj.CopyComplete
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\bin\Debug\DLLPractica10.dll
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\bin\Debug\DLLPractica10.pdb
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.FormChat.resources
+C:\Users\quick\source\repos\pnavvaz1707\Trimestre1Interfaces\Practica10\Practica10\obj\Debug\Practica10.csproj.CopyComplete
