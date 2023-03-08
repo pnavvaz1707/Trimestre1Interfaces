@@ -63,7 +63,7 @@ namespace Practica10
                     DialogResult opcionSel = MessageBox.Show("Ha recibido un archivo de texto, pulse sí si desea guardarlo, no si desea visualizarlo solo", "Archivo recibido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (opcionSel == DialogResult.Yes)
                     {
-                        guardarArchivoRecibido(cabecera, archivoRecibido, nombreArchivo, bytesRecibidos);
+                        guardarArchivoRecibido(archivoRecibido, nombreArchivo, bytesRecibidos);
                     }
                     else
                     {
@@ -75,39 +75,15 @@ namespace Practica10
                     DialogResult opcionSel = MessageBox.Show("Ha recibido un archivo, ¿desea guardarlo?", "Archivo recibido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (opcionSel == DialogResult.Yes)
                     {
-                        guardarArchivoRecibido(cabecera, archivoRecibido, nombreArchivo, bytesRecibidos);
-                        /*    SaveFileDialog saveFileDialog = new SaveFileDialog();
-                            saveFileDialog.Filter = "Todos los archivos (*.*)|*.*";
-                            saveFileDialog.FileName = nombreArchivo;
-                            saveFileDialog.CreatePrompt = true;
-                            saveFileDialog.OverwritePrompt = true;
-                            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                            DialogResult result = DialogResult.None;
-                            if (InvokeRequired)
-                            {
-                                Invoke(new Action(() => result = saveFileDialog.ShowDialog()));
-                            }
+                        byte[] archivo = new byte[tamanoArchivo];
+                        int bytesLeidos = 0;
+                        while (bytesLeidos < tamanoArchivo)
+                        {
+                            bytesLeidos += puertoSerie.Read(archivo, bytesLeidos, tamanoArchivo - bytesLeidos);
+                        }
 
-                            if (result == DialogResult.OK)
-                            {
-                                // Creamos un objeto SaveFileDialog para que el usuario seleccione la ruta donde guardar el archivo
-
-                                // Creamos un objeto FileStream para escribir el contenido del archivo
-                                using (FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create))
-                                {
-                                    // Creamos un buffer para ir leyendo los datos del archivo
-                                    byte[] buffer = new byte[1024];
-
-                                    // Leemos los datos del archivo desde el puerto serie y los vamos escribiendo en el FileStream
-                                    int bytesRead;
-                                    while ((bytesRead = puertoSerie.Read(buffer, 0, buffer.Length)) > 0)
-                                    {
-                                        fileStream.Write(buffer, 0, bytesRead);
-                                    }
-                                }
-                                MessageBox.Show("Archivo guardado con éxito.", "Archivo recibido", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                //guardarArchivoRecibido(cabecera, archivoRecibido, nombreArchivo);
-                            }*/
+                        File.WriteAllBytes(nombreArchivo, archivo);
+                        //guardarArchivoRecibido(archivoRecibido, nombreArchivo, bytesRecibidos);
                     }
                 }
             }
@@ -117,7 +93,7 @@ namespace Practica10
                 rtboxMensajesRecibidos.Text += mensaje;
             }
         }
-        private void guardarArchivoRecibido(string cabecera, byte[] archivoRecibido, string nombreArchivo, int bytesRecibidos)
+        private void guardarArchivoRecibido(byte[] archivoRecibido, string nombreArchivo, int bytesRecibidos)
         {
             try
             {
@@ -139,7 +115,6 @@ namespace Practica10
                     fileStream.Write(archivoRecibido, 0, bytesRecibidos);
 
                     fileStream.Close();
-                    //File.WriteAllBytes(saveFileDialog.FileName, archivoRecibido);
                     MessageBox.Show("Se ha guardado correctamente el archivo", "Archivo guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -157,50 +132,10 @@ namespace Practica10
             {
                 PruebaDLL pruebaDLL = new PruebaDLL();
 
-                //FileStream fichero = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
-
                 byte[] bytesArchivoEnviar = File.ReadAllBytes(openFileDialog.FileName);
 
                 pruebaDLL.escribirCabecera(puertoSerie, "--- Archivo --- *" + openFileDialog.SafeFileName + " " + bytesArchivoEnviar.Length);
-
                 puertoSerie.Write(bytesArchivoEnviar, 0, bytesArchivoEnviar.Length);
-
-                /*try
-                {
-                    using (var fileStream = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read))
-                    using (var binaryReader = new BinaryReader(fileStream))
-                    {
-                        // Escribir la cabecera indicando que se va a enviar un archivo
-                        pruebaDLL.escribirCabecera(puertoSerie, "--- Archivo --- *" + openFileDialog.SafeFileName + " " + bytesArchivoEnviar.Length);
-
-                        // Leer y enviar el archivo en bloques de 4 KB
-                        byte[] buffer = new byte[4096];
-                        int bytesRead;
-                        while ((bytesRead = binaryReader.Read(buffer, 0, buffer.Length)) > 0)
-                        {
-                            puertoSerie.Write(buffer, 0, bytesRead);
-                        }
-                        MessageBox.Show("El archivo se ha enviado correctamente.", "Archivo enviado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("El archivo no se ha podido enviar correctamente: " + ex.Message, "Error al enviar archivo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }*/
-                /*int bytesEnviados = 0;
-                while (bytesEnviados < bytesArchivoEnviar.Length)
-                {
-                    int bytesPorEnviar = Math.Min(1024, bytesArchivoEnviar.Length - bytesEnviados);
-                    puertoSerie.Write(bytesArchivoEnviar, bytesEnviados, bytesPorEnviar);
-                    bytesEnviados += bytesPorEnviar;
-                }
-                //puertoSerie.Write(bytesArchivoEnviar, 0, bytesArchivoEnviar.Length);*/
-                //MessageBox.Show("Archivo enviado correctamente", "Archivo enviado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                //puertoSerie.Write(bytesArchivoEnviar, 0, bytesArchivoEnviar.Length);
-
-                //fichero.Close();
-
             }
         }
 
