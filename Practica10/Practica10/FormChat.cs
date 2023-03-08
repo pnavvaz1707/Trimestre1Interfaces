@@ -55,7 +55,11 @@ namespace Practica10
                 int tamanoArchivo = Convert.ToInt32(cabecera.LastIndexOf(' '));
 
                 byte[] archivoRecibido = new byte[tamanoArchivo];
-                int bytesRecibidos = puertoSerie.Read(archivoRecibido, 0, archivoRecibido.Length);
+                int bytesLeidos = 0;
+                while (bytesLeidos < tamanoArchivo)
+                {
+                    bytesLeidos += puertoSerie.Read(archivoRecibido, bytesLeidos, tamanoArchivo - bytesLeidos);
+                }
 
 
                 if (nombreArchivo.Substring(nombreArchivo.IndexOf('.')) == "txt")
@@ -63,7 +67,7 @@ namespace Practica10
                     DialogResult opcionSel = MessageBox.Show("Ha recibido un archivo de texto, pulse sí si desea guardarlo, no si desea visualizarlo solo", "Archivo recibido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (opcionSel == DialogResult.Yes)
                     {
-                        guardarArchivoRecibido(archivoRecibido, nombreArchivo, bytesRecibidos);
+                        guardarArchivoRecibido(archivoRecibido, nombreArchivo);
                     }
                     else
                     {
@@ -75,15 +79,7 @@ namespace Practica10
                     DialogResult opcionSel = MessageBox.Show("Ha recibido un archivo, ¿desea guardarlo?", "Archivo recibido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (opcionSel == DialogResult.Yes)
                     {
-                        byte[] archivo = new byte[tamanoArchivo];
-                        int bytesLeidos = 0;
-                        while (bytesLeidos < tamanoArchivo)
-                        {
-                            bytesLeidos += puertoSerie.Read(archivo, bytesLeidos, tamanoArchivo - bytesLeidos);
-                        }
-
-                        File.WriteAllBytes(nombreArchivo, archivo);
-                        //guardarArchivoRecibido(archivoRecibido, nombreArchivo, bytesRecibidos);
+                        guardarArchivoRecibido(archivoRecibido, nombreArchivo);
                     }
                 }
             }
@@ -93,7 +89,7 @@ namespace Practica10
                 rtboxMensajesRecibidos.Text += mensaje;
             }
         }
-        private void guardarArchivoRecibido(byte[] archivoRecibido, string nombreArchivo, int bytesRecibidos)
+        private void guardarArchivoRecibido(byte[] archivoRecibido, string nombreArchivo)
         {
             try
             {
@@ -111,10 +107,13 @@ namespace Practica10
 
                 if (result == DialogResult.OK)
                 {
-                    FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
+                    
+
+                    File.WriteAllBytes(nombreArchivo, archivoRecibido);
+                    /*FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
                     fileStream.Write(archivoRecibido, 0, bytesRecibidos);
 
-                    fileStream.Close();
+                    fileStream.Close();*/
                     MessageBox.Show("Se ha guardado correctamente el archivo", "Archivo guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
