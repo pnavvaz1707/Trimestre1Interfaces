@@ -576,9 +576,7 @@ namespace Practica11
         {
             enPausa = false;
             pausaJuego();
-            MessageBox.Show("Hecho por Pablo Navarro Vázquez" + "\nVersión 1.0.0", "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            enPausa = true;
-            pausaJuego();
+            MessageBox.Show("Hecho por Pablo Navarro Vázquez" + "\nVersión 2.0.0", "Acerca de", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void btnNúmeroDeFilasMenuItemConfiguracion_Click(object sender, EventArgs e)
@@ -588,6 +586,9 @@ namespace Practica11
 
             FormConfgDimensiones formConfgDimensiones = new FormConfgDimensiones();
             formConfgDimensiones.ShowDialog();
+
+            Width = pbPantallaJuego.Width + 250;
+            Height = pbPantallaJuego.Height + 150;
         }
 
         private void btnAñadirPiezasMenuItemConfiguracion_Click(object sender, EventArgs e)
