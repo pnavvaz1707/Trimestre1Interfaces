@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.Pipes;
 using System.IO.Ports;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using DLLPractica10;
 
@@ -45,9 +46,8 @@ namespace Practica10
 
             if (cabecera.Contains("--- Texto ---"))
             {
-                string mensaje = puertoSerie.ReadExisting();
-                rtboxMensajesRecibidos.Text += mensaje;
-
+                string mensaje = puertoSerie.ReadLine();
+                rtboxMensajesRecibidos.Text += mensaje + "\n";
             }
             else
             {
@@ -58,17 +58,40 @@ namespace Practica10
 
                 string nombreArchivo = cabecera.Substring(indiceInicio + 1, longitud);
 
+                int tamanoArchivo = Convert.ToInt32(cabecera.Substring(cabecera.LastIndexOf(' ') + 1));
 
-                if (nombreArchivo.Substring(nombreArchivo.IndexOf('.')) == "txt")
+                byte[] bytesRecibidos = new byte[tamanoArchivo];
+
+                MessageBox.Show("Archivo recibido --> " + nombreArchivo);
+
+                if (nombreArchivo.Substring(nombreArchivo.IndexOf('.') + 1) == "txt")
                 {
                     DialogResult opcionSel = MessageBox.Show("Ha recibido un archivo de texto, pulse sí si desea guardarlo, no si desea visualizarlo solo", "Archivo recibido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (opcionSel == DialogResult.Yes)
                     {
-                        guardarArchivoRecibido(nombreArchivo);
+                        guardarArchivoRecibido(nombreArchivo, bytesRecibidos);
                     }
                     else
                     {
-                        //rtboxMensajesRecibidos.Text += archivoRecibido;
+                        int tamanoBloque = 1024;
+                        int bloquesTotales = (int)Math.Ceiling((double)bytesRecibidos.Length / tamanoBloque);
+
+                        int bloquesRecibidos = 0;
+                        while (bloquesRecibidos < bloquesTotales)
+                        {
+                            int bytesPorLeer = puertoSerie.BytesToRead;
+                            if (bytesPorLeer > 0)
+                            {
+                                int bytesLeidos = puertoSerie.Read(bytesRecibidos, bloquesRecibidos * tamanoBloque, bytesPorLeer);
+                                bloquesRecibidos += bytesLeidos / tamanoBloque;
+                            }
+                            else
+                            {
+                                bloquesRecibidos = bloquesTotales;
+                            }
+                        }
+
+                        rtboxMensajesRecibidos.Text += Encoding.UTF8.GetString(bytesRecibidos);
                     }
                 }
                 else
@@ -76,12 +99,16 @@ namespace Practica10
                     DialogResult opcionSel = MessageBox.Show("Ha recibido un archivo, ¿desea guardarlo?", "Archivo recibido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (opcionSel == DialogResult.Yes)
                     {
-                        guardarArchivoRecibido(nombreArchivo);
+                        guardarArchivoRecibido(nombreArchivo, bytesRecibidos);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se ha guardado el archivo recibido", "Archivo recibido", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
             }
         }
-        private void guardarArchivoRecibido(string nombreArchivo)
+        private void guardarArchivoRecibido(string nombreArchivo, byte[] bytesRecibidos)
         {
             try
             {
@@ -99,17 +126,26 @@ namespace Practica10
 
                 if (result == DialogResult.OK)
                 {
+                    int tamanoBloque = 1024;
+                    int bloquesTotales = (int)Math.Ceiling((double)bytesRecibidos.Length / tamanoBloque);
 
-                    FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
-
-                    byte[] buffer = new byte[puertoSerie.ReadBufferSize];
-                    int bytesLeidos = 0;
-                    while ((bytesLeidos = puertoSerie.Read(buffer, 0, buffer.Length)) > 0)
+                    int bloquesRecibidos = 0;
+                    while (bloquesRecibidos < bloquesTotales)
                     {
-                        fileStream.Write(buffer,0,bytesLeidos);
+                        int bytesPorLeer = puertoSerie.BytesToRead;
+                        if (bytesPorLeer > 0)
+                        {
+                            int bytesLeidos = puertoSerie.Read(bytesRecibidos, bloquesRecibidos * tamanoBloque, bytesPorLeer);
+                            bloquesRecibidos += bytesLeidos / tamanoBloque;
+                        }
+                        else
+                        {
+                            bloquesRecibidos = bloquesTotales;
+                        }
                     }
 
-                    fileStream.Close();
+                    File.WriteAllBytes(saveFileDialog.FileName, bytesRecibidos);
+
                     MessageBox.Show("Se ha guardado correctamente el archivo", "Archivo guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -128,9 +164,19 @@ namespace Practica10
                 PruebaDLL pruebaDLL = new PruebaDLL();
 
                 byte[] bytesArchivoEnviar = File.ReadAllBytes(openFileDialog.FileName);
+                int tamanoBloque = 1024;
+                int bloquesTotales = (int)Math.Ceiling((double)bytesArchivoEnviar.Length / tamanoBloque);
 
                 pruebaDLL.escribirCabecera(puertoSerie, "--- Archivo --- *" + openFileDialog.SafeFileName + " " + bytesArchivoEnviar.Length);
-                puertoSerie.Write(bytesArchivoEnviar, 0, bytesArchivoEnviar.Length);
+
+                for (int i = 0; i < bloquesTotales; i++)
+                {
+                    int offset = i * tamanoBloque;
+                    int longitud = Math.Min(tamanoBloque, bytesArchivoEnviar.Length - offset);
+                    byte[] bytesBloque = new byte[longitud];
+                    Array.Copy(bytesArchivoEnviar, offset, bytesBloque, 0, longitud);
+                    puertoSerie.Write(bytesBloque, 0, longitud);
+                }
             }
         }
 
