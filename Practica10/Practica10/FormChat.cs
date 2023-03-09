@@ -109,7 +109,7 @@ namespace Practica10
                 {
                     
 
-                    File.WriteAllBytes(nombreArchivo, archivoRecibido);
+                    File.WriteAllBytes(saveFileDialog.FileName, archivoRecibido);
                     /*FileStream fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
                     fileStream.Write(archivoRecibido, 0, bytesRecibidos);
 
